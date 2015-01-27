@@ -23,6 +23,11 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><button type="button" class="navbar-btn">@Html.ActionLink("Ask Question", "PostQuestion")</button></li>
+                    <li><button type="button" class="navbar-btn">@Html.ActionLink("Questions", "ViewQuestions")</button></li>
+                    <li><button type="button" class="navbar-btn">@Html.ActionLink("Unanswered", "ViewOpenQuestions")</button></li>
+                    <li><input  type="text" name="taMainSearchBox" class="navbar-btn"/></li>
+                    <li><button type="submit" name="btnSubmitSearch" class="navbar-btn">Search</button></li>
                 </ul>
                 <p class="nav navbar-text navbar-right">Hello, @User.Identity.Name!</p>
             </div>

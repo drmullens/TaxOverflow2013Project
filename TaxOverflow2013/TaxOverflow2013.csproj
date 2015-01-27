@@ -163,6 +163,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\PostQuestion.cshtml" />
+    <Content Include="Views\Home\ViewQuestions.cshtml" />
+    <Content Include="Views\Home\ViewSingleQuestion.cshtml" />
+    <Content Include="Views\Home\ViewOpenQuestions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

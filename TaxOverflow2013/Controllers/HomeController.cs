@@ -27,14 +27,14 @@ namespace TaxOverflow2013.Controllers
             return View();
         }
 
-        public ActionResult Post()
+        public ActionResult PostQuestion()
         {
             ViewBag.Message = "Post a question";
 
             return View();
         }
 
-        public ActionResult Unanswered()
+        public ActionResult ViewOpenQuestions()
         {
             ViewBag.Message = "View unanswered questions";
 
