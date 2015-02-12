@@ -143,18 +143,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\TaxOverflow.png" />
     <Content Include="Images\TestLogo.png" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Scripts\jquery-2.1.3.min.js.map">
+      <DependentUpon>jquery-2.1.3.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -178,13 +185,23 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\PostQuestion.cshtml" />
     <Content Include="Views\Home\ViewQuestions.cshtml" />
     <Content Include="Views\Home\ViewSingleQuestion.cshtml" />
     <Content Include="Views\Home\ViewOpenQuestions.cshtml" />
+    <Content Include="Scripts\jquery.validate.min.js.map">
+      <DependentUpon>jquery.validate.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map">
+      <DependentUpon>jquery.validate.unobtrusive.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js.map">
+      <DependentUpon>respond.matchmedia.addListener.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\respond.min.js.map">
+      <DependentUpon>respond.min.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

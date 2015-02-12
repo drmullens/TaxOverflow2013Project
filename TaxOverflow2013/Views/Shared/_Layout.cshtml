@@ -10,29 +10,28 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header" style="margin-top: 10px;">
+                <a href="~/"><img class="img-thumbnail" width="100" src="~/Images/TaxOverflow.png" alt="TaxOverflow Logo" /></a>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("TaxOverflow", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("TaxOverflow", "Index", "Home", new { area = "" }, new { @class = "btn btn-link", @style = "font-size: 20pt;" })
+            </div>
+            <div class="navbar-right">
+                @Html.ActionLink("Ask Question", "PostQuestion", new { area = "" }, new { @class = "btn btn-default", @style = "margin-top: 10px;" })
+                @Html.ActionLink("Questions", "ViewQuestions", new { area = "" }, new { @class = "btn btn-default", @style = "margin-top: 10px;" })
+                @Html.ActionLink("Unanswered", "ViewOpenQuestions", new { area = "" }, new { @class = "btn btn-default", @style = "margin-top: 10px;" })
+                <input type="text" name="taMainSearchBox" class="input-sm" style="vertical-align: bottom" />
+                <button type="submit" name="btnSubmitSearch" class="btn btn-sm" style="vertical-align: bottom">Search</button>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li><button type="button" class="navbar-btn">@Html.ActionLink("Ask Question", "PostQuestion")</button></li>
-                    <li><button type="button" class="navbar-btn">@Html.ActionLink("Questions", "ViewQuestions")</button></li>
-                    <li><button type="button" class="navbar-btn">@Html.ActionLink("Unanswered", "ViewOpenQuestions")</button></li>
-                    <li><input  type="text" name="taMainSearchBox" class="navbar-btn"/></li>
-                    <li><button type="submit" name="btnSubmitSearch" class="navbar-btn">Search</button></li>
-                </ul>
                 <p class="nav navbar-text navbar-right">Hello, @User.Identity.Name!</p>
             </div>
         </div>
     </div>
+    <div style="clear: both;"></div>
     <div class="container body-content">
         @RenderBody()
         <hr />
