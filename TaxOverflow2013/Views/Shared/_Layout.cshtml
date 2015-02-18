@@ -8,29 +8,27 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container" style="max-height: 410px; min-height: 145px;">
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="row" style="margin-top: 10px;">
-                <div class="col-md-8 navbar-header">
-                    <a href="~/"><img class="img-thumbnail" width="100" src="~/Images/TaxOverflow.png" alt="TaxOverflow Logo" /></a>
-                    @Html.ActionLink("TaxOverflow", "Index", "Home", new { area = "" }, new { @class = "btn btn-link", @style = "font-size: 20pt;" })
-                </div>
-                <div class="col-md-4">
-                    <p class="right">Hello, @User.Identity.Name!</p>
-                </div>
+    <div class="container navbar navbar-inverse navbar-static-top" style="max-height: 500px; min-height: 150px;">
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-8 navbar-header">
+                <a href="~/"><img class="img-thumbnail" width="100" src="~/Images/TaxOverflow.png" alt="TaxOverflow Logo" /></a>
+                @Html.ActionLink("TaxOverflow", "Index", "Home", new { area = "" }, new { @class = "btn btn-link", @style = "font-size: 20pt;" })
             </div>
+            <div class="col-md-4">
+                <p class="right">Hello, @User.Identity.Name!</p>
+            </div>
+        </div>
 
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-5 center">
-                    @Html.ActionLink("Ask Question", "PostQuestion", new { area = "" }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Questions", "ViewQuestions", new { area = "" }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Unanswered", "ViewOpenQuestions", new { area = "" }, new { @class = "btn btn-default" })
-                </div>
-                <div class="col-md-4 right">
-                    <input type="text" name="taMainSearchBox" class="input-sm" style="vertical-align: bottom" />
-                    <button type="submit" name="btnSubmitSearch" class="btn btn-sm" style="vertical-align: bottom">Search</button>
-                </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-5 center">
+                @Html.ActionLink("Ask Question", "PostQuestion", new { area = "" }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Questions", "ViewQuestions", new { area = "" }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Unanswered", "ViewOpenQuestions", new { area = "" }, new { @class = "btn btn-default" })
+            </div>
+            <div class="col-md-4 right">
+                <input type="text" name="taMainSearchBox" class="input-sm" style="vertical-align: bottom" />
+                <button type="submit" name="btnSubmitSearch" class="btn btn-sm" style="vertical-align: bottom">Search</button>
             </div>
         </div>
     </div>

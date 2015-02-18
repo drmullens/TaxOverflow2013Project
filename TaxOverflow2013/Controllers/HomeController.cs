@@ -33,5 +33,12 @@ namespace TaxOverflow2013.Controllers
 
             return View();
         }
+
+        public ActionResult ViewSingleQuestion()
+        {
+            ViewBag.Message = "View answered questions";
+
+            return View();
+        }
     }
 }
