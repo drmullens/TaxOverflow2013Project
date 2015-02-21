@@ -201,10 +201,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\PostQuestion.cshtml" />
-    <Content Include="Views\Home\ViewQuestions.cshtml" />
-    <Content Include="Views\Home\ViewSingleQuestion.cshtml" />
-    <Content Include="Views\Home\ViewOpenQuestions.cshtml" />
     <Content Include="Scripts\jquery.validate.min.js.map">
       <DependentUpon>jquery.validate.min.js</DependentUpon>
     </Content>
@@ -217,6 +213,11 @@
     <Content Include="Scripts\respond.min.js.map">
       <DependentUpon>respond.min.js</DependentUpon>
     </Content>
+    <Content Include="Views\Home\Answer.cshtml" />
+    <Content Include="Views\Home\Question.cshtml" />
+    <Content Include="Views\Home\QuestionList.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\ViewQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
