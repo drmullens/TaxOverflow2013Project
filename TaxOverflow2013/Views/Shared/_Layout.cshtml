@@ -22,9 +22,9 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-5 center">
-                @Html.ActionLink("Ask Question", "PostQuestion", new { area = "" }, new { @class = "btn btn-default" })
-                @Html.ActionLink("Questions", "ViewQuestions", new { area = "" }, new { @class = "btn btn-default" })
-                @Html.ActionLink("Unanswered", "ViewOpenQuestions", new { area = "" }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Ask Question", "Question", new { area = "" }, new { @class = "btn btn-default" })
+                @Html.ActionLink("All Questions", "QuestionList", new { area = "" }, new { @class = "btn btn-default" })
             </div>
             <div class="col-md-4 right">
                 <input type="text" name="taMainSearchBox" class="input-sm" style="vertical-align: bottom" />
