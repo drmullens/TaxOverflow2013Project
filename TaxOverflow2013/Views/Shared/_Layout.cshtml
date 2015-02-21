@@ -6,6 +6,8 @@
     <title>@ViewBag.Title - TaxOverflow</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    @RenderSection("head", false)
 </head>
 <body>
     <div class="container navbar navbar-inverse navbar-static-top" style="max-height: 500px; min-height: 150px;">
@@ -15,18 +17,18 @@
                 @Html.ActionLink("TaxOverflow", "Index", "Home", new { area = "" }, new { @class = "btn btn-link", @style = "font-size: 20pt;" })
             </div>
             <div class="col-md-4">
-                <p class="right">Hello, @User.Identity.Name!</p>
+                <p class="text-right">Hello, @User.Identity.Name!</p>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-3"></div>
-            <div class="col-md-5 center">
+            <div class="col-md-5 text-center">
                 @Html.ActionLink("Home Page", "Index", "Home", new { area = "" }, new { @class = "btn btn-default" })
                 @Html.ActionLink("Ask Question", "Question", new { area = "" }, new { @class = "btn btn-default" })
                 @Html.ActionLink("All Questions", "QuestionList", new { area = "" }, new { @class = "btn btn-default" })
             </div>
-            <div class="col-md-4 right">
+            <div class="col-md-4 text-right">
                 <input type="text" name="taMainSearchBox" class="input-sm" style="vertical-align: bottom" />
                 <button type="submit" name="btnSubmitSearch" class="btn btn-sm" style="vertical-align: bottom">Search</button>
             </div>

@@ -1,18 +1,19 @@
 ﻿@{
-    ViewBag.Title = "Post A Question";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
+    ViewBag.Title = "Post a Comment";
 }
 
 @section head {
-    <script>tinymce.init({selector:'textarea'});</script>
+<script>tinymce.init({selector:'textarea'});</script>
 }
 
 <div class="row">
     <div class="col-md-12">
-        <h2>Post a Question</h2>
+        <h2>Post a Comment</h2>
+        <div class="jumbotron">
+            Preview of Question.
+        </div>
         <p>
-            <textarea id="txtQuestion"></textarea>
+            <textarea id="txtComment"></textarea>
             <div class="text-right">
                 <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" title="Submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
             </div>

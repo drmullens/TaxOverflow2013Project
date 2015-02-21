@@ -2,14 +2,21 @@
     ViewBag.Title = "Answer a Question";
 }
 
+@section head {
+<script>tinymce.init({selector:'textarea'});</script>
+}
+
 <div class="row">
     <div class="col-md-12">
         <h2>Write an Answer</h2>
-        <p>
+        <div class="jumbotron">
             Preview of Question.
-        </p>
+        </div>
         <p>
-            Write an Answer.
+            <textarea id="txtAnswer"></textarea>
+            <div class="text-right">
+                <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" title="Submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
+            </div>
         </p>
     </div>
 </div>

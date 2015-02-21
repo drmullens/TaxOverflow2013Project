@@ -4257,7 +4257,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #0061FF;
+  background-color: #FF0000;
   color: #FFFFFF;
   border-color: #080808;
 }
@@ -6123,18 +6123,6 @@ button.close {
 
 div {
     padding: 2px;
-}
-
-/* Common Styles */
-
-.center {
-    text-align: center;
-}
-.right {
-    text-align: right;
-}
-.left {
-    text-align: left;
 }
 
 @-ms-viewport {
