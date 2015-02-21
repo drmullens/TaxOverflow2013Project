@@ -27,7 +27,7 @@ namespace TaxOverflow2013.Controllers
             return View();
         }
 
-        public ActionResult ViewQuestion()
+        public ActionResult View()
         {
             ViewBag.Message = "View a question";
 
