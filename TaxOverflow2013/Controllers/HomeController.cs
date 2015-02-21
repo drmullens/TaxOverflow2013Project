@@ -13,44 +13,30 @@ namespace TaxOverflow2013.Controllers
             return View();
         }
 
-        public ActionResult Question()
+        public ActionResult PostQuestion()
         {
-            ViewBag.Message = "Post a Question";
+            ViewBag.Message = "Post a question";
 
             return View();
         }
 
-        public ActionResult QuestionList()
+        public ActionResult ViewOpenQuestions()
         {
-            ViewBag.Message = "View Questions";
+            ViewBag.Message = "View unanswered questions";
 
             return View();
         }
 
-        public ActionResult View()
+        public ActionResult ViewQuestions()
         {
-            ViewBag.Message = "View a question";
+            ViewBag.Message = "View answered questions";
 
             return View();
         }
 
-        public ActionResult Search()
+        public ActionResult ViewSingleQuestion()
         {
-            ViewBag.Message = "View Search Results";
-
-            return View();
-        }
-
-        public ActionResult Answer()
-        {
-            ViewBag.Message = "Post an Answer";
-
-            return View();
-        }
-
-        public ActionResult Comment()
-        {
-            ViewBag.Message = "Post a Comment";
+            ViewBag.Message = "View answered questions";
 
             return View();
         }
