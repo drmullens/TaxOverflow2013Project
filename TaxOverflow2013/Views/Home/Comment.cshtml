@@ -3,19 +3,54 @@
 }
 
 @section head {
-<script>tinymce.init({selector:'textarea'});</script>
+    <script>tinymce.init({ selector: 'textarea' });</script>
 }
 
 <div class="row">
     <div class="col-md-12">
         <h2>Post a Comment</h2>
-        <div class="jumbotron">
-            Preview of Question.
+        <div id="divQJumbo" class="jumbotron row">
+            <div id="divVotes" class="col-md-1">
+                <a href="">
+                    <img src="~/Images/VoteUp.png" width="50" alt="Voting Up Glyphs" />
+                </a>
+                <div id="divVoteCount">
+                    @* Voting Data Goes Here *@
+                    0
+                </div>
+                <a href="">
+                    <img src="~/Images/VoteDown.png" width="50" alt="Voting Down Glyphs" />
+                </a>
+            </div>
+            <div id="divQuestion" class="col-md-9">
+                <h2>Category goes here</h2>
+                Preview of Question goes here. Preview of Question goes here. Preview of Question goes here.
+                Preview of Question goes here. Preview of Question goes here. Preview of Question goes here.
+                Preview of Question goes here. Preview of Question goes here. Preview of Question goes here.
+                Preview of Question goes here. Preview of Question goes here. Preview of Question goes here.
+                Preview of Question goes here. Preview of Question goes here. Preview of Question goes here.
+                Preview of Question goes here. Preview of Question goes here. Preview of Question goes here.
+                Preview of Question goes here. Preview of Question goes here. Preview of Question goes here.
+                Preview of Question goes here. Preview of Question goes here. Preview of Question goes here.
+                Preview of Question goes here. Preview of Question goes here. Preview of Question goes here.
+                Preview of Question goes here. Preview of Question goes here. Preview of Question goes here.
+            </div>
+            <div id="divAuthorDetails" class="col-md-2">
+                <div id="divGenericPerson">
+                    <img src="~/Images/GenericPerson.png" height="70" width="50" alt="Generic Person Photo" />
+                </div>
+                <div id="divAuthor">Author's Name</div>
+                <div id="divTime">TimeStamp</div>
+            </div>
+            <div class="clearfix"></div>
         </div>
         <p>
             <textarea id="txtComment"></textarea>
             <div class="text-right">
                 <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" title="Submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
+                <a href="../Home/ViewQuestion?question_id=">
+                    <button type="button" name="btnCancel" id="btnCancel" value="Cancel" title="Cancel" class="btn btn-default" style="margin-top: 20px;">Cancel</button>
+                </a>
             </div>
         </p>
     </div>

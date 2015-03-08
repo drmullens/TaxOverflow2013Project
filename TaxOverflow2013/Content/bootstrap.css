@@ -6149,9 +6149,9 @@ div {
   display: none !important;
 }
 @media (max-width: 767px) {
-    .right, .left, .center {
-        text-align: center;
-    }
+.divCJumbo, .divCAJumbo {
+    margin-left: 10px;
+}
   .visible-xs {
     display: block !important;
   }

@@ -5,16 +5,23 @@
 }
 
 @section head {
-    <script>tinymce.init({selector:'textarea'});</script>
+    <script>tinymce.init({ selector: 'textarea' });</script>
 }
 
 <div class="row">
     <div class="col-md-12">
         <h2>Post a Question</h2>
         <p>
+            <select id="ddlCategory">
+                <option value="default">Select a Category</option>
+            </select>
+
             <textarea id="txtQuestion"></textarea>
             <div class="text-right">
                 <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" title="Submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
+                <a href="~/">
+                    <button type="button" name="btnCancel" id="btnCancel" value="Cancel" title="Cancel" class="btn btn-default" style="margin-top: 20px;">Cancel</button>
+                </a>
             </div>
         </p>
     </div>

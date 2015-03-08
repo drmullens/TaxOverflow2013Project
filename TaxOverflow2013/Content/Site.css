@@ -11,8 +11,38 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
+input, select, textarea {
     max-width: 280px;
+}
+
+#divVotes, .divVotes {
+    float: left;
+    text-align: center;
+}
+
+#divVoteCount, .divVoteCount {
+    font-size: 30pt;
+    text-align: center;
+}
+
+#divAuthorDetails, .divAuthorDetails {
+    text-align: right;
+}
+
+.divAJumbo, .divCAJumbo {
+    background-color: #CCCCCC;
+}
+
+.divCJumbo, .divCAJumbo {
+    margin-left: 50px;
+}
+
+#divButtonChoices {
+    text-align: right;
+}
+
+#ddlCategory {
+    display: block;
+    width: 200px;
+    margin-bottom: 20px;
 }
