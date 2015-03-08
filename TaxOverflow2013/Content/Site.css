@@ -91,6 +91,7 @@ input, select, textarea {
 #hdrQuestionList, #hdrSearchResults {
     float: left;
     margin: 0 0 10px;
+    padding: 0;
 }
 
 #ddlSort {
