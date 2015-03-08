@@ -37,7 +37,7 @@ input, select, textarea {
     margin-left: 50px;
 }
 
-#divButtonChoices {
+#divButtonChoices, .divButtonChoices {
     text-align: right;
 }
 
@@ -45,4 +45,56 @@ input, select, textarea {
     display: block;
     width: 200px;
     margin-bottom: 20px;
+}
+
+#divRecent, #divUnanswered {
+    padding: 5px;
+    background-color: #CCCCCC;
+    margin-bottom: 20px;
+}
+
+#divRecent h2, #divUnanswered h2 {
+    text-align: center;
+    margin: 5px 0 10px;
+}
+
+.Votes {
+    text-align: center;
+}
+
+.Category {
+    text-align: left;
+}
+
+.Question {
+    font-size: 20pt;
+}
+
+.Author {
+    text-align: right;
+}
+
+.Author img {
+    margin-right: 10px;
+    vertical-align: bottom;
+}
+
+.Category, .Votes {
+    font-size: 14pt;
+}
+
+.Start {
+    border-top: 2px groove #CCCCCC;
+    margin: 0;
+}
+
+#hdrQuestionList, #hdrSearchResults {
+    float: left;
+    margin: 0 0 10px;
+}
+
+#ddlSort {
+    width: 200px;
+    height: 30px;
+    float: right;
 }
