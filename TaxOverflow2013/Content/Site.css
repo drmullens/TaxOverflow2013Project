@@ -44,6 +44,7 @@ input, select, textarea {
 #ddlCategory {
     display: block;
     width: 200px;
+    height: 30px;
     margin-bottom: 20px;
 }
 
@@ -66,7 +67,7 @@ input, select, textarea {
     text-align: left;
 }
 
-.Question {
+.Question, .divCategory {
     font-size: 20pt;
 }
 
