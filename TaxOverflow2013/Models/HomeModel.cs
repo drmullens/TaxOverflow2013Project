@@ -73,15 +73,16 @@ namespace TaxOverflow2013.Models
             public Random Votes = new Random();
             public int questionID = new int();
             public string referrer;
-            public MockViewQuestion(int question_id, string _referrer) 
+            public MockViewQuestion(int question_id) 
             {
                 questionID = question_id;
-                referrer = _referrer;
 
                 LoadMockData();
             }
-            public MockViewQuestion(int vote, char math)
+            public MockViewQuestion(int question_id, int vote, char math)
             {
+                questionID = question_id;
+
                 LoadMockData();
 
                 if (math == 'a') 

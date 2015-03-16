@@ -10,14 +10,14 @@
         <h2>Viewing a Question.</h2>
         <div id="divQJumbo" class="jumbotron row">
             <div id="divVotes" class="col-md-1">
-                <a href="../Home/ViewQuestion?vote=@Model.Question[2]&math=a">
+                <a href="../Home/ViewQuestion?question_id=@Model.Question[0]&vote=@Model.Question[2]&math=a">
                     <img src="~/Images/VoteUp.png" width="50" alt="Voting Up Glyphs" />
                 </a>
                 <div id="divVoteCount">
                     @* Voting Data Goes Here *@
                     @Model.Question[2]
                 </div>
-                <a href="../Home/ViewQuestion?vote=@Model.Question[2]&math=s">
+                <a href="../Home/ViewQuestion?question_id=@Model.Question[0]&vote=@Model.Question[2]&math=s">
                     <img src="~/Images/VoteDown.png" width="50" alt="Voting Down Glyphs" />
                 </a>
             </div>

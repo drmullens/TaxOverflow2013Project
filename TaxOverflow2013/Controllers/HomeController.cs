@@ -31,13 +31,13 @@ namespace TaxOverflow2013.Controllers
         {
             ViewBag.Message = "View a question";
 
-            if (Request["question_id"] != null && !String.IsNullOrWhiteSpace(Request["question_id"]))
+            if (Request["vote"] != null && !String.IsNullOrWhiteSpace(Request["vote"]))
             {
-                return View(new TaxOverflow2013.Models.HomeModel.MockViewQuestion(Int32.Parse(Request["question_id"]), Convert.ToString(Request["referrer"])));
+                return View(new TaxOverflow2013.Models.HomeModel.MockViewQuestion((Int32.Parse(Request["question_id"])), Int32.Parse(Request["vote"]), Convert.ToChar(Request["math"])));
             }
-            else if (Request["vote"] != null && !String.IsNullOrWhiteSpace(Request["vote"]))
+            else if (Request["question_id"] != null && !String.IsNullOrWhiteSpace(Request["question_id"]))
             {
-                return View(new TaxOverflow2013.Models.HomeModel.MockViewQuestion(Int32.Parse(Request["vote"]), Convert.ToChar(Request["math"])));
+                return View(new TaxOverflow2013.Models.HomeModel.MockViewQuestion(Int32.Parse(Request["question_id"])));
             }
             else
             {
