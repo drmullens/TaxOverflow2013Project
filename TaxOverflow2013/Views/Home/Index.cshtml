@@ -7,131 +7,33 @@
         <div id="divRecent" class="jumbotron">
             <h2>Top 5 Most Recent</h2>
             @* Pull top 5 most Recent: for each *@
-            <div class="Start">
-                <div class="row">
-                    <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=">Short Preview of Question</a>
+            @for (int i = 4; i >= 0; i--)
+            {
+                <div class="Start">
+                    <div class="row">
+                        <div class="Question col-sm-12">
+                            <a href="~/Home/ViewQuestion?question_id=@Model.Question[i][0]&referrer=Recent">@Model.Question[i][1]</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="Votes col-sm-3">
+                            @Model.Question[i][2] Votes
+                        </div>
+                        <div class="Category col-sm-4">
+                            @Model.Question[i][3]
+                        </div>
+                        <div class="Author col-sm-5">
+                            <span class="display-inline-block">
+                                <img src="~/Images/GenericPerson.png" width="25" />
+                            </span>
+                            <span class="display-inline-block">
+                                @Model.Question[i][4] <br />
+                                @Model.Question[i][5]
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="Votes col-lg-2">
-                        0 Votes
-                    </div>
-                    <div class="Category col-lg-5">
-                        Preview Category
-                    </div>
-                    <div class="Author col-sm-5">
-                        <span class="visible-lg-inline-block">
-                            <img src="~/Images/GenericPerson.png" width="25" />
-                        </span>
-                        <span class="visible-lg-inline-block">
-                            Posted by Author <br />
-                            at TimeStamp
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Start">
-                <div class="row">
-                    <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=">Short Preview of Question</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="Votes col-lg-2">
-                        0 Votes
-                    </div>
-                    <div class="Category col-lg-5">
-                        Preview Category
-                    </div>
-                    <div class="Author col-sm-5">
-                        <span class="visible-lg-inline-block">
-                            <img src="~/Images/GenericPerson.png" width="25" />
-                        </span>
-                        <span class="visible-lg-inline-block">
-                            Posted by Author <br />
-                            at TimeStamp
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Start">
-                <div class="row">
-                    <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=">Short Preview of Question</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="Votes col-lg-2">
-                        0 Votes
-                    </div>
-                    <div class="Category col-lg-5">
-                        Preview Category
-                    </div>
-                    <div class="Author col-sm-5">
-                        <span class="visible-lg-inline-block">
-                            <img src="~/Images/GenericPerson.png" width="25" />
-                        </span>
-                        <span class="visible-lg-inline-block">
-                            Posted by Author <br />
-                            at TimeStamp
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Start">
-                <div class="row">
-                    <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=">Short Preview of Question</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="Votes col-lg-2">
-                        0 Votes
-                    </div>
-                    <div class="Category col-lg-5">
-                        Preview Category
-                    </div>
-                    <div class="Author col-sm-5">
-                        <span class="visible-lg-inline-block">
-                            <img src="~/Images/GenericPerson.png" width="25" />
-                        </span>
-                        <span class="visible-lg-inline-block">
-                            Posted by Author <br />
-                            at TimeStamp
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Start">
-                <div class="row">
-                    <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=">Short Preview of Question</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="Votes col-lg-2">
-                        0 Votes
-                    </div>
-                    <div class="Category col-lg-5">
-                        Preview Category
-                    </div>
-                    <div class="Author col-sm-5">
-                        <span class="visible-lg-inline-block">
-                            <img src="~/Images/GenericPerson.png" width="25" />
-                        </span>
-                        <span class="visible-lg-inline-block">
-                            Posted by Author <br />
-                            at TimeStamp
-                        </span>
-                    </div>
-                </div>
-            </div>
-
+            }
         </div>
     </div>
 
@@ -139,131 +41,33 @@
         <div id="divUnanswered" class="jumbotron">
             <h2>Top 5 Unanswered Questions</h2>
             @* Pull top 5 most Votes: for each *@
-            <div class="Start">
-                <div class="row">
-                    <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=">Short Preview of Question</a>
+            @for (int i = 0; i < 5; i++)
+            {
+                <div class="Start">
+                    <div class="row">
+                        <div class="Question col-sm-12">
+                            <a href="~/Home/ViewQuestion?question_id=@Model.Question[i][0]&referrer=Recent">@Model.Question[i][1]</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="Votes col-sm-3">
+                            @Model.Question[i][2] Votes
+                        </div>
+                        <div class="Category col-sm-4">
+                            @Model.Question[i][3]
+                        </div>
+                        <div class="Author col-sm-5">
+                            <span class="display-inline-block">
+                                <img src="~/Images/GenericPerson.png" width="25" />
+                            </span>
+                            <span class="display-inline-block">
+                                @Model.Question[i][4] <br />
+                                @Model.Question[i][5]
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="Votes col-lg-2">
-                        0 Votes
-                    </div>
-                    <div class="Category col-lg-5">
-                        Preview Category
-                    </div>
-                    <div class="Author col-sm-5">
-                        <span class="visible-lg-inline-block">
-                            <img src="~/Images/GenericPerson.png" width="25" />
-                        </span>
-                        <span class="visible-lg-inline-block">
-                            Posted by Author <br />
-                            at TimeStamp
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Start">
-                <div class="row">
-                    <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=">Short Preview of Question</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="Votes col-lg-2">
-                        0 Votes
-                    </div>
-                    <div class="Category col-lg-5">
-                        Preview Category
-                    </div>
-                    <div class="Author col-sm-5">
-                        <span class="visible-lg-inline-block">
-                            <img src="~/Images/GenericPerson.png" width="25" />
-                        </span>
-                        <span class="visible-lg-inline-block">
-                            Posted by Author <br />
-                            at TimeStamp
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Start">
-                <div class="row">
-                    <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=">Short Preview of Question</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="Votes col-lg-2">
-                        0 Votes
-                    </div>
-                    <div class="Category col-lg-5">
-                        Preview Category
-                    </div>
-                    <div class="Author col-sm-5">
-                        <span class="visible-lg-inline-block">
-                            <img src="~/Images/GenericPerson.png" width="25" />
-                        </span>
-                        <span class="visible-lg-inline-block">
-                            Posted by Author <br />
-                            at TimeStamp
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Start">
-                <div class="row">
-                    <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=">Short Preview of Question</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="Votes col-lg-2">
-                        0 Votes
-                    </div>
-                    <div class="Category col-lg-5">
-                        Preview Category
-                    </div>
-                    <div class="Author col-sm-5">
-                        <span class="visible-lg-inline-block">
-                            <img src="~/Images/GenericPerson.png" width="25" />
-                        </span>
-                        <span class="visible-lg-inline-block">
-                            Posted by Author <br />
-                            at TimeStamp
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Start">
-                <div class="row">
-                    <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=">Short Preview of Question</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="Votes col-lg-2">
-                        0 Votes
-                    </div>
-                    <div class="Category col-lg-5">
-                        Preview Category
-                    </div>
-                    <div class="Author col-sm-5">
-                        <span class="visible-lg-inline-block">
-                            <img src="~/Images/GenericPerson.png" width="25" />
-                        </span>
-                        <span class="visible-lg-inline-block">
-                            Posted by Author <br />
-                            at TimeStamp
-                        </span>
-                    </div>
-                </div>
-            </div>
-
+            }
         </div>
     </div>
 </div>

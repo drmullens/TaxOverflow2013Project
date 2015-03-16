@@ -10,7 +10,7 @@ namespace TaxOverflow2013.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View(new TaxOverflow2013.Models.HomeModel.MockIndexModel());
         }
 
         public ActionResult Question()
@@ -24,35 +24,63 @@ namespace TaxOverflow2013.Controllers
         {
             ViewBag.Message = "View Questions";
 
-            return View();
+            return View(new TaxOverflow2013.Models.HomeModel.MockIndexModel());
         }
 
         public ActionResult ViewQuestion()
         {
             ViewBag.Message = "View a question";
 
-            return View();
+            if (Request["question_id"] != null && !String.IsNullOrWhiteSpace(Request["question_id"]))
+            {
+                return View(new TaxOverflow2013.Models.HomeModel.MockViewQuestion(Int32.Parse(Request["question_id"]), Convert.ToString(Request["referrer"])));
+            }
+            else if (Request["vote"] != null && !String.IsNullOrWhiteSpace(Request["vote"]))
+            {
+                return View(new TaxOverflow2013.Models.HomeModel.MockViewQuestion(Int32.Parse(Request["vote"]), Convert.ToChar(Request["math"])));
+            }
+            else
+            {
+                Response.Redirect("~/");
+                return null;
+            }
         }
 
         public ActionResult Search()
         {
             ViewBag.Message = "View Search Results";
 
-            return View();
+            return View(new TaxOverflow2013.Models.HomeModel.MockIndexModel());
         }
 
         public ActionResult Answer()
         {
             ViewBag.Message = "Post an Answer";
 
-            return View();
+            if (Request["question_id"] != null)
+            {
+                return View(new TaxOverflow2013.Models.HomeModel.MockQuestion(Int32.Parse(Request["question_id"])));
+            }
+            else
+            {
+                Response.Redirect("~/");
+                return null;
+            }
         }
 
         public ActionResult Comment()
         {
             ViewBag.Message = "Post a Comment";
 
-            return View();
+            if (Request["question_id"] != null)
+            {
+                return View(new TaxOverflow2013.Models.HomeModel.MockQuestion(Int32.Parse(Request["question_id"])));
+            }
+            else
+            {
+                Response.Redirect("~/");
+                return null;
+            }
         }
     }
 }

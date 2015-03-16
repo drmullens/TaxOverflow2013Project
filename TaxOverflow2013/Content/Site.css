@@ -16,6 +16,7 @@ input, select, textarea {
 }
 
 #divVotes, .divVotes {
+    z-index: 10;
     float: left;
     text-align: center;
 }
@@ -27,6 +28,7 @@ input, select, textarea {
 
 #divAuthorDetails, .divAuthorDetails {
     text-align: right;
+    padding: 15px
 }
 
 .divAJumbo, .divCAJumbo {
@@ -50,14 +52,13 @@ input, select, textarea {
 
 #divRecent, #divUnanswered {
     padding: 5px;
-    background-color: #CCCCCC;
     margin-bottom: 20px;
 }
 
-#divRecent h2, #divUnanswered h2 {
-    text-align: center;
-    margin: 5px 0 10px;
-}
+    #divRecent h2, #divUnanswered h2 {
+        text-align: center;
+        margin: 5px 0 10px;
+    }
 
 .Votes {
     text-align: center;
@@ -68,17 +69,26 @@ input, select, textarea {
 }
 
 .Question, .divCategory {
+    margin-top: 5px;
     font-size: 20pt;
+}
+
+.Question {
+    white-space: nowrap;
+    text-wrap:none;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
 .Author {
     text-align: right;
 }
 
-.Author img {
-    margin-right: 10px;
-    vertical-align: bottom;
-}
+    .Author img {
+        margin-right: 10px;
+        vertical-align: bottom;
+    }
 
 .Category, .Votes {
     font-size: 14pt;
@@ -98,5 +108,18 @@ input, select, textarea {
 #ddlSort {
     width: 200px;
     height: 30px;
+    float: right;
+}
+
+.display-inline-block {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
     float: right;
 }
