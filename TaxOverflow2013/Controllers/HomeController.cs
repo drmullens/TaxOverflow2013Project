@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestTODB;
 
 namespace TaxOverflow2013.Controllers
 {
@@ -16,7 +17,7 @@ namespace TaxOverflow2013.Controllers
         public ActionResult Question()
         {
             ViewBag.Message = "Post a Question";
-
+            
             return View();
         }
 
@@ -81,6 +82,16 @@ namespace TaxOverflow2013.Controllers
                 Response.Redirect("~/");
                 return null;
             }
+        }
+
+        [HttpPost]
+        public ActionResult SubmitQuestion(string que, string Text)
+        {
+            //Submitting a question
+            Questions myQuestion = new Questions();
+            myQuestion.Question = Text;
+
+            return View();
         }
     }
 }

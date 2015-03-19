@@ -231,12 +231,6 @@
     <Content Include="Views\Home\Comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Visual Studio 2013\Projects\TestTODB\TestTODB\TestTODB\TestTODB.csproj">
-      <Project>{690230d9-000e-4c04-9456-cf2bfce9a5a7}</Project>
-      <Name>TestTODB</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
@@ -245,6 +239,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestTODB\TestTODB\TestTODB.csproj">
+      <Project>{690230d9-000e-4c04-9456-cf2bfce9a5a7}</Project>
+      <Name>TestTODB</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
