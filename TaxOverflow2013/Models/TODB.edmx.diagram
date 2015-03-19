@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8d8c12264b054109b81a8158709a9cb5" Name="Diagram1">
+        <EntityTypeShape EntityType="TestTODBModel.AnswerComment" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestTODBModel.Answers1" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestTODBModel.AnswerVotingHistory" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestTODBModel.Categories1" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestTODBModel.QuestionComment" Width="1.5" PointX="12" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestTODBModel.Questions1" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestTODBModel.QuestionVotingHistory" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestTODBModel.User" Width="1.5" PointX="9.75" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="TestTODBModel.FK_AnswersAnswerComment" ManuallyRouted="false" />
+        <AssociationConnector Association="TestTODBModel.FK_UserAnswerComment" ManuallyRouted="false" />
+        <AssociationConnector Association="TestTODBModel.FK_AnswersAnswerVotingHistory" ManuallyRouted="false" />
+        <AssociationConnector Association="TestTODBModel.FK_QuestionsAnswers" ManuallyRouted="false" />
+        <AssociationConnector Association="TestTODBModel.FK_UserAnswers" ManuallyRouted="false" />
+        <AssociationConnector Association="TestTODBModel.FK_UserAnswerVotingHistory" ManuallyRouted="false" />
+        <AssociationConnector Association="TestTODBModel.FK_QuestionsCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="TestTODBModel.FK_QuestionsQuestionComment" ManuallyRouted="false" />
+        <AssociationConnector Association="TestTODBModel.FK_UserQuestionComment" ManuallyRouted="false" />
+        <AssociationConnector Association="TestTODBModel.FK_QuestionsQuestionVotingHistory" ManuallyRouted="false" />
+        <AssociationConnector Association="TestTODBModel.FK_UserQuestions" ManuallyRouted="false" />
+        <AssociationConnector Association="TestTODBModel.FK_UserQuestionVotingHistory" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

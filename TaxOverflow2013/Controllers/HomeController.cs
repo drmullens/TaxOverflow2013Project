@@ -85,11 +85,12 @@ namespace TaxOverflow2013.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitQuestion(string que, string Text)
+        public ActionResult PostQuestion()
         {
+            string aQuestion = Request["txtQuestion"];
             //Submitting a question
             Questions myQuestion = new Questions();
-            myQuestion.Question = Text;
+            myQuestion.Question = aQuestion;
 
             return View();
         }

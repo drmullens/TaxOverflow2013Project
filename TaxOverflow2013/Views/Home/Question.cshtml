@@ -5,7 +5,7 @@
 }
 
 @section head {
-    <script>tinymce.init({ selector: 'textarea' });</script>
+    @*<script>tinymce.init({ selector: 'textarea' });</script>*@
 }
 
 <div class="row">
@@ -16,21 +16,20 @@
                 <option value="default">Select a Category</option>
                 <option value="Tech">Technical</option>
             </select>
-            
 
 
-            @using (Html.BeginForm("SubmitQuestion", "Home"))
+            @using (Html.BeginForm("PostQuestion", "Home"))
             {
-                @Html.TextArea("fuckThisShit")
+                @Html.TextArea("txtQuestion")
                 @*<textarea id="txtQuestion" name="txtQuestion"></textarea>*@
-                
+
                 <div class="float-right">
                     <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" title="Submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
                 </div>
             }
-                <div class="float-right">
-                    <button type="button" name="btnCancel" id="btnCancel" value="Cancel" title="Cancel" class="btn btn-default" style="margin-top: 20px; margin-right: 25px;">Cancel</button>
-                </div>
+            <div class="float-right">
+                <button type="button" name="btnCancel" id="btnCancel" value="Cancel" title="Cancel" class="btn btn-default" style="margin-top: 20px; margin-right: 25px;">Cancel</button>
+            </div>
         </div>
     </div>
 </div>
