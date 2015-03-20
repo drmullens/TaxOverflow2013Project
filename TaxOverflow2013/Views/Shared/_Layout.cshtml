@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - TaxOverflow</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-    @RenderSection("head", false)
+    @RenderSection("styles", false)
 </head>
 <body>
     <div class="container navbar navbar-inverse navbar-static-top" style="max-height: 500px; min-height: 150px;">
@@ -31,9 +29,7 @@
             </div>
             <div class="col-md-4 text-right">
                 <input type="text" name="taMainSearchBox" class="input-sm" style="vertical-align: bottom" />
-                <a href="~/Home/Search?keyword=">
-                    <button type="submit" name="btnSubmitSearch" class="btn btn-default btn-sm" style="vertical-align: bottom">Search</button>
-                </a>
+                <button type="submit" name="btnSubmitSearch" class="btn btn-default btn-sm" style="vertical-align: bottom">Search</button>
             </div>
         </div>
     </div>
@@ -46,7 +42,9 @@
         </footer>
     </div>
 
+    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery-1.11.2.min.js")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

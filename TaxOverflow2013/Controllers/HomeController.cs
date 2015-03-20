@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TestTODB;
+using TaxOverflow2013.Models;
 
 namespace TaxOverflow2013.Controllers
 {
@@ -11,21 +11,32 @@ namespace TaxOverflow2013.Controllers
     {
         public ActionResult Index()
         {
-            return View(new TaxOverflow2013.Models.HomeModel.MockIndexModel());
+            return View(new HomeModel.MockIndexModel());
         }
 
         public ActionResult Question()
         {
             ViewBag.Message = "Post a Question";
-            
+
             return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Question(string txtQuestion, string ddlCategory)
+        {
+            string data = txtQuestion;
+
+            //Return new QuestionID
+
+            return View("ViewQuestion", new HomeModel.MockViewQuestion(Int32.Parse("0")));
         }
 
         public ActionResult QuestionList()
         {
             ViewBag.Message = "View Questions";
 
-            return View(new TaxOverflow2013.Models.HomeModel.MockIndexModel());
+            return View(new HomeModel.MockIndexModel());
         }
 
         public ActionResult ViewQuestion()
@@ -38,7 +49,7 @@ namespace TaxOverflow2013.Controllers
             }
             else if (Request["question_id"] != null && !String.IsNullOrWhiteSpace(Request["question_id"]))
             {
-                return View(new TaxOverflow2013.Models.HomeModel.MockViewQuestion(Int32.Parse(Request["question_id"])));
+                return View(new HomeModel.MockViewQuestion(Int32.Parse(Request["question_id"])));
             }
             else
             {
@@ -51,7 +62,7 @@ namespace TaxOverflow2013.Controllers
         {
             ViewBag.Message = "View Search Results";
 
-            return View(new TaxOverflow2013.Models.HomeModel.MockIndexModel());
+            return View(new HomeModel.MockIndexModel());
         }
 
         public ActionResult Answer()
@@ -60,7 +71,7 @@ namespace TaxOverflow2013.Controllers
 
             if (Request["question_id"] != null)
             {
-                return View(new TaxOverflow2013.Models.HomeModel.MockQuestion(Int32.Parse(Request["question_id"])));
+                return View(new  HomeModel.MockQuestion(Int32.Parse(Request["question_id"])));
             }
             else
             {
@@ -82,17 +93,6 @@ namespace TaxOverflow2013.Controllers
                 Response.Redirect("~/");
                 return null;
             }
-        }
-
-        [HttpPost]
-        public ActionResult PostQuestion(string someQuestion, string Qvalue)
-        {
-            string aQuestion = Request["txtQuestion"];
-            //Submitting a question
-            Questions myQuestion = new Questions();
-            myQuestion.Question = aQuestion;
-
-            return View();
         }
     }
 }

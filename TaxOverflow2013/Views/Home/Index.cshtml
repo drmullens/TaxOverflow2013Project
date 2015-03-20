@@ -6,8 +6,12 @@
     <div class="col-lg-6">
         <div id="divRecent" class="jumbotron">
             <h2>Top 5 Most Recent</h2>
-            @* Pull top 5 most Recent: for each *@
-            @for (int i = 4; i >= 0; i--)
+            @*
+                Pull top 5 most Recent:
+                0 - id, 1 - Question, 2 - Number of Votes, 3 - Category, 4 - Author, 5 - TimeStamp
+            *@
+
+            @for (int i = Model.Question.Length - 1; i >= 0; i--)
             {
                 <div class="Start">
                     <div class="row">
@@ -40,8 +44,12 @@
     <div class="col-lg-6">
         <div id="divUnanswered" class="jumbotron">
             <h2>Top 5 Unanswered Questions</h2>
-            @* Pull top 5 most Votes: for each *@
-            @for (int i = 0; i < 5; i++)
+            @*
+                Pull top 5 most Votes:
+                0 - id, 1 - Question, 2 - Number of Votes, 3 - Category, 4 - Author, 5 - TimeStamp
+            *@
+
+            @for (int i = 0; i < Model.Question.Length; i++)
             {
                 <div class="Start">
                     <div class="row">

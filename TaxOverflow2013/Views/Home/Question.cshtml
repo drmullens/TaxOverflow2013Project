@@ -4,36 +4,32 @@
 
 }
 
-
-
-@section head {
-    @*<script>tinymce.init({ selector: 'textarea' });</script>*@
+@section scripts{
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script>tinymce.init({ selector: 'textarea' });</script>
 }
 
 <div class="row">
     <div class="col-md-12">
         <h2>Post a Question</h2>
-        <div>
-            @*<select id="ddlCategory">
+        <form method="post" action="/Home/Question">
+            <select id="ddlCategory" name="ddlCategory">
                 <option value="default">Select a Category</option>
                 <option value="Tech">Technical</option>
-            </select>*@
+            </select>
 
-            @*@Html.DropDownListFor(cat => cat.Categories1.CategoryID, )*@
+            <textarea id="txtQuestion" name="txtQuestion"></textarea>
+            <div class="text-right">
+                <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" 
+                        title="Submit" class="btn btn-default" style="margin-top: 20px;">
+                    Submit
+                </button>
 
-
-            @using (Html.BeginForm("PostQuestion", "Questions1"))
-            {
-                
-                @*<textarea id="txtQuestion" name="txtQuestion"></textarea>*@
-
-                <div class="float-right">
-                    <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" title="Submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
-                </div>
-            }
-            <div class="float-right">
-                <button type="button" name="btnCancel" id="btnCancel" value="Cancel" title="Cancel" class="btn btn-default" style="margin-top: 20px; margin-right: 25px;">Cancel</button>
+                <button type="button" name="btnCancel" id="btnCancel" value="Cancel"
+                        title="Cancel" class="btn btn-default" style="margin-top: 20px;">
+                    Cancel
+                </button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
