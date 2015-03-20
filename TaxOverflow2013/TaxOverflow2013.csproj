@@ -134,6 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Questions1Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -287,6 +288,11 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\ViewQuestion.cshtml" />
     <Content Include="Views\Home\Comment.cshtml" />
+    <Content Include="Views\Questions1\Create.cshtml" />
+    <Content Include="Views\Questions1\Delete.cshtml" />
+    <Content Include="Views\Questions1\Details.cshtml" />
+    <Content Include="Views\Questions1\Edit.cshtml" />
+    <Content Include="Views\Questions1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -307,6 +313,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

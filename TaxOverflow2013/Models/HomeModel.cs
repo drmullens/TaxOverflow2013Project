@@ -219,17 +219,5 @@ namespace TaxOverflow2013.Models
             }
         }
     }
-
-    public class AccessTODB
-    {
-        public void addNewQuestion()
-        {
-            using (var context = new TestTODBContext())
-            {
-
-            }
-        }
-    }
-
    
 }

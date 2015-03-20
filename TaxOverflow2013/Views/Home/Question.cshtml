@@ -4,6 +4,8 @@
 
 }
 
+
+
 @section head {
     @*<script>tinymce.init({ selector: 'textarea' });</script>*@
 }
@@ -12,15 +14,17 @@
     <div class="col-md-12">
         <h2>Post a Question</h2>
         <div>
-            <select id="ddlCategory">
+            @*<select id="ddlCategory">
                 <option value="default">Select a Category</option>
                 <option value="Tech">Technical</option>
-            </select>
+            </select>*@
+
+            @*@Html.DropDownListFor(cat => cat.Categories1.CategoryID, )*@
 
 
-            @using (Html.BeginForm("PostQuestion", "Home"))
+            @using (Html.BeginForm("PostQuestion", "Questions1"))
             {
-                @Html.TextArea("txtQuestion")
+                
                 @*<textarea id="txtQuestion" name="txtQuestion"></textarea>*@
 
                 <div class="float-right">
