@@ -2,7 +2,8 @@
     ViewBag.Title = "Post a Comment";
 }
 
-@section head {
+@section scripts {
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
     <script>tinymce.init({ selector: 'textarea' });</script>
 }
 
@@ -42,12 +43,11 @@
         <p>
             <textarea id="txtComment"></textarea>
             <div class="text-right">
-                <a href="../Home/ViewQuestion?question_id=@Model.Question[0]">
-                    <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" title="Submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
-                </a>
-                <a href="../Home/ViewQuestion?question_id=@Model.Question[0]">
-                    <button type="button" name="btnCancel" id="btnCancel" value="Cancel" title="Cancel" class="btn btn-default" style="margin-top: 20px;">Cancel</button>
-                </a>
+                <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" 
+                        title="Submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
+
+                <button type="button" name="btnCancel" id="btnCancel" value="Cancel" 
+                        title="Cancel" class="btn btn-default" style="margin-top: 20px;">Cancel</button>
             </div>
         </p>
     </div>

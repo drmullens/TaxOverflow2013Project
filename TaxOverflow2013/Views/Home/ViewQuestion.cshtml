@@ -8,13 +8,17 @@
 <div class="row">
     <div class="col-md-12">
         <h2>Viewing a Question.</h2>
+
+        @*
+            Question:
+            0 - QuestionID, 1 - Question, 2 - Number of Votes, 3 - Category, 4 - Author, 5 - TimeStamp
+        *@
         <div id="divQJumbo" class="jumbotron row">
             <div id="divVotes" class="col-md-1">
                 <a href="../Home/ViewQuestion?question_id=@Model.Question[0]&vote=@Model.Question[2]&math=a">
                     <img src="~/Images/VoteUp.png" width="50" alt="Voting Up Glyphs" />
                 </a>
                 <div id="divVoteCount">
-                    @* Voting Data Goes Here *@
                     @Model.Question[2]
                 </div>
                 <a href="../Home/ViewQuestion?question_id=@Model.Question[0]&vote=@Model.Question[2]&math=s">
@@ -40,5 +44,95 @@
                 <a class="btn btn-default btn-sm" href="../Home/Comment?question_id=@Model.Question[0]">Comment</a>
             </div>
         </div>
+
+        @*
+            Question Comments:
+            0 - QuestionID, 1 - CommentID, 2 - Comment, 3 - Author, 4 - TimeStamp
+        *@
+        @for (int i = 0; i < Model.QComment.Length; i++)
+        {
+            <div class="divCJumbo jumbotron row">
+                <div class="divComment col-md-10">
+                    @Model.QComment[i][2]
+                </div>
+                <div class="divAuthorDetails col-md-2">
+                    <div class="divGenericPerson">
+                        <img src="~/Images/GenericPerson.png" height="70" width="50" alt="Generic Person Photo" />
+                    </div>
+                    <div class="divAuthor">@Model.QComment[i][3]</div>
+                    <div class="divTime">@Model.QComment[i][4]</div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        }
+
+        @*
+            Answers:
+            0 - QuestionID, 1 - AnswerID, 2 - Answer, 3 - Number of Votes, 4 - is Correct, 5 - Author, 6 - TimeStamp
+        *@
+        @for (int i = 0; i < Model.Answer.Length; i++)
+        {
+            <div class="divAJumbo jumbotron row">
+                <div class="divVotes col-md-1">
+                    <a href="../Home/ViewQuestion?question_id=@Model.Answer[i][0]&answer_id=@Model.Answer[i][1]&vote=@Model.Answer[i][3]&math=a">
+                        <img src="~/Images/VoteUp.png" width="50" alt="Voting Up Glyphs" />
+                    </a>
+                    <div class="divVoteCount">
+                        @* Voting Data Goes Here *@
+                        @Model.Answer[i][3]
+                    </div>
+                    <a href="../Home/ViewQuestion?question_id=@Model.Answer[i][0]&answer_id=@Model.Answer[i][1]&vote=@Model.Answer[i][3]&math=s">
+                        <img src="~/Images/VoteDown.png" width="50" alt="Voting Down Glyphs" />
+                    </a>
+
+                    @if (@Model.Answer[i][4] == "true")
+                    {
+                        <img src="~/Images/checkmark.png" alt="Check Mark means Answer is Accepted" width="50" />
+                    }
+                </div>
+                <div class="divAnswer col-md-9">
+                    @Model.Answer[i][2]
+                </div>
+                <div class="divAuthorDetails col-md-2">
+                    <div class="divGenericPerson">
+                        <img src="~/Images/GenericPerson.png" height="70" width="50" alt="Generic Person Photo" />
+                    </div>
+                    <div class="divAuthor">@Model.Answer[i][5]</div>
+                    <div class="divTime">@Model.Answer[i][6]</div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="divButtonChoices">
+                    @* If Question Writer *@
+                    @if (@Model.Question[4].Contains(User.Identity.Name.Split('\\')[1]))
+                    {
+                        <a class="btn btn-default btn-sm" href="question_id=@Model.Answer[i][0]&answer_id=@Model.Answer[i][1]">Mark As Answer</a>
+                    }
+                    <a class="btn btn-default btn-sm" href="../Home/Comment?question_id=@Model.Answer[i][0]&answer_id=@Model.Answer[i][1]">Comment</a>
+                </div>
+            </div>
+
+            @*
+                Answer Comments:
+                0 - answerID, 1 - commentID, 2 - Comment, 3 - Author, 4 - TimeStamp
+            *@
+            for (int j = 0; j < Model.AComment.Length; j++)
+            {
+                @*  For Each of the Answer Comments *@
+                <div class="divCAJumbo jumbotron row">
+                    <div class="divComment col-md-10">
+                        @Model.AComment[j][2]
+                    </div>
+                    <div class="divAuthorDetails col-md-2">
+                        <div class="divGenericPerson">
+                            <img src="~/Images/GenericPerson.png" height="70" width="50" alt="Generic Person Photo" />
+                        </div>
+                        <div class="divAuthor">@Model.AComment[j][3]</div>
+                        <div class="divTime">@Model.AComment[j][4]</div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            }
+        }
+
     </div>
 </div>

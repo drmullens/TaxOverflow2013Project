@@ -4,28 +4,32 @@
 
 }
 
-@section head {
+@section scripts{
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
     <script>tinymce.init({ selector: 'textarea' });</script>
 }
 
 <div class="row">
     <div class="col-md-12">
         <h2>Post a Question</h2>
-        <p>
-            <select id="ddlCategory">
+        <form method="post" action="/Home/btnClick">
+            <select id="ddlCategory" name="ddlCategory">
                 <option value="default">Select a Category</option>
                 <option value="Tech">Technical</option>
             </select>
 
-            <textarea id="txtQuestion"></textarea>
+            <textarea id="txtQuestion" name="txtQuestion"></textarea>
             <div class="text-right">
-                <a href="../Home/ViewQuestion?question_id=">
-                    <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" title="Submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
-                </a>
-                <a href="~/">
-                    <button type="button" name="btnCancel" id="btnCancel" value="Cancel" title="Cancel" class="btn btn-default" style="margin-top: 20px;">Cancel</button>
-                </a>
+                <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" 
+                        title="Submit" class="btn btn-default" style="margin-top: 20px;">
+                    Submit
+                </button>
+
+                <button type="button" name="btnCancel" id="btnCancel" value="Cancel"
+                        title="Cancel" class="btn btn-default" style="margin-top: 20px;">
+                    Cancel
+                </button>
             </div>
-        </p>
+        </form>
     </div>
 </div>

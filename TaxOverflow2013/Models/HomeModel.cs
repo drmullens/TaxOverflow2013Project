@@ -14,7 +14,7 @@ namespace TaxOverflow2013.Models
 
             public MockIndexModel()
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < Question.Length; i++)
                 {
                     Question[i] = new List<string>();
                 }
@@ -58,7 +58,7 @@ namespace TaxOverflow2013.Models
                     Question[4].Add("Onyeka Ezenwoye");
                     Question[4].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
                 
-                    for (int i = 0; i < 5; i++)
+                    for (int i = 0; i < Question.Length; i++)
                     {
                         if (Question[i][1].Length >= 40) {
                             Question[i][1] = Question[i][1].Substring(0, 40) + "...";
@@ -70,6 +70,10 @@ namespace TaxOverflow2013.Models
         public class MockViewQuestion
         {
             public List<string> Question = new List<string>();
+            public List<string>[] QComment = new List<string>[3];
+            public List<string>[] Answer = new List<string>[2];
+            public List<string>[] AComment = new List<string>[1];
+
             public Random Votes = new Random();
             public int questionID = new int();
             public string referrer;
@@ -77,13 +81,16 @@ namespace TaxOverflow2013.Models
             {
                 questionID = question_id;
 
-                LoadMockData();
+                LoadMockQuestionData();
+                LoadMockQCommentData();
+                LoadMockAnswerData();
+                LoadMockACommentData();
             }
             public MockViewQuestion(int question_id, int vote, char math)
             {
                 questionID = question_id;
 
-                LoadMockData();
+                LoadMockQuestionData();
 
                 if (math == 'a') 
                 {
@@ -97,8 +104,12 @@ namespace TaxOverflow2013.Models
                 {
                     Question[2] = Convert.ToString(vote);
                 }
+
+                LoadMockQCommentData();
+                LoadMockAnswerData();
+                LoadMockACommentData();
             }
-            private void LoadMockData() 
+            private void LoadMockQuestionData() 
             {
                 switch (questionID)
                 {
@@ -149,6 +160,228 @@ namespace TaxOverflow2013.Models
                     default:
                         break;
                 }
+            }
+            private void LoadMockQCommentData()
+            {
+                for (int i = 0; i < QComment.Length; i++)
+                {
+                    QComment[i] = new List<string>();
+                }
+                //0 - QuestionID, 1 - CommentID, 2 - Comment, 3 - Author, 4 - TimeStamp
+
+                switch (questionID)
+                {
+                    case 0:
+                        QComment[0].Add("0");
+                        QComment[0].Add("0");
+                        QComment[0].Add("Other than the name, why do you think it is like coffee?");
+                        QComment[0].Add("Clueless Wonder");
+                        QComment[0].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        QComment[1].Add("0");
+                        QComment[1].Add("1");
+                        QComment[1].Add("Mostly it is the name...");
+                        QComment[1].Add("Caroline Chonko");
+                        QComment[1].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        QComment[2].Add("0");
+                        QComment[2].Add("2");
+                        QComment[2].Add("Oh...");
+                        QComment[2].Add("Clueless Wonder");
+                        QComment[2].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+                        break;
+                    case 1:
+                        QComment[0].Add("1");
+                        QComment[0].Add("3");
+                        QComment[0].Add("Didn't get much use out of database class...Mostly learned MySQL.");
+                        QComment[0].Add("Caroline Chonko");
+                        QComment[0].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        QComment[1].Add("1");
+                        QComment[1].Add("4");
+                        QComment[1].Add("I didn't learn this in Database, I learned it on my own.");
+                        QComment[1].Add("David Mullens");
+                        QComment[1].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        QComment[2].Add("1");
+                        QComment[2].Add("5");
+                        QComment[2].Add("I have no good excuses at this time... Try again later.");
+                        QComment[2].Add("Caroline Chonko");
+                        QComment[2].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+                        break;
+                    case 2:
+                        QComment[0].Add("2");
+                        QComment[0].Add("6");
+                        QComment[0].Add("So what is the Project you are working on exactly?");
+                        QComment[0].Add("Caroline Chonko");
+                        QComment[0].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        QComment[1].Add("2");
+                        QComment[1].Add("7");
+                        QComment[1].Add("I am building a Question and Answer Repository.");
+                        QComment[1].Add("Behrad Torkian");
+                        QComment[1].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        QComment[2].Add("2");
+                        QComment[2].Add("8");
+                        QComment[2].Add("Clearly you should use Java... Doesn't get much better than coffee. But if all else fails, use ASP.NET MVC5.");
+                        QComment[2].Add("Caroline Chonko");
+                        QComment[2].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+                        break;
+                    case 3:
+                        QComment[0].Add("3");
+                        QComment[0].Add("9");
+                        QComment[0].Add("Apologies for the late updates, this is harder than it looks!");
+                        QComment[0].Add("Caroline Chonko");
+                        QComment[0].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        QComment[1].Add("3");
+                        QComment[1].Add("10");
+                        QComment[1].Add("Clearly you should have been done by now!");
+                        QComment[1].Add("Snarky User");
+                        QComment[1].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        QComment[2].Add("3");
+                        QComment[2].Add("11");
+                        QComment[2].Add("No hurries, I want it done right.");
+                        QComment[2].Add("Peter Mourfield");
+                        QComment[2].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+                        break;
+                    case 4:
+                        QComment[0].Add("4");
+                        QComment[0].Add("12");
+                        QComment[0].Add("I find this a highly personal question that should be asked behind closed doors.");
+                        QComment[0].Add("Caroline Chonko");
+                        QComment[0].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        QComment[1].Add("4");
+                        QComment[1].Add("13");
+                        QComment[1].Add("I refuse to answer on grounds of self-incrimination. I plea the 5th.");
+                        QComment[1].Add("Behrad Torkian");
+                        QComment[1].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        QComment[2].Add("4");
+                        QComment[2].Add("14");
+                        QComment[2].Add("Just answer the question.");
+                        QComment[2].Add("Onyeka Ezenwoye");
+                        QComment[2].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+                        break;
+                    default:
+                        break;
+                }
+            }
+            private void LoadMockAnswerData()
+            {
+                //0 - QuestionID, 1 - AnswerID, 2 - Answer, 3 - Number of Votes, 4 - is Correct, 5 - Author, 6 - TimeStamp
+
+                for (int i = 0; i < Answer.Length; i++)
+                {
+                    Answer[i] = new List<string>();
+                }
+
+                switch (questionID)
+                {
+                    case 0:
+                        Answer[0].Add("0");
+                        Answer[0].Add("0");
+                        Answer[0].Add("Because clearly everyone loves coffee.");
+                        Answer[0].Add(Votes.Next(100).ToString());
+                        Answer[0].Add("false");
+                        Answer[0].Add("Caroline");
+                        Answer[0].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        Answer[1].Add("0");
+                        Answer[1].Add("1");
+                        Answer[1].Add("It came about because of a joke.");
+                        Answer[1].Add(Votes.Next(100).ToString());
+                        Answer[1].Add("true");
+                        Answer[1].Add("Random User");
+                        Answer[1].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+                        break;
+                    case 1:
+                        Answer[0].Add("1");
+                        Answer[0].Add("2");
+                        Answer[0].Add("We are learning it slowly!");
+                        Answer[0].Add(Votes.Next(100).ToString());
+                        Answer[0].Add("false");
+                        Answer[0].Add("Generic User");
+                        Answer[0].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        Answer[1].Add("1");
+                        Answer[1].Add("3");
+                        Answer[1].Add("We are clearly not trying hard enough to learn it.");
+                        Answer[1].Add(Votes.Next(100).ToString());
+                        Answer[1].Add("true");
+                        Answer[1].Add("Caroline Chonko");
+                        Answer[1].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+                        break;
+                    case 2:
+                        Answer[0].Add("2");
+                        Answer[0].Add("4");
+                        Answer[0].Add("Clearly Java because it is like Coffee.");
+                        Answer[0].Add(Votes.Next(100).ToString());
+                        Answer[0].Add("true");
+                        Answer[0].Add("Random User");
+                        Answer[0].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        Answer[1].Add("2");
+                        Answer[1].Add("5");
+                        Answer[1].Add("How about ASP.NET MVC?");
+                        Answer[1].Add(Votes.Next(100).ToString());
+                        Answer[1].Add("false");
+                        Answer[1].Add("Generic User");
+                        Answer[1].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+                        break;
+                    case 3:
+                        Answer[0].Add("3");
+                        Answer[0].Add("6");
+                        Answer[0].Add("Never! Bwahahahah!");
+                        Answer[0].Add(Votes.Next(100).ToString());
+                        Answer[0].Add("false");
+                        Answer[0].Add("Troll User");
+                        Answer[0].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        Answer[1].Add("3");
+                        Answer[1].Add("7");
+                        Answer[1].Add("At the latest by May.");
+                        Answer[1].Add(Votes.Next(100).ToString());
+                        Answer[1].Add("true");
+                        Answer[1].Add("Onyeka Ezenwoye");
+                        Answer[1].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+                        break;
+                    case 4:
+                        Answer[0].Add("4");
+                        Answer[0].Add("8");
+                        Answer[0].Add("Contribution is highly subjective and therefore should not make or break anyone's grades.");
+                        Answer[0].Add(Votes.Next(100).ToString());
+                        Answer[0].Add("false");
+                        Answer[0].Add("Random User");
+                        Answer[0].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+
+                        Answer[1].Add("4");
+                        Answer[1].Add("9");
+                        Answer[1].Add("I feel we all contributed enough to pass this class!");
+                        Answer[1].Add(Votes.Next(100).ToString());
+                        Answer[1].Add("true");
+                        Answer[1].Add("Caroline");
+                        Answer[1].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            private void LoadMockACommentData()
+            {
+                for (int i = 0; i < AComment.Length; i++)
+                {
+                    AComment[i] = new List<string>();
+                }
+                        AComment[0].Add("");
+                        AComment[0].Add("");
+                        AComment[0].Add("This is a terrible Answer!");
+                        AComment[0].Add("Snarky User");
+                        AComment[0].Add(DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString());
             }
         }
 
@@ -216,6 +449,12 @@ namespace TaxOverflow2013.Models
                         break;
                 }
             }
+        }
+
+        public class MockAnswer
+        {
+            
+
         }
     }
 }
