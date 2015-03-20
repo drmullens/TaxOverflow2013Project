@@ -21,6 +21,17 @@ namespace TaxOverflow2013.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Question(string txtQuestion, string ddlCategory)
+        {
+            string data = txtQuestion;
+
+            //Return new QuestionID
+
+            return View("ViewQuestion", new HomeModel.MockViewQuestion(Int32.Parse("0")));
+        }
+
         public ActionResult QuestionList()
         {
             ViewBag.Message = "View Questions";
@@ -54,16 +65,6 @@ namespace TaxOverflow2013.Controllers
             return View(new HomeModel.MockIndexModel());
         }
 
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult btnClick(string txtQuestion, string ddlCategory)
-        {
-            string data = txtQuestion;
-
-            //Return new QuestionID
-            
-            return View("ViewQuestion", new HomeModel.MockViewQuestion(Int32.Parse("0")));
-        }
         public ActionResult Answer()
         {
             ViewBag.Message = "Post an Answer";
