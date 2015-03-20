@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TestTODB;
 
 namespace TaxOverflow2013.Models
 {
@@ -457,4 +458,17 @@ namespace TaxOverflow2013.Models
 
         }
     }
+
+    public class AccessTODB
+    {
+        public void addNewQuestion()
+        {
+            using (var context = new TestTODBContext())
+            {
+
+            }
+        }
+    }
+
+   
 }

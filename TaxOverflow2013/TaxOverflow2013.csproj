@@ -59,6 +59,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -135,7 +137,46 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnswerComment.cs">
+      <DependentUpon>TODB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Answers1.cs">
+      <DependentUpon>TODB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AnswerVotingHistory.cs">
+      <DependentUpon>TODB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Categories1.cs">
+      <DependentUpon>TODB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\QuestionComment.cs">
+      <DependentUpon>TODB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Questions1.cs">
+      <DependentUpon>TODB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuestionVotingHistory.cs">
+      <DependentUpon>TODB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TODB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TODB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TODB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TODB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TODB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TODB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>TODB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -153,16 +194,9 @@
       <DependentUpon>TestTODB.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css">
-      <DependentUpon>bootstrap-theme.css</DependentUpon>
-    </Content>
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css">
-      <DependentUpon>bootstrap.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Site.min.css">
-      <DependentUpon>Site.css</DependentUpon>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -175,71 +209,54 @@
     <Content Include="Images\TaxOverflow.png" />
     <Content Include="Images\VoteDown.png" />
     <Content Include="Images\VoteUp.png" />
+    <Content Include="Scripts\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.min.js</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <EntityDeploy Include="Models\TODB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TODB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TODB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TODB.edmx</DependentUpon>
+      <LastGenOutput>TODB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\TODB.edmx.diagram">
+      <DependentUpon>TODB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\TODB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TODB.edmx</DependentUpon>
+      <LastGenOutput>TODB.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Scripts\bootstrap.min.js">
-      <DependentUpon>bootstrap.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\jquery-1.11.2.min.js.map">
-      <DependentUpon>jquery-1.11.2.min.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\bootstrap.min.js.map">
-      <DependentUpon>bootstrap.min.js</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\jquery-1.11.2.js" />
-    <Content Include="Scripts\jquery-1.11.2.min.js">
-      <DependentUpon>jquery-1.11.2.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\jquery-2.1.3.intellisense.min.js">
-      <DependentUpon>jquery-2.1.3.intellisense.js</DependentUpon>
-    </Content>
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
-    <Content Include="Scripts\jquery-2.1.3.intellisense.min.js.map">
-      <DependentUpon>jquery-2.1.3.intellisense.min.js</DependentUpon>
-    </Content>
+    <Content Include="Scripts\jquery-2.1.3.min.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Scripts\jquery-2.1.3.min.js.map">
       <DependentUpon>jquery-2.1.3.min.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.js">
-      <DependentUpon>jquery-2.1.3.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\jquery.validate-vsdoc.min.js">
-      <DependentUpon>jquery.validate-vsdoc.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js">
-      <DependentUpon>jquery.validate.js</DependentUpon>
-    </Content>
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js">
-      <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
-    </Content>
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\modernizr-2.8.3.min.js">
-      <DependentUpon>modernizr-2.8.3.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\npm.js" />
-    <Content Include="Scripts\npm.min.js">
-      <DependentUpon>npm.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.min.js">
-      <DependentUpon>respond.matchmedia.addListener.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\respond.min.js">
-      <DependentUpon>respond.js</DependentUpon>
-    </Content>
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="App_Data\TestTODB.mdf" />
-    <Content Include="Scripts\_references.min.js">
-      <DependentUpon>_references.js</DependentUpon>
-    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -252,42 +269,24 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Answer.cshtml" />
-    <Content Include="Views\Home\Question.cshtml" />
-    <Content Include="Views\Home\QuestionList.cshtml" />
-    <Content Include="Views\Home\Search.cshtml" />
-    <Content Include="Views\Home\ViewQuestion.cshtml" />
-    <Content Include="Views\Home\Comment.cshtml" />
-    <Content Include="Scripts\jquery.validate-vsdoc.min.js.map">
-      <DependentUpon>jquery.validate-vsdoc.min.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\modernizr-2.8.3.min.js.map">
-      <DependentUpon>modernizr-2.8.3.min.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\npm.min.js.map">
-      <DependentUpon>npm.min.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\_references.min.js.map">
-      <DependentUpon>_references.min.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\jquery.validate.min.js.map">
       <DependentUpon>jquery.validate.min.js</DependentUpon>
     </Content>
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map">
       <DependentUpon>jquery.validate.unobtrusive.min.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\respond.min.js.map">
-      <DependentUpon>respond.min.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\respond.matchmedia.addListener.min.js.map">
       <DependentUpon>respond.matchmedia.addListener.min.js</DependentUpon>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Visual Studio 2013\Projects\TestTODB\TestTODB\TestTODB\TestTODB.csproj">
-      <Project>{690230d9-000e-4c04-9456-cf2bfce9a5a7}</Project>
-      <Name>TestTODB</Name>
-    </ProjectReference>
+    <Content Include="Scripts\respond.min.js.map">
+      <DependentUpon>respond.min.js</DependentUpon>
+    </Content>
+    <Content Include="Views\Home\Answer.cshtml" />
+    <Content Include="Views\Home\Question.cshtml" />
+    <Content Include="Views\Home\QuestionList.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\ViewQuestion.cshtml" />
+    <Content Include="Views\Home\Comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -298,6 +297,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestTODB\TestTODB\TestTODB.csproj">
+      <Project>{690230d9-000e-4c04-9456-cf2bfce9a5a7}</Project>
+      <Name>TestTODB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
