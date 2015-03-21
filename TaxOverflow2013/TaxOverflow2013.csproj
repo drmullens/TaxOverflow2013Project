@@ -195,13 +195,20 @@
       <DependentUpon>TestTODB.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-theme.min.css">
+      <DependentUpon>bootstrap-theme.css</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css">
+      <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -210,11 +217,6 @@
     <Content Include="Images\TaxOverflow.png" />
     <Content Include="Images\VoteDown.png" />
     <Content Include="Images\VoteUp.png" />
-    <Content Include="Scripts\bootstrap.min.js.map">
-      <DependentUpon>bootstrap.min.js</DependentUpon>
-    </Content>
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
     <EntityDeploy Include="Models\TODB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TODB.Designer.cs</LastGenOutput>
@@ -236,28 +238,67 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery-1.11.2.min.js.map">
+      <DependentUpon>jquery-1.11.2.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js">
+      <DependentUpon>bootstrap.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery-1.11.2.js" />
+    <Content Include="Scripts\jquery-1.11.2.min.js">
+      <DependentUpon>jquery-1.11.2.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery-2.1.3.intellisense.min.js">
+      <DependentUpon>jquery-2.1.3.intellisense.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery-2.1.3.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Scripts\jquery-2.1.3.intellisense.min.js.map">
+      <DependentUpon>jquery-2.1.3.intellisense.min.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery-2.1.3.min.js.map">
       <DependentUpon>jquery-2.1.3.min.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.js">
+      <DependentUpon>jquery-2.1.3.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.validate-vsdoc.min.js">
+      <DependentUpon>jquery.validate-vsdoc.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js">
+      <DependentUpon>jquery.validate.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js">
+      <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modernizr-2.8.3.min.js">
+      <DependentUpon>modernizr-2.8.3.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\npm.min.js">
+      <DependentUpon>npm.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
-    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js">
+      <DependentUpon>respond.matchmedia.addListener.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\respond.min.js">
+      <DependentUpon>respond.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\_references.js" />
     <Content Include="App_Data\TestTODB.mdf" />
+    <Content Include="Scripts\_references.min.js">
+      <DependentUpon>_references.js</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -270,18 +311,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery.validate.min.js.map">
-      <DependentUpon>jquery.validate.min.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map">
-      <DependentUpon>jquery.validate.unobtrusive.min.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\respond.matchmedia.addListener.min.js.map">
-      <DependentUpon>respond.matchmedia.addListener.min.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\respond.min.js.map">
-      <DependentUpon>respond.min.js</DependentUpon>
-    </Content>
     <Content Include="Views\Home\Answer.cshtml" />
     <Content Include="Views\Home\Question.cshtml" />
     <Content Include="Views\Home\QuestionList.cshtml" />
@@ -293,10 +322,33 @@
     <Content Include="Views\Questions1\Details.cshtml" />
     <Content Include="Views\Questions1\Edit.cshtml" />
     <Content Include="Views\Questions1\Index.cshtml" />
+    <Content Include="Scripts\jquery.validate-vsdoc.min.js.map">
+      <DependentUpon>jquery.validate-vsdoc.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\modernizr-2.8.3.min.js.map">
+      <DependentUpon>modernizr-2.8.3.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\npm.min.js.map">
+      <DependentUpon>npm.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\_references.min.js.map">
+      <DependentUpon>_references.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.validate.min.js.map">
+      <DependentUpon>jquery.validate.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map">
+      <DependentUpon>jquery.validate.unobtrusive.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\respond.min.js.map">
+      <DependentUpon>respond.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js.map">
+      <DependentUpon>respond.matchmedia.addListener.min.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

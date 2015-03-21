@@ -73,14 +73,6 @@ input, select, textarea {
     font-size: 20pt;
 }
 
-.Question {
-    white-space: nowrap;
-    text-wrap:none;
-    -ms-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-}
-
 .Author {
     text-align: right;
 }
