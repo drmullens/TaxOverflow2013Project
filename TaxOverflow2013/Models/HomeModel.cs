@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace TaxOverflow2013.Models
 {
@@ -21,49 +19,50 @@ namespace TaxOverflow2013.Models
 
                 LoadMockData();
             }
-                private void LoadMockData() 
+            private void LoadMockData()
+            {
+                Question[0].Add("0");
+                Question[0].Add("Why is Java so much like coffee?");
+                Question[0].Add("200");
+                Question[0].Add("Technical");
+                Question[0].Add("Caroline Chonko");
+                Question[0].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
+
+                Question[1].Add("1");
+                Question[1].Add("Why does no one on my team know Entity?");
+                Question[1].Add("100");
+                Question[1].Add("Technical");
+                Question[1].Add("David Mullens");
+                Question[1].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
+
+                Question[2].Add("2");
+                Question[2].Add("What is the best programming language to use?");
+                Question[2].Add("50");
+                Question[2].Add("Technical");
+                Question[2].Add("Behrad Torkian");
+                Question[2].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
+
+                Question[3].Add("3");
+                Question[3].Add("When is my project going to be done?");
+                Question[3].Add("25");
+                Question[3].Add("Technical");
+                Question[3].Add("Peter Mourfield");
+                Question[3].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
+
+                Question[4].Add("4");
+                Question[4].Add("How much did each member contribute?");
+                Question[4].Add("18");
+                Question[4].Add("Technical");
+                Question[4].Add("Onyeka Ezenwoye");
+                Question[4].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
+
+                for (int i = 0; i < Question.Length; i++)
                 {
-                    Question[0].Add("0");
-                    Question[0].Add("Why is Java so much like coffee?");
-                    Question[0].Add("200");
-                    Question[0].Add("Technical");
-                    Question[0].Add("Caroline Chonko");
-                    Question[0].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
-
-                    Question[1].Add("1");
-                    Question[1].Add("Why does no one on my team know Entity?");
-                    Question[1].Add("100");
-                    Question[1].Add("Technical");
-                    Question[1].Add("David Mullens");
-                    Question[1].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
-
-                    Question[2].Add("2");
-                    Question[2].Add("What is the best programming language to use?");
-                    Question[2].Add("50");
-                    Question[2].Add("Technical");
-                    Question[2].Add("Behrad Torkian");
-                    Question[2].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
-
-                    Question[3].Add("3");
-                    Question[3].Add("When is my project going to be done?");
-                    Question[3].Add("25");
-                    Question[3].Add("Technical");
-                    Question[3].Add("Peter Mourfield");
-                    Question[3].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
-
-                    Question[4].Add("4");
-                    Question[4].Add("How much did each member contribute?");
-                    Question[4].Add("18");
-                    Question[4].Add("Technical");
-                    Question[4].Add("Onyeka Ezenwoye");
-                    Question[4].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
-                
-                    for (int i = 0; i < Question.Length; i++)
+                    if (Question[i][1].Length >= 40)
                     {
-                        if (Question[i][1].Length >= 40) {
-                            Question[i][1] = Question[i][1].Substring(0, 40) + "...";
-                        }
+                        Question[i][1] = Question[i][1].Substring(0, 40) + "...";
                     }
+                }
             }
         }
 
@@ -77,7 +76,7 @@ namespace TaxOverflow2013.Models
             public Random Votes = new Random();
             public int questionID = new int();
             public string referrer;
-            public MockViewQuestion(int question_id) 
+            public MockViewQuestion(int question_id)
             {
                 questionID = question_id;
 
@@ -92,7 +91,7 @@ namespace TaxOverflow2013.Models
 
                 LoadMockQuestionData();
 
-                if (math == 'a') 
+                if (math == 'a')
                 {
                     Question[2] = Convert.ToString(vote + 1);
                 }
@@ -109,7 +108,7 @@ namespace TaxOverflow2013.Models
                 LoadMockAnswerData();
                 LoadMockACommentData();
             }
-            private void LoadMockQuestionData() 
+            private void LoadMockQuestionData()
             {
                 switch (questionID)
                 {
@@ -377,11 +376,11 @@ namespace TaxOverflow2013.Models
                 {
                     AComment[i] = new List<string>();
                 }
-                        AComment[0].Add("");
-                        AComment[0].Add("");
-                        AComment[0].Add("This is a terrible Answer!");
-                        AComment[0].Add("Snarky User");
-                        AComment[0].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
+                AComment[0].Add("");
+                AComment[0].Add("");
+                AComment[0].Add("This is a terrible Answer!");
+                AComment[0].Add("Snarky User");
+                AComment[0].Add(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
             }
         }
 
@@ -453,8 +452,8 @@ namespace TaxOverflow2013.Models
 
         public class MockAnswer
         {
-            
+
 
         }
-    }   
+    }
 }

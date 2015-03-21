@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TaxOverflow2013.Models;
 
@@ -71,7 +68,7 @@ namespace TaxOverflow2013.Controllers
 
             if (Request["question_id"] != null)
             {
-                return View(new  HomeModel.MockQuestion(Int32.Parse(Request["question_id"])));
+                return View(new HomeModel.MockQuestion(Int32.Parse(Request["question_id"])));
             }
             else
             {
