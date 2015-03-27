@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="TestTODBModel.QuestionComment" Width="1.5" PointX="12" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TestTODBModel.Questions1" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="TestTODBModel.QuestionVotingHistory" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestTODBModel.User" Width="1.5" PointX="9.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestTODBModel.User" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
         <AssociationConnector Association="TestTODBModel.FK_AnswersAnswerComment" ManuallyRouted="false" />
         <AssociationConnector Association="TestTODBModel.FK_UserAnswerComment" ManuallyRouted="false" />
         <AssociationConnector Association="TestTODBModel.FK_AnswersAnswerVotingHistory" ManuallyRouted="false" />

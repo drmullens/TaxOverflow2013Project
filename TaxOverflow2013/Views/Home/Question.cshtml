@@ -7,6 +7,9 @@
 @section scripts{
     <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
     <script>tinymce.init({ selector: 'textarea' });</script>
+
+    @*TODO: JavaScript validation of the DDL  value != "default"
+        Possible new value to be saved if  *@
 }
 
 <div class="row">
@@ -14,13 +17,17 @@
         <h2>Post a Question</h2>
         <form method="post" action="/Home/Question">
             <select id="ddlCategory" name="ddlCategory">
-                <option value="default">Select a Category</option>
-                <option value="Tech">Technical</option>
+                <option value="default" >Select a Category</option>
+                @{foreach (var ddlItem in Model)
+                {
+                    <option value="@ddlItem.CategoryID">@ddlItem.Category</option>
+                }
+                }
             </select>
-
+            
             <textarea id="txtQuestion" name="txtQuestion"></textarea>
             <div class="text-right">
-                <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" 
+                <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit"
                         title="Submit" class="btn btn-default" style="margin-top: 20px;">
                     Submit
                 </button>

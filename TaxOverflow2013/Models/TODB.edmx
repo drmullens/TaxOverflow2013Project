@@ -4,85 +4,85 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TestTODBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="TestTODBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
         <EntityType Name="AnswerComments">
           <Key>
             <PropertyRef Name="ACommentID" />
           </Key>
-          <Property Name="ACommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ACommentDTS" Type="datetime" Nullable="false" />
-          <Property Name="AnswerID" Type="int" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ACommentID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Comment" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="ACommentDTS" Nullable="false" Type="datetime" />
+          <Property Name="AnswerID" Nullable="false" Type="int" />
+          <Property Name="UserID" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="Answers1">
           <Key>
             <PropertyRef Name="AnswerID" />
           </Key>
-          <Property Name="AnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Score" Type="int" Nullable="false" />
-          <Property Name="AnswerDTS" Type="datetime" Nullable="false" />
-          <Property Name="Answered" Type="bit" Nullable="false" />
-          <Property Name="QuestionID" Type="int" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="AnswerID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Answer" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="Score" Nullable="false" Type="int" />
+          <Property Name="AnswerDTS" Nullable="false" Type="datetime" />
+          <Property Name="Answered" Nullable="false" Type="bit" />
+          <Property Name="QuestionID" Nullable="false" Type="int" />
+          <Property Name="UserID" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="AnswerVotingHistories">
           <Key>
             <PropertyRef Name="AVH_ID" />
           </Key>
-          <Property Name="AVH_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Answer_AnswerID" Type="int" Nullable="false" />
+          <Property Name="AVH_ID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Answer_AnswerID" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="Categories1">
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
-          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Category" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="CategoryID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Category" Nullable="false" MaxLength="15" Type="nvarchar" />
         </EntityType>
         <EntityType Name="QuestionComments">
           <Key>
             <PropertyRef Name="QCommentID" />
           </Key>
-          <Property Name="QCommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="QCommentDTS" Type="datetime" Nullable="false" />
-          <Property Name="QuestionID" Type="int" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="QCommentID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Comment" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="QCommentDTS" Nullable="false" Type="datetime" />
+          <Property Name="QuestionID" Nullable="false" Type="int" />
+          <Property Name="UserID" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="Questions1">
           <Key>
             <PropertyRef Name="QuestionID" />
           </Key>
-          <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Score" Type="int" Nullable="false" />
-          <Property Name="QuestionDTS" Type="datetime" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="Category_CategoryID" Type="int" Nullable="false" />
+          <Property Name="QuestionID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Question" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="Score" Nullable="false" Type="int" />
+          <Property Name="QuestionDTS" Nullable="false" Type="datetime" />
+          <Property Name="UserID" Nullable="false" Type="int" />
+          <Property Name="Category_CategoryID" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="QuestionVotingHistories">
           <Key>
             <PropertyRef Name="QVH_ID" />
           </Key>
-          <Property Name="QVH_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Question_QuestionID" Type="int" Nullable="false" />
+          <Property Name="QVH_ID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Question_QuestionID" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="AnswerVotingHistory_AVH_ID" Type="int" Nullable="false" />
-          <Property Name="QuestionVotingHistory_QVH_ID" Type="int" Nullable="false" />
+          <Property Name="UserID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="UserName" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="AnswerVotingHistory_AVH_ID" Nullable="false" Type="int" />
+          <Property Name="QuestionVotingHistory_QVH_ID" Nullable="false" Type="int" />
         </EntityType>
         <Association Name="FK_AnswersAnswerComment">
-          <End Role="Answers1" Type="Self.Answers1" Multiplicity="1">
+          <End Type="Self.Answers1" Multiplicity="1" Role="Answers1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AnswerComments" Type="Self.AnswerComments" Multiplicity="*" />
+          <End Type="Self.AnswerComments" Multiplicity="*" Role="AnswerComments" />
           <ReferentialConstraint>
             <Principal Role="Answers1">
               <PropertyRef Name="AnswerID" />
@@ -93,10 +93,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AnswersAnswerVotingHistory">
-          <End Role="Answers1" Type="Self.Answers1" Multiplicity="1">
+          <End Type="Self.Answers1" Multiplicity="1" Role="Answers1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AnswerVotingHistories" Type="Self.AnswerVotingHistories" Multiplicity="*" />
+          <End Type="Self.AnswerVotingHistories" Multiplicity="*" Role="AnswerVotingHistories" />
           <ReferentialConstraint>
             <Principal Role="Answers1">
               <PropertyRef Name="AnswerID" />
@@ -107,10 +107,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionsAnswers">
-          <End Role="Questions1" Type="Self.Questions1" Multiplicity="1">
+          <End Type="Self.Questions1" Multiplicity="1" Role="Questions1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Answers1" Type="Self.Answers1" Multiplicity="*" />
+          <End Type="Self.Answers1" Multiplicity="*" Role="Answers1" />
           <ReferentialConstraint>
             <Principal Role="Questions1">
               <PropertyRef Name="QuestionID" />
@@ -121,8 +121,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionsCategories">
-          <End Role="Categories1" Type="Self.Categories1" Multiplicity="1" />
-          <End Role="Questions1" Type="Self.Questions1" Multiplicity="*" />
+          <End Type="Self.Categories1" Multiplicity="1" Role="Categories1" />
+          <End Type="Self.Questions1" Multiplicity="*" Role="Questions1" />
           <ReferentialConstraint>
             <Principal Role="Categories1">
               <PropertyRef Name="CategoryID" />
@@ -133,10 +133,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionsQuestionComment">
-          <End Role="Questions1" Type="Self.Questions1" Multiplicity="1">
+          <End Type="Self.Questions1" Multiplicity="1" Role="Questions1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="QuestionComments" Type="Self.QuestionComments" Multiplicity="*" />
+          <End Type="Self.QuestionComments" Multiplicity="*" Role="QuestionComments" />
           <ReferentialConstraint>
             <Principal Role="Questions1">
               <PropertyRef Name="QuestionID" />
@@ -147,10 +147,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionsQuestionVotingHistory">
-          <End Role="Questions1" Type="Self.Questions1" Multiplicity="1">
+          <End Type="Self.Questions1" Multiplicity="1" Role="Questions1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="QuestionVotingHistories" Type="Self.QuestionVotingHistories" Multiplicity="*" />
+          <End Type="Self.QuestionVotingHistories" Multiplicity="*" Role="QuestionVotingHistories" />
           <ReferentialConstraint>
             <Principal Role="Questions1">
               <PropertyRef Name="QuestionID" />
@@ -161,8 +161,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserAnswerComment">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="AnswerComments" Type="Self.AnswerComments" Multiplicity="*" />
+          <End Type="Self.Users" Multiplicity="1" Role="Users" />
+          <End Type="Self.AnswerComments" Multiplicity="*" Role="AnswerComments" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserID" />
@@ -173,8 +173,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserAnswers">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Answers1" Type="Self.Answers1" Multiplicity="*" />
+          <End Type="Self.Users" Multiplicity="1" Role="Users" />
+          <End Type="Self.Answers1" Multiplicity="*" Role="Answers1" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserID" />
@@ -185,8 +185,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserAnswerVotingHistory">
-          <End Role="AnswerVotingHistories" Type="Self.AnswerVotingHistories" Multiplicity="1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <End Type="Self.AnswerVotingHistories" Multiplicity="1" Role="AnswerVotingHistories" />
+          <End Type="Self.Users" Multiplicity="*" Role="Users" />
           <ReferentialConstraint>
             <Principal Role="AnswerVotingHistories">
               <PropertyRef Name="AVH_ID" />
@@ -197,8 +197,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserQuestionComment">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="QuestionComments" Type="Self.QuestionComments" Multiplicity="*" />
+          <End Type="Self.Users" Multiplicity="1" Role="Users" />
+          <End Type="Self.QuestionComments" Multiplicity="*" Role="QuestionComments" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserID" />
@@ -209,8 +209,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserQuestions">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Questions1" Type="Self.Questions1" Multiplicity="*" />
+          <End Type="Self.Users" Multiplicity="1" Role="Users" />
+          <End Type="Self.Questions1" Multiplicity="*" Role="Questions1" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserID" />
@@ -221,8 +221,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserQuestionVotingHistory">
-          <End Role="QuestionVotingHistories" Type="Self.QuestionVotingHistories" Multiplicity="1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <End Type="Self.QuestionVotingHistories" Multiplicity="1" Role="QuestionVotingHistories" />
+          <End Type="Self.Users" Multiplicity="*" Role="Users" />
           <ReferentialConstraint>
             <Principal Role="QuestionVotingHistories">
               <PropertyRef Name="QVH_ID" />
@@ -242,56 +242,55 @@
           <EntitySet Name="QuestionVotingHistories" EntityType="Self.QuestionVotingHistories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AnswersAnswerComment" Association="Self.FK_AnswersAnswerComment">
-            <End Role="Answers1" EntitySet="Answers1" />
-            <End Role="AnswerComments" EntitySet="AnswerComments" />
+            <End EntitySet="Answers1" Role="Answers1" />
+            <End EntitySet="AnswerComments" Role="AnswerComments" />
           </AssociationSet>
           <AssociationSet Name="FK_AnswersAnswerVotingHistory" Association="Self.FK_AnswersAnswerVotingHistory">
-            <End Role="Answers1" EntitySet="Answers1" />
-            <End Role="AnswerVotingHistories" EntitySet="AnswerVotingHistories" />
+            <End EntitySet="Answers1" Role="Answers1" />
+            <End EntitySet="AnswerVotingHistories" Role="AnswerVotingHistories" />
           </AssociationSet>
           <AssociationSet Name="FK_QuestionsAnswers" Association="Self.FK_QuestionsAnswers">
-            <End Role="Questions1" EntitySet="Questions1" />
-            <End Role="Answers1" EntitySet="Answers1" />
+            <End EntitySet="Questions1" Role="Questions1" />
+            <End EntitySet="Answers1" Role="Answers1" />
           </AssociationSet>
           <AssociationSet Name="FK_QuestionsCategories" Association="Self.FK_QuestionsCategories">
-            <End Role="Categories1" EntitySet="Categories1" />
-            <End Role="Questions1" EntitySet="Questions1" />
+            <End EntitySet="Categories1" Role="Categories1" />
+            <End EntitySet="Questions1" Role="Questions1" />
           </AssociationSet>
           <AssociationSet Name="FK_QuestionsQuestionComment" Association="Self.FK_QuestionsQuestionComment">
-            <End Role="Questions1" EntitySet="Questions1" />
-            <End Role="QuestionComments" EntitySet="QuestionComments" />
+            <End EntitySet="Questions1" Role="Questions1" />
+            <End EntitySet="QuestionComments" Role="QuestionComments" />
           </AssociationSet>
           <AssociationSet Name="FK_QuestionsQuestionVotingHistory" Association="Self.FK_QuestionsQuestionVotingHistory">
-            <End Role="Questions1" EntitySet="Questions1" />
-            <End Role="QuestionVotingHistories" EntitySet="QuestionVotingHistories" />
+            <End EntitySet="Questions1" Role="Questions1" />
+            <End EntitySet="QuestionVotingHistories" Role="QuestionVotingHistories" />
           </AssociationSet>
           <AssociationSet Name="FK_UserAnswerComment" Association="Self.FK_UserAnswerComment">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="AnswerComments" EntitySet="AnswerComments" />
+            <End EntitySet="Users" Role="Users" />
+            <End EntitySet="AnswerComments" Role="AnswerComments" />
           </AssociationSet>
           <AssociationSet Name="FK_UserAnswers" Association="Self.FK_UserAnswers">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Answers1" EntitySet="Answers1" />
+            <End EntitySet="Users" Role="Users" />
+            <End EntitySet="Answers1" Role="Answers1" />
           </AssociationSet>
           <AssociationSet Name="FK_UserAnswerVotingHistory" Association="Self.FK_UserAnswerVotingHistory">
-            <End Role="AnswerVotingHistories" EntitySet="AnswerVotingHistories" />
-            <End Role="Users" EntitySet="Users" />
+            <End EntitySet="AnswerVotingHistories" Role="AnswerVotingHistories" />
+            <End EntitySet="Users" Role="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_UserQuestionComment" Association="Self.FK_UserQuestionComment">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="QuestionComments" EntitySet="QuestionComments" />
+            <End EntitySet="Users" Role="Users" />
+            <End EntitySet="QuestionComments" Role="QuestionComments" />
           </AssociationSet>
           <AssociationSet Name="FK_UserQuestions" Association="Self.FK_UserQuestions">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Questions1" EntitySet="Questions1" />
+            <End EntitySet="Users" Role="Users" />
+            <End EntitySet="Questions1" Role="Questions1" />
           </AssociationSet>
           <AssociationSet Name="FK_UserQuestionVotingHistory" Association="Self.FK_UserQuestionVotingHistory">
-            <End Role="QuestionVotingHistories" EntitySet="QuestionVotingHistories" />
-            <End Role="Users" EntitySet="Users" />
+            <End EntitySet="QuestionVotingHistories" Role="QuestionVotingHistories" />
+            <End EntitySet="Users" Role="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TestTODBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -407,7 +406,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserAnswerComment">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Users" Type="TestTODBModel.User" Multiplicity="1" />
           <End Role="AnswerComments" Type="Self.AnswerComment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -447,7 +446,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserAnswers">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Users" Type="TestTODBModel.User" Multiplicity="1" />
           <End Role="Answers1" Type="Self.Answers1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -460,7 +459,7 @@
         </Association>
         <Association Name="FK_UserAnswerVotingHistory">
           <End Role="AnswerVotingHistories" Type="Self.AnswerVotingHistory" Multiplicity="1" />
-          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <End Role="Users" Type="TestTODBModel.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AnswerVotingHistories">
               <PropertyRef Name="AVH_ID" />
@@ -497,7 +496,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserQuestionComment">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Users" Type="TestTODBModel.User" Multiplicity="1" />
           <End Role="QuestionComments" Type="Self.QuestionComment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -523,7 +522,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserQuestions">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Users" Type="TestTODBModel.User" Multiplicity="1" />
           <End Role="Questions1" Type="Self.Questions1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -536,7 +535,7 @@
         </Association>
         <Association Name="FK_UserQuestionVotingHistory">
           <End Role="QuestionVotingHistories" Type="Self.QuestionVotingHistory" Multiplicity="1" />
-          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <End Role="Users" Type="TestTODBModel.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QuestionVotingHistories">
               <PropertyRef Name="QVH_ID" />
@@ -554,7 +553,7 @@
           <EntitySet Name="QuestionComments" EntityType="Self.QuestionComment" />
           <EntitySet Name="Questions1" EntityType="Self.Questions1" />
           <EntitySet Name="QuestionVotingHistories" EntityType="Self.QuestionVotingHistory" />
-          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Users" EntityType="TestTODBModel.User" />
           <AssociationSet Name="FK_AnswersAnswerComment" Association="Self.FK_AnswersAnswerComment">
             <End Role="Answers1" EntitySet="Answers1" />
             <End Role="AnswerComments" EntitySet="AnswerComments" />
