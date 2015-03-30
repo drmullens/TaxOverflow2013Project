@@ -16,16 +16,16 @@ namespace TaxOverflow2013.Controllers
 
             currentUser = User.Identity.Name;
 
-            using (var context = new TestTODBEntities())
+            using (var context = new TODBEntities())
             {
-                var users = context.Users.Where(c => c.UserName == currentUser).ToList();
+                var users = context.UserTBLs.Where(c => c.UserName == currentUser).ToList();
                 if (users.Count() == 0)
                 {
-                    TaxOverflow2013.Models.User newUser = new TaxOverflow2013.Models.User();
+                    UserTBL newUser = new UserTBL();
 
                     newUser.UserName = User.Identity.Name;
-
-                    users.Add(newUser);
+                    
+                    context.UserTBLs.Add(newUser);
                     context.SaveChanges();
                 }
             }
@@ -37,9 +37,9 @@ namespace TaxOverflow2013.Controllers
             ViewBag.Message = "Post a Question";
             // TODO: load the DDL with the categories from the DB
 
-            using (var context = new TestTODBEntities())
+            using (var context = new TODBEntities())
             {
-                var categories = context.Categories1.Where(c => c.CategoryID > 0).ToList();
+                var categories = context.CategoryTBLs.Where(c => c.CategoryID > 0).ToList();
                 return View(categories);
             }
 
@@ -55,21 +55,21 @@ namespace TaxOverflow2013.Controllers
 
             try
             {
-                Questions1 myQuestion = new Questions1();
+                QuestionTBL myQuestion = new QuestionTBL();
 
                 myQuestion.Question = txtQuestion;
-                myQuestion.User.UserName = User.Identity.Name.ToString();
+                myQuestion.UserTBL.UserName = User.Identity.Name.ToString();
                 myQuestion.Score = 0;
 
                 int ddlValue;
                 if (Int32.TryParse(ddlCategory, out ddlValue))
-                    myQuestion.Category_CategoryID = ddlValue;
+                    myQuestion.CategoryID = ddlValue;
                 else
                     //TODO: logic here to handle problem with a non-int value being passed as ddlCategory
                     ddlValue = 0;
-                using (var context = new TestTODBEntities())
+                using (var context = new TODBEntities())
                 {
-                    context.Questions1.Add(myQuestion);
+                    context.QuestionTBLs.Add(myQuestion);
                     context.SaveChanges();
                 }
 

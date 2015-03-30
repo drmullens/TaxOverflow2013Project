@@ -12,17 +12,11 @@ namespace TaxOverflow2013.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class QuestionVotingHistory
+    public partial class QuestionVotingHistoryTBL
     {
-        public QuestionVotingHistory()
-        {
-            this.Users = new HashSet<User>();
-        }
-    
-        public int QVH_ID { get; set; }
-        public int Question_QuestionID { get; set; }
-    
-        public virtual Questions1 Questions1 { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public int QVHID { get; set; }
+        public int QVHUserID { get; set; }
+        public int QVHQuestionID { get; set; }
+        public System.DateTime QVHDTS { get; set; }
     }
 }

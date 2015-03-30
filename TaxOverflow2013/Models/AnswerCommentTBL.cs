@@ -12,17 +12,15 @@ namespace TaxOverflow2013.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AnswerVotingHistory
+    public partial class AnswerCommentTBL
     {
-        public AnswerVotingHistory()
-        {
-            this.Users = new HashSet<User>();
-        }
+        public int ACommentID { get; set; }
+        public string AComment { get; set; }
+        public System.DateTime AcommentDTS { get; set; }
+        public int AnswerID { get; set; }
+        public int UserID { get; set; }
     
-        public int AVH_ID { get; set; }
-        public int Answer_AnswerID { get; set; }
-    
-        public virtual Answers1 Answers1 { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual AnswerTBL AnswerTBL { get; set; }
+        public virtual UserTBL UserTBL { get; set; }
     }
 }

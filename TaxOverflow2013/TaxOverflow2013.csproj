@@ -137,26 +137,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AnswerComment.cs">
+    <Compile Include="Models\AnswerCommentTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Answers1.cs">
+    <Compile Include="Models\AnswerTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AnswerVotingHistory.cs">
+    <Compile Include="Models\AnswerVotingHistoryTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Categories1.cs">
+    <Compile Include="Models\CategoryTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeModel.cs" />
-    <Compile Include="Models\QuestionComment.cs">
+    <Compile Include="Models\QuestionCommentTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Questions1.cs">
+    <Compile Include="Models\QuestionTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuestionVotingHistory.cs">
+    <Compile Include="Models\QuestionVotingHistoryTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TODB.Context.cs">
@@ -174,7 +174,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TODB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.cs">
+    <Compile Include="Models\UserTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -190,8 +190,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\TestTODB_log.ldf">
-      <DependentUpon>TestTODB.mdf</DependentUpon>
+    <Content Include="App_Data\TODB.mdf" />
+    <Content Include="App_Data\TODB_log.ldf">
+      <DependentUpon>TODB.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css">
@@ -294,7 +295,6 @@
       <DependentUpon>respond.js</DependentUpon>
     </Content>
     <Content Include="Scripts\_references.js" />
-    <Content Include="App_Data\TestTODB.mdf" />
     <Content Include="Scripts\_references.min.js">
       <DependentUpon>_references.js</DependentUpon>
     </Content>

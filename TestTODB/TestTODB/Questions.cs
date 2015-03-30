@@ -7,31 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TaxOverflow2013.Models
+namespace TestTODB
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Questions
     {
-        public User()
+        public Questions()
         {
-            this.AnswerComments = new HashSet<AnswerComment>();
-            this.Answers1 = new HashSet<Answers1>();
+            this.Score = 0;
+            this.Answers = new HashSet<Answers>();
             this.QuestionComments = new HashSet<QuestionComment>();
-            this.Questions1 = new HashSet<Questions1>();
         }
     
+        public int QuestionID { get; set; }
+        public string Question { get; set; }
+        public int Score { get; set; }
+        public System.DateTime QuestionDTS { get; set; }
         public int UserID { get; set; }
-        public string UserName { get; set; }
-        public int AnswerVotingHistory_AVH_ID { get; set; }
-        public int QuestionVotingHistory_QVH_ID { get; set; }
     
-        public virtual ICollection<AnswerComment> AnswerComments { get; set; }
-        public virtual ICollection<Answers1> Answers1 { get; set; }
-        public virtual AnswerVotingHistory AnswerVotingHistory { get; set; }
+        public virtual ICollection<Answers> Answers { get; set; }
         public virtual ICollection<QuestionComment> QuestionComments { get; set; }
-        public virtual ICollection<Questions1> Questions1 { get; set; }
+        public virtual UserInfo User { get; set; }
         public virtual QuestionVotingHistory QuestionVotingHistory { get; set; }
+        public virtual Categories Category { get; set; }
     }
 }

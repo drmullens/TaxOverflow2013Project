@@ -4,309 +4,238 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="TestTODBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
-        <EntityType Name="AnswerComments">
+      <Schema Namespace="TODBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnswerCommentTBLs">
           <Key>
             <PropertyRef Name="ACommentID" />
           </Key>
-          <Property Name="ACommentID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Comment" Nullable="false" Type="nvarchar(max)" />
-          <Property Name="ACommentDTS" Nullable="false" Type="datetime" />
-          <Property Name="AnswerID" Nullable="false" Type="int" />
-          <Property Name="UserID" Nullable="false" Type="int" />
+          <Property Name="ACommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AComment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AcommentDTS" Type="datetime" Nullable="false" />
+          <Property Name="AnswerID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Answers1">
+        <EntityType Name="AnswerTBLs">
           <Key>
             <PropertyRef Name="AnswerID" />
           </Key>
-          <Property Name="AnswerID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Answer" Nullable="false" Type="nvarchar(max)" />
-          <Property Name="Score" Nullable="false" Type="int" />
-          <Property Name="AnswerDTS" Nullable="false" Type="datetime" />
-          <Property Name="Answered" Nullable="false" Type="bit" />
-          <Property Name="QuestionID" Nullable="false" Type="int" />
-          <Property Name="UserID" Nullable="false" Type="int" />
+          <Property Name="AnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="AnswerDTS" Type="datetime" Nullable="false" />
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Accepted" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="AnswerVotingHistories">
+        <EntityType Name="AnswerVotingHistoryTBLs">
           <Key>
-            <PropertyRef Name="AVH_ID" />
+            <PropertyRef Name="AVHID" />
           </Key>
-          <Property Name="AVH_ID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Answer_AnswerID" Nullable="false" Type="int" />
+          <Property Name="AVHID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AVHUserID" Type="int" Nullable="false" />
+          <Property Name="AVHAnswerID" Type="int" Nullable="false" />
+          <Property Name="AVHDTS" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="Categories1">
+        <EntityType Name="CategoryTBLs">
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
-          <Property Name="CategoryID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Category" Nullable="false" MaxLength="15" Type="nvarchar" />
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="25" Nullable="false" />
         </EntityType>
-        <EntityType Name="QuestionComments">
+        <EntityType Name="QuestionCommentTBLs">
           <Key>
             <PropertyRef Name="QCommentID" />
           </Key>
-          <Property Name="QCommentID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Comment" Nullable="false" Type="nvarchar(max)" />
-          <Property Name="QCommentDTS" Nullable="false" Type="datetime" />
-          <Property Name="QuestionID" Nullable="false" Type="int" />
-          <Property Name="UserID" Nullable="false" Type="int" />
+          <Property Name="QCommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QComment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="QCommentDTS" Type="datetime" Nullable="false" />
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Questions1">
+        <EntityType Name="QuestionTBLs">
           <Key>
             <PropertyRef Name="QuestionID" />
           </Key>
-          <Property Name="QuestionID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Question" Nullable="false" Type="nvarchar(max)" />
-          <Property Name="Score" Nullable="false" Type="int" />
-          <Property Name="QuestionDTS" Nullable="false" Type="datetime" />
-          <Property Name="UserID" Nullable="false" Type="int" />
-          <Property Name="Category_CategoryID" Nullable="false" Type="int" />
+          <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="QuestionDTS" Type="datetime" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="QuestionVotingHistories">
+        <EntityType Name="QuestionVotingHistoryTBLs">
           <Key>
-            <PropertyRef Name="QVH_ID" />
+            <PropertyRef Name="QVHID" />
           </Key>
-          <Property Name="QVH_ID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Question_QuestionID" Nullable="false" Type="int" />
+          <Property Name="QVHID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QVHUserID" Type="int" Nullable="false" />
+          <Property Name="QVHQuestionID" Type="int" Nullable="false" />
+          <Property Name="QVHDTS" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="Users">
+        <EntityType Name="UserTBLs">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="UserName" Nullable="false" MaxLength="50" Type="nvarchar" />
-          <Property Name="AnswerVotingHistory_AVH_ID" Nullable="false" Type="int" />
-          <Property Name="QuestionVotingHistory_QVH_ID" Nullable="false" Type="int" />
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <Association Name="FK_AnswersAnswerComment">
-          <End Type="Self.Answers1" Multiplicity="1" Role="Answers1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Self.AnswerComments" Multiplicity="*" Role="AnswerComments" />
+        <Association Name="FK_AnswerTBLAnswerCommentTBL">
+          <End Role="AnswerTBLs" Type="Self.AnswerTBLs" Multiplicity="1" />
+          <End Role="AnswerCommentTBLs" Type="Self.AnswerCommentTBLs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Answers1">
+            <Principal Role="AnswerTBLs">
               <PropertyRef Name="AnswerID" />
             </Principal>
-            <Dependent Role="AnswerComments">
+            <Dependent Role="AnswerCommentTBLs">
               <PropertyRef Name="AnswerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AnswersAnswerVotingHistory">
-          <End Type="Self.Answers1" Multiplicity="1" Role="Answers1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Self.AnswerVotingHistories" Multiplicity="*" Role="AnswerVotingHistories" />
+        <Association Name="FK_QuestionTBLAnswerTBL">
+          <End Role="QuestionTBLs" Type="Self.QuestionTBLs" Multiplicity="1" />
+          <End Role="AnswerTBLs" Type="Self.AnswerTBLs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Answers1">
-              <PropertyRef Name="AnswerID" />
-            </Principal>
-            <Dependent Role="AnswerVotingHistories">
-              <PropertyRef Name="Answer_AnswerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_QuestionsAnswers">
-          <End Type="Self.Questions1" Multiplicity="1" Role="Questions1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Self.Answers1" Multiplicity="*" Role="Answers1" />
-          <ReferentialConstraint>
-            <Principal Role="Questions1">
+            <Principal Role="QuestionTBLs">
               <PropertyRef Name="QuestionID" />
             </Principal>
-            <Dependent Role="Answers1">
+            <Dependent Role="AnswerTBLs">
               <PropertyRef Name="QuestionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_QuestionsCategories">
-          <End Type="Self.Categories1" Multiplicity="1" Role="Categories1" />
-          <End Type="Self.Questions1" Multiplicity="*" Role="Questions1" />
+        <Association Name="FK_QuestionTBLCategoryTBL">
+          <End Role="CategoryTBLs" Type="Self.CategoryTBLs" Multiplicity="1" />
+          <End Role="QuestionTBLs" Type="Self.QuestionTBLs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Categories1">
+            <Principal Role="CategoryTBLs">
               <PropertyRef Name="CategoryID" />
             </Principal>
-            <Dependent Role="Questions1">
-              <PropertyRef Name="Category_CategoryID" />
+            <Dependent Role="QuestionTBLs">
+              <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_QuestionsQuestionComment">
-          <End Type="Self.Questions1" Multiplicity="1" Role="Questions1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Self.QuestionComments" Multiplicity="*" Role="QuestionComments" />
+        <Association Name="FK_QuestionTBLQuestionCommentTBL">
+          <End Role="QuestionTBLs" Type="Self.QuestionTBLs" Multiplicity="1" />
+          <End Role="QuestionCommentTBLs" Type="Self.QuestionCommentTBLs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Questions1">
+            <Principal Role="QuestionTBLs">
               <PropertyRef Name="QuestionID" />
             </Principal>
-            <Dependent Role="QuestionComments">
+            <Dependent Role="QuestionCommentTBLs">
               <PropertyRef Name="QuestionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_QuestionsQuestionVotingHistory">
-          <End Type="Self.Questions1" Multiplicity="1" Role="Questions1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Self.QuestionVotingHistories" Multiplicity="*" Role="QuestionVotingHistories" />
+        <Association Name="FK_UserTBLAnswerCommentTBL">
+          <End Role="UserTBLs" Type="Self.UserTBLs" Multiplicity="1" />
+          <End Role="AnswerCommentTBLs" Type="Self.AnswerCommentTBLs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Questions1">
-              <PropertyRef Name="QuestionID" />
-            </Principal>
-            <Dependent Role="QuestionVotingHistories">
-              <PropertyRef Name="Question_QuestionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserAnswerComment">
-          <End Type="Self.Users" Multiplicity="1" Role="Users" />
-          <End Type="Self.AnswerComments" Multiplicity="*" Role="AnswerComments" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
+            <Principal Role="UserTBLs">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="AnswerComments">
+            <Dependent Role="AnswerCommentTBLs">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAnswers">
-          <End Type="Self.Users" Multiplicity="1" Role="Users" />
-          <End Type="Self.Answers1" Multiplicity="*" Role="Answers1" />
+        <Association Name="FK_UserTBLAnswerTBL">
+          <End Role="UserTBLs" Type="Self.UserTBLs" Multiplicity="1" />
+          <End Role="AnswerTBLs" Type="Self.AnswerTBLs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Users">
+            <Principal Role="UserTBLs">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Answers1">
+            <Dependent Role="AnswerTBLs">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAnswerVotingHistory">
-          <End Type="Self.AnswerVotingHistories" Multiplicity="1" Role="AnswerVotingHistories" />
-          <End Type="Self.Users" Multiplicity="*" Role="Users" />
+        <Association Name="FK_UserTBLQuestionCommentTBL">
+          <End Role="UserTBLs" Type="Self.UserTBLs" Multiplicity="1" />
+          <End Role="QuestionCommentTBLs" Type="Self.QuestionCommentTBLs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AnswerVotingHistories">
-              <PropertyRef Name="AVH_ID" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="AnswerVotingHistory_AVH_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserQuestionComment">
-          <End Type="Self.Users" Multiplicity="1" Role="Users" />
-          <End Type="Self.QuestionComments" Multiplicity="*" Role="QuestionComments" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
+            <Principal Role="UserTBLs">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="QuestionComments">
+            <Dependent Role="QuestionCommentTBLs">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserQuestions">
-          <End Type="Self.Users" Multiplicity="1" Role="Users" />
-          <End Type="Self.Questions1" Multiplicity="*" Role="Questions1" />
+        <Association Name="FK_UserTBLQuestionTBL">
+          <End Role="UserTBLs" Type="Self.UserTBLs" Multiplicity="1" />
+          <End Role="QuestionTBLs" Type="Self.QuestionTBLs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Users">
+            <Principal Role="UserTBLs">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Questions1">
+            <Dependent Role="QuestionTBLs">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserQuestionVotingHistory">
-          <End Type="Self.QuestionVotingHistories" Multiplicity="1" Role="QuestionVotingHistories" />
-          <End Type="Self.Users" Multiplicity="*" Role="Users" />
-          <ReferentialConstraint>
-            <Principal Role="QuestionVotingHistories">
-              <PropertyRef Name="QVH_ID" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="QuestionVotingHistory_QVH_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="TestTODBModelStoreContainer">
-          <EntitySet Name="AnswerComments" EntityType="Self.AnswerComments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Answers1" EntityType="Self.Answers1" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AnswerVotingHistories" EntityType="Self.AnswerVotingHistories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Categories1" EntityType="Self.Categories1" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="QuestionComments" EntityType="Self.QuestionComments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Questions1" EntityType="Self.Questions1" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="QuestionVotingHistories" EntityType="Self.QuestionVotingHistories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AnswersAnswerComment" Association="Self.FK_AnswersAnswerComment">
-            <End EntitySet="Answers1" Role="Answers1" />
-            <End EntitySet="AnswerComments" Role="AnswerComments" />
+        <EntityContainer Name="TODBModelStoreContainer">
+          <EntitySet Name="AnswerCommentTBLs" EntityType="Self.AnswerCommentTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnswerTBLs" EntityType="Self.AnswerTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnswerVotingHistoryTBLs" EntityType="Self.AnswerVotingHistoryTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryTBLs" EntityType="Self.CategoryTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionCommentTBLs" EntityType="Self.QuestionCommentTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionTBLs" EntityType="Self.QuestionTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionVotingHistoryTBLs" EntityType="Self.QuestionVotingHistoryTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTBLs" EntityType="Self.UserTBLs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AnswerTBLAnswerCommentTBL" Association="Self.FK_AnswerTBLAnswerCommentTBL">
+            <End Role="AnswerTBLs" EntitySet="AnswerTBLs" />
+            <End Role="AnswerCommentTBLs" EntitySet="AnswerCommentTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_AnswersAnswerVotingHistory" Association="Self.FK_AnswersAnswerVotingHistory">
-            <End EntitySet="Answers1" Role="Answers1" />
-            <End EntitySet="AnswerVotingHistories" Role="AnswerVotingHistories" />
+          <AssociationSet Name="FK_QuestionTBLAnswerTBL" Association="Self.FK_QuestionTBLAnswerTBL">
+            <End Role="QuestionTBLs" EntitySet="QuestionTBLs" />
+            <End Role="AnswerTBLs" EntitySet="AnswerTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionsAnswers" Association="Self.FK_QuestionsAnswers">
-            <End EntitySet="Questions1" Role="Questions1" />
-            <End EntitySet="Answers1" Role="Answers1" />
+          <AssociationSet Name="FK_QuestionTBLCategoryTBL" Association="Self.FK_QuestionTBLCategoryTBL">
+            <End Role="CategoryTBLs" EntitySet="CategoryTBLs" />
+            <End Role="QuestionTBLs" EntitySet="QuestionTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionsCategories" Association="Self.FK_QuestionsCategories">
-            <End EntitySet="Categories1" Role="Categories1" />
-            <End EntitySet="Questions1" Role="Questions1" />
+          <AssociationSet Name="FK_QuestionTBLQuestionCommentTBL" Association="Self.FK_QuestionTBLQuestionCommentTBL">
+            <End Role="QuestionTBLs" EntitySet="QuestionTBLs" />
+            <End Role="QuestionCommentTBLs" EntitySet="QuestionCommentTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionsQuestionComment" Association="Self.FK_QuestionsQuestionComment">
-            <End EntitySet="Questions1" Role="Questions1" />
-            <End EntitySet="QuestionComments" Role="QuestionComments" />
+          <AssociationSet Name="FK_UserTBLAnswerCommentTBL" Association="Self.FK_UserTBLAnswerCommentTBL">
+            <End Role="UserTBLs" EntitySet="UserTBLs" />
+            <End Role="AnswerCommentTBLs" EntitySet="AnswerCommentTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionsQuestionVotingHistory" Association="Self.FK_QuestionsQuestionVotingHistory">
-            <End EntitySet="Questions1" Role="Questions1" />
-            <End EntitySet="QuestionVotingHistories" Role="QuestionVotingHistories" />
+          <AssociationSet Name="FK_UserTBLAnswerTBL" Association="Self.FK_UserTBLAnswerTBL">
+            <End Role="UserTBLs" EntitySet="UserTBLs" />
+            <End Role="AnswerTBLs" EntitySet="AnswerTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserAnswerComment" Association="Self.FK_UserAnswerComment">
-            <End EntitySet="Users" Role="Users" />
-            <End EntitySet="AnswerComments" Role="AnswerComments" />
+          <AssociationSet Name="FK_UserTBLQuestionCommentTBL" Association="Self.FK_UserTBLQuestionCommentTBL">
+            <End Role="UserTBLs" EntitySet="UserTBLs" />
+            <End Role="QuestionCommentTBLs" EntitySet="QuestionCommentTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserAnswers" Association="Self.FK_UserAnswers">
-            <End EntitySet="Users" Role="Users" />
-            <End EntitySet="Answers1" Role="Answers1" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAnswerVotingHistory" Association="Self.FK_UserAnswerVotingHistory">
-            <End EntitySet="AnswerVotingHistories" Role="AnswerVotingHistories" />
-            <End EntitySet="Users" Role="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserQuestionComment" Association="Self.FK_UserQuestionComment">
-            <End EntitySet="Users" Role="Users" />
-            <End EntitySet="QuestionComments" Role="QuestionComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserQuestions" Association="Self.FK_UserQuestions">
-            <End EntitySet="Users" Role="Users" />
-            <End EntitySet="Questions1" Role="Questions1" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserQuestionVotingHistory" Association="Self.FK_UserQuestionVotingHistory">
-            <End EntitySet="QuestionVotingHistories" Role="QuestionVotingHistories" />
-            <End EntitySet="Users" Role="Users" />
+          <AssociationSet Name="FK_UserTBLQuestionTBL" Association="Self.FK_UserTBLQuestionTBL">
+            <End Role="UserTBLs" EntitySet="UserTBLs" />
+            <End Role="QuestionTBLs" EntitySet="QuestionTBLs" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TestTODBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AnswerComment">
+      <Schema Namespace="TODBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnswerCommentTBL">
           <Key>
             <PropertyRef Name="ACommentID" />
           </Key>
           <Property Name="ACommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ACommentDTS" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AcommentDTS" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="AnswerID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Answers1" Relationship="Self.FK_AnswersAnswerComment" FromRole="AnswerComments" ToRole="Answers1" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserAnswerComment" FromRole="AnswerComments" ToRole="Users" />
+          <NavigationProperty Name="AnswerTBL" Relationship="Self.FK_AnswerTBLAnswerCommentTBL" FromRole="AnswerCommentTBLs" ToRole="AnswerTBLs" />
+          <NavigationProperty Name="UserTBL" Relationship="Self.FK_UserTBLAnswerCommentTBL" FromRole="AnswerCommentTBLs" ToRole="UserTBLs" />
         </EntityType>
-        <EntityType Name="Answers1">
+        <EntityType Name="AnswerTBL">
           <Key>
             <PropertyRef Name="AnswerID" />
           </Key>
@@ -314,44 +243,43 @@
           <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Score" Type="Int32" Nullable="false" />
           <Property Name="AnswerDTS" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Answered" Type="Boolean" Nullable="false" />
           <Property Name="QuestionID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AnswerComments" Relationship="Self.FK_AnswersAnswerComment" FromRole="Answers1" ToRole="AnswerComments" />
-          <NavigationProperty Name="AnswerVotingHistories" Relationship="Self.FK_AnswersAnswerVotingHistory" FromRole="Answers1" ToRole="AnswerVotingHistories" />
-          <NavigationProperty Name="Questions1" Relationship="Self.FK_QuestionsAnswers" FromRole="Answers1" ToRole="Questions1" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserAnswers" FromRole="Answers1" ToRole="Users" />
+          <Property Name="Accepted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AnswerCommentTBLs" Relationship="Self.FK_AnswerTBLAnswerCommentTBL" FromRole="AnswerTBLs" ToRole="AnswerCommentTBLs" />
+          <NavigationProperty Name="QuestionTBL" Relationship="Self.FK_QuestionTBLAnswerTBL" FromRole="AnswerTBLs" ToRole="QuestionTBLs" />
+          <NavigationProperty Name="UserTBL" Relationship="Self.FK_UserTBLAnswerTBL" FromRole="AnswerTBLs" ToRole="UserTBLs" />
         </EntityType>
-        <EntityType Name="AnswerVotingHistory">
+        <EntityType Name="AnswerVotingHistoryTBL">
           <Key>
-            <PropertyRef Name="AVH_ID" />
+            <PropertyRef Name="AVHID" />
           </Key>
-          <Property Name="AVH_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Answer_AnswerID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Answers1" Relationship="Self.FK_AnswersAnswerVotingHistory" FromRole="AnswerVotingHistories" ToRole="Answers1" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_UserAnswerVotingHistory" FromRole="AnswerVotingHistories" ToRole="Users" />
+          <Property Name="AVHID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AVHUserID" Type="Int32" Nullable="false" />
+          <Property Name="AVHAnswerID" Type="Int32" Nullable="false" />
+          <Property Name="AVHDTS" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="Categories1">
+        <EntityType Name="CategoryTBL">
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Category" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Questions1" Relationship="Self.FK_QuestionsCategories" FromRole="Categories1" ToRole="Questions1" />
+          <Property Name="Category" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="QuestionTBLs" Relationship="Self.FK_QuestionTBLCategoryTBL" FromRole="CategoryTBLs" ToRole="QuestionTBLs" />
         </EntityType>
-        <EntityType Name="QuestionComment">
+        <EntityType Name="QuestionCommentTBL">
           <Key>
             <PropertyRef Name="QCommentID" />
           </Key>
           <Property Name="QCommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="QCommentDTS" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="QuestionID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Questions1" Relationship="Self.FK_QuestionsQuestionComment" FromRole="QuestionComments" ToRole="Questions1" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserQuestionComment" FromRole="QuestionComments" ToRole="Users" />
+          <NavigationProperty Name="QuestionTBL" Relationship="Self.FK_QuestionTBLQuestionCommentTBL" FromRole="QuestionCommentTBLs" ToRole="QuestionTBLs" />
+          <NavigationProperty Name="UserTBL" Relationship="Self.FK_UserTBLQuestionCommentTBL" FromRole="QuestionCommentTBLs" ToRole="UserTBLs" />
         </EntityType>
-        <EntityType Name="Questions1">
+        <EntityType Name="QuestionTBL">
           <Key>
             <PropertyRef Name="QuestionID" />
           </Key>
@@ -359,248 +287,169 @@
           <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Score" Type="Int32" Nullable="false" />
           <Property Name="QuestionDTS" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Category_CategoryID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Answers1" Relationship="Self.FK_QuestionsAnswers" FromRole="Questions1" ToRole="Answers1" />
-          <NavigationProperty Name="Categories1" Relationship="Self.FK_QuestionsCategories" FromRole="Questions1" ToRole="Categories1" />
-          <NavigationProperty Name="QuestionComments" Relationship="Self.FK_QuestionsQuestionComment" FromRole="Questions1" ToRole="QuestionComments" />
-          <NavigationProperty Name="QuestionVotingHistories" Relationship="Self.FK_QuestionsQuestionVotingHistory" FromRole="Questions1" ToRole="QuestionVotingHistories" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserQuestions" FromRole="Questions1" ToRole="Users" />
+          <NavigationProperty Name="AnswerTBLs" Relationship="Self.FK_QuestionTBLAnswerTBL" FromRole="QuestionTBLs" ToRole="AnswerTBLs" />
+          <NavigationProperty Name="CategoryTBL" Relationship="Self.FK_QuestionTBLCategoryTBL" FromRole="QuestionTBLs" ToRole="CategoryTBLs" />
+          <NavigationProperty Name="QuestionCommentTBLs" Relationship="Self.FK_QuestionTBLQuestionCommentTBL" FromRole="QuestionTBLs" ToRole="QuestionCommentTBLs" />
+          <NavigationProperty Name="UserTBL" Relationship="Self.FK_UserTBLQuestionTBL" FromRole="QuestionTBLs" ToRole="UserTBLs" />
         </EntityType>
-        <EntityType Name="QuestionVotingHistory">
+        <EntityType Name="QuestionVotingHistoryTBL">
           <Key>
-            <PropertyRef Name="QVH_ID" />
+            <PropertyRef Name="QVHID" />
           </Key>
-          <Property Name="QVH_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Question_QuestionID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Questions1" Relationship="Self.FK_QuestionsQuestionVotingHistory" FromRole="QuestionVotingHistories" ToRole="Questions1" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_UserQuestionVotingHistory" FromRole="QuestionVotingHistories" ToRole="Users" />
+          <Property Name="QVHID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QVHUserID" Type="Int32" Nullable="false" />
+          <Property Name="QVHQuestionID" Type="Int32" Nullable="false" />
+          <Property Name="QVHDTS" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="UserTBL">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="AnswerVotingHistory_AVH_ID" Type="Int32" Nullable="false" />
-          <Property Name="QuestionVotingHistory_QVH_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AnswerComments" Relationship="Self.FK_UserAnswerComment" FromRole="Users" ToRole="AnswerComments" />
-          <NavigationProperty Name="Answers1" Relationship="Self.FK_UserAnswers" FromRole="Users" ToRole="Answers1" />
-          <NavigationProperty Name="AnswerVotingHistory" Relationship="Self.FK_UserAnswerVotingHistory" FromRole="Users" ToRole="AnswerVotingHistories" />
-          <NavigationProperty Name="QuestionComments" Relationship="Self.FK_UserQuestionComment" FromRole="Users" ToRole="QuestionComments" />
-          <NavigationProperty Name="Questions1" Relationship="Self.FK_UserQuestions" FromRole="Users" ToRole="Questions1" />
-          <NavigationProperty Name="QuestionVotingHistory" Relationship="Self.FK_UserQuestionVotingHistory" FromRole="Users" ToRole="QuestionVotingHistories" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AnswerCommentTBLs" Relationship="Self.FK_UserTBLAnswerCommentTBL" FromRole="UserTBLs" ToRole="AnswerCommentTBLs" />
+          <NavigationProperty Name="AnswerTBLs" Relationship="Self.FK_UserTBLAnswerTBL" FromRole="UserTBLs" ToRole="AnswerTBLs" />
+          <NavigationProperty Name="QuestionCommentTBLs" Relationship="Self.FK_UserTBLQuestionCommentTBL" FromRole="UserTBLs" ToRole="QuestionCommentTBLs" />
+          <NavigationProperty Name="QuestionTBLs" Relationship="Self.FK_UserTBLQuestionTBL" FromRole="UserTBLs" ToRole="QuestionTBLs" />
         </EntityType>
-        <Association Name="FK_AnswersAnswerComment">
-          <End Role="Answers1" Type="Self.Answers1" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AnswerComments" Type="Self.AnswerComment" Multiplicity="*" />
+        <Association Name="FK_AnswerTBLAnswerCommentTBL">
+          <End Role="AnswerTBLs" Type="Self.AnswerTBL" Multiplicity="1" />
+          <End Role="AnswerCommentTBLs" Type="Self.AnswerCommentTBL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Answers1">
+            <Principal Role="AnswerTBLs">
               <PropertyRef Name="AnswerID" />
             </Principal>
-            <Dependent Role="AnswerComments">
+            <Dependent Role="AnswerCommentTBLs">
               <PropertyRef Name="AnswerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAnswerComment">
-          <End Role="Users" Type="TestTODBModel.User" Multiplicity="1" />
-          <End Role="AnswerComments" Type="Self.AnswerComment" Multiplicity="*" />
+        <Association Name="FK_UserTBLAnswerCommentTBL">
+          <End Role="UserTBLs" Type="Self.UserTBL" Multiplicity="1" />
+          <End Role="AnswerCommentTBLs" Type="Self.AnswerCommentTBL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Users">
+            <Principal Role="UserTBLs">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="AnswerComments">
+            <Dependent Role="AnswerCommentTBLs">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AnswersAnswerVotingHistory">
-          <End Role="Answers1" Type="Self.Answers1" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AnswerVotingHistories" Type="Self.AnswerVotingHistory" Multiplicity="*" />
+        <Association Name="FK_QuestionTBLAnswerTBL">
+          <End Role="QuestionTBLs" Type="Self.QuestionTBL" Multiplicity="1" />
+          <End Role="AnswerTBLs" Type="Self.AnswerTBL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Answers1">
-              <PropertyRef Name="AnswerID" />
-            </Principal>
-            <Dependent Role="AnswerVotingHistories">
-              <PropertyRef Name="Answer_AnswerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_QuestionsAnswers">
-          <End Role="Questions1" Type="Self.Questions1" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Answers1" Type="Self.Answers1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions1">
+            <Principal Role="QuestionTBLs">
               <PropertyRef Name="QuestionID" />
             </Principal>
-            <Dependent Role="Answers1">
+            <Dependent Role="AnswerTBLs">
               <PropertyRef Name="QuestionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAnswers">
-          <End Role="Users" Type="TestTODBModel.User" Multiplicity="1" />
-          <End Role="Answers1" Type="Self.Answers1" Multiplicity="*" />
+        <Association Name="FK_UserTBLAnswerTBL">
+          <End Role="UserTBLs" Type="Self.UserTBL" Multiplicity="1" />
+          <End Role="AnswerTBLs" Type="Self.AnswerTBL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Users">
+            <Principal Role="UserTBLs">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Answers1">
+            <Dependent Role="AnswerTBLs">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAnswerVotingHistory">
-          <End Role="AnswerVotingHistories" Type="Self.AnswerVotingHistory" Multiplicity="1" />
-          <End Role="Users" Type="TestTODBModel.User" Multiplicity="*" />
+        <Association Name="FK_QuestionTBLCategoryTBL">
+          <End Role="CategoryTBLs" Type="Self.CategoryTBL" Multiplicity="1" />
+          <End Role="QuestionTBLs" Type="Self.QuestionTBL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AnswerVotingHistories">
-              <PropertyRef Name="AVH_ID" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="AnswerVotingHistory_AVH_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_QuestionsCategories">
-          <End Role="Categories1" Type="Self.Categories1" Multiplicity="1" />
-          <End Role="Questions1" Type="Self.Questions1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categories1">
+            <Principal Role="CategoryTBLs">
               <PropertyRef Name="CategoryID" />
             </Principal>
-            <Dependent Role="Questions1">
-              <PropertyRef Name="Category_CategoryID" />
+            <Dependent Role="QuestionTBLs">
+              <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_QuestionsQuestionComment">
-          <End Role="Questions1" Type="Self.Questions1" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="QuestionComments" Type="Self.QuestionComment" Multiplicity="*" />
+        <Association Name="FK_QuestionTBLQuestionCommentTBL">
+          <End Role="QuestionTBLs" Type="Self.QuestionTBL" Multiplicity="1" />
+          <End Role="QuestionCommentTBLs" Type="Self.QuestionCommentTBL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Questions1">
+            <Principal Role="QuestionTBLs">
               <PropertyRef Name="QuestionID" />
             </Principal>
-            <Dependent Role="QuestionComments">
+            <Dependent Role="QuestionCommentTBLs">
               <PropertyRef Name="QuestionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserQuestionComment">
-          <End Role="Users" Type="TestTODBModel.User" Multiplicity="1" />
-          <End Role="QuestionComments" Type="Self.QuestionComment" Multiplicity="*" />
+        <Association Name="FK_UserTBLQuestionCommentTBL">
+          <End Role="UserTBLs" Type="Self.UserTBL" Multiplicity="1" />
+          <End Role="QuestionCommentTBLs" Type="Self.QuestionCommentTBL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Users">
+            <Principal Role="UserTBLs">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="QuestionComments">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_QuestionsQuestionVotingHistory">
-          <End Role="Questions1" Type="Self.Questions1" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="QuestionVotingHistories" Type="Self.QuestionVotingHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Questions1">
-              <PropertyRef Name="QuestionID" />
-            </Principal>
-            <Dependent Role="QuestionVotingHistories">
-              <PropertyRef Name="Question_QuestionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserQuestions">
-          <End Role="Users" Type="TestTODBModel.User" Multiplicity="1" />
-          <End Role="Questions1" Type="Self.Questions1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Questions1">
+            <Dependent Role="QuestionCommentTBLs">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserQuestionVotingHistory">
-          <End Role="QuestionVotingHistories" Type="Self.QuestionVotingHistory" Multiplicity="1" />
-          <End Role="Users" Type="TestTODBModel.User" Multiplicity="*" />
+        <Association Name="FK_UserTBLQuestionTBL">
+          <End Role="UserTBLs" Type="Self.UserTBL" Multiplicity="1" />
+          <End Role="QuestionTBLs" Type="Self.QuestionTBL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="QuestionVotingHistories">
-              <PropertyRef Name="QVH_ID" />
+            <Principal Role="UserTBLs">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="QuestionVotingHistory_QVH_ID" />
+            <Dependent Role="QuestionTBLs">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TestTODBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AnswerComments" EntityType="Self.AnswerComment" />
-          <EntitySet Name="Answers1" EntityType="Self.Answers1" />
-          <EntitySet Name="AnswerVotingHistories" EntityType="Self.AnswerVotingHistory" />
-          <EntitySet Name="Categories1" EntityType="Self.Categories1" />
-          <EntitySet Name="QuestionComments" EntityType="Self.QuestionComment" />
-          <EntitySet Name="Questions1" EntityType="Self.Questions1" />
-          <EntitySet Name="QuestionVotingHistories" EntityType="Self.QuestionVotingHistory" />
-          <EntitySet Name="Users" EntityType="TestTODBModel.User" />
-          <AssociationSet Name="FK_AnswersAnswerComment" Association="Self.FK_AnswersAnswerComment">
-            <End Role="Answers1" EntitySet="Answers1" />
-            <End Role="AnswerComments" EntitySet="AnswerComments" />
+        <EntityContainer Name="TODBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnswerCommentTBLs" EntityType="Self.AnswerCommentTBL" />
+          <EntitySet Name="AnswerTBLs" EntityType="Self.AnswerTBL" />
+          <EntitySet Name="AnswerVotingHistoryTBLs" EntityType="Self.AnswerVotingHistoryTBL" />
+          <EntitySet Name="CategoryTBLs" EntityType="Self.CategoryTBL" />
+          <EntitySet Name="QuestionCommentTBLs" EntityType="Self.QuestionCommentTBL" />
+          <EntitySet Name="QuestionTBLs" EntityType="Self.QuestionTBL" />
+          <EntitySet Name="QuestionVotingHistoryTBLs" EntityType="Self.QuestionVotingHistoryTBL" />
+          <EntitySet Name="UserTBLs" EntityType="Self.UserTBL" />
+          <AssociationSet Name="FK_AnswerTBLAnswerCommentTBL" Association="Self.FK_AnswerTBLAnswerCommentTBL">
+            <End Role="AnswerTBLs" EntitySet="AnswerTBLs" />
+            <End Role="AnswerCommentTBLs" EntitySet="AnswerCommentTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserAnswerComment" Association="Self.FK_UserAnswerComment">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="AnswerComments" EntitySet="AnswerComments" />
+          <AssociationSet Name="FK_UserTBLAnswerCommentTBL" Association="Self.FK_UserTBLAnswerCommentTBL">
+            <End Role="UserTBLs" EntitySet="UserTBLs" />
+            <End Role="AnswerCommentTBLs" EntitySet="AnswerCommentTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_AnswersAnswerVotingHistory" Association="Self.FK_AnswersAnswerVotingHistory">
-            <End Role="Answers1" EntitySet="Answers1" />
-            <End Role="AnswerVotingHistories" EntitySet="AnswerVotingHistories" />
+          <AssociationSet Name="FK_QuestionTBLAnswerTBL" Association="Self.FK_QuestionTBLAnswerTBL">
+            <End Role="QuestionTBLs" EntitySet="QuestionTBLs" />
+            <End Role="AnswerTBLs" EntitySet="AnswerTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionsAnswers" Association="Self.FK_QuestionsAnswers">
-            <End Role="Questions1" EntitySet="Questions1" />
-            <End Role="Answers1" EntitySet="Answers1" />
+          <AssociationSet Name="FK_UserTBLAnswerTBL" Association="Self.FK_UserTBLAnswerTBL">
+            <End Role="UserTBLs" EntitySet="UserTBLs" />
+            <End Role="AnswerTBLs" EntitySet="AnswerTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserAnswers" Association="Self.FK_UserAnswers">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Answers1" EntitySet="Answers1" />
+          <AssociationSet Name="FK_QuestionTBLCategoryTBL" Association="Self.FK_QuestionTBLCategoryTBL">
+            <End Role="CategoryTBLs" EntitySet="CategoryTBLs" />
+            <End Role="QuestionTBLs" EntitySet="QuestionTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserAnswerVotingHistory" Association="Self.FK_UserAnswerVotingHistory">
-            <End Role="AnswerVotingHistories" EntitySet="AnswerVotingHistories" />
-            <End Role="Users" EntitySet="Users" />
+          <AssociationSet Name="FK_QuestionTBLQuestionCommentTBL" Association="Self.FK_QuestionTBLQuestionCommentTBL">
+            <End Role="QuestionTBLs" EntitySet="QuestionTBLs" />
+            <End Role="QuestionCommentTBLs" EntitySet="QuestionCommentTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionsCategories" Association="Self.FK_QuestionsCategories">
-            <End Role="Categories1" EntitySet="Categories1" />
-            <End Role="Questions1" EntitySet="Questions1" />
+          <AssociationSet Name="FK_UserTBLQuestionCommentTBL" Association="Self.FK_UserTBLQuestionCommentTBL">
+            <End Role="UserTBLs" EntitySet="UserTBLs" />
+            <End Role="QuestionCommentTBLs" EntitySet="QuestionCommentTBLs" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionsQuestionComment" Association="Self.FK_QuestionsQuestionComment">
-            <End Role="Questions1" EntitySet="Questions1" />
-            <End Role="QuestionComments" EntitySet="QuestionComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserQuestionComment" Association="Self.FK_UserQuestionComment">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="QuestionComments" EntitySet="QuestionComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuestionsQuestionVotingHistory" Association="Self.FK_QuestionsQuestionVotingHistory">
-            <End Role="Questions1" EntitySet="Questions1" />
-            <End Role="QuestionVotingHistories" EntitySet="QuestionVotingHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserQuestions" Association="Self.FK_UserQuestions">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Questions1" EntitySet="Questions1" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserQuestionVotingHistory" Association="Self.FK_UserQuestionVotingHistory">
-            <End Role="QuestionVotingHistories" EntitySet="QuestionVotingHistories" />
-            <End Role="Users" EntitySet="Users" />
+          <AssociationSet Name="FK_UserTBLQuestionTBL" Association="Self.FK_UserTBLQuestionTBL">
+            <End Role="UserTBLs" EntitySet="UserTBLs" />
+            <End Role="QuestionTBLs" EntitySet="QuestionTBLs" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -608,85 +457,87 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TestTODBModelStoreContainer" CdmEntityContainer="TestTODBEntities">
-          <EntitySetMapping Name="AnswerComments">
-            <EntityTypeMapping TypeName="TestTODBModel.AnswerComment">
-              <MappingFragment StoreEntitySet="AnswerComments">
+        <EntityContainerMapping StorageEntityContainer="TODBModelStoreContainer" CdmEntityContainer="TODBEntities">
+          <EntitySetMapping Name="AnswerCommentTBLs">
+            <EntityTypeMapping TypeName="TODBModel.AnswerCommentTBL">
+              <MappingFragment StoreEntitySet="AnswerCommentTBLs">
                 <ScalarProperty Name="ACommentID" ColumnName="ACommentID" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="ACommentDTS" ColumnName="ACommentDTS" />
+                <ScalarProperty Name="AComment" ColumnName="AComment" />
+                <ScalarProperty Name="AcommentDTS" ColumnName="AcommentDTS" />
                 <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Answers1">
-            <EntityTypeMapping TypeName="TestTODBModel.Answers1">
-              <MappingFragment StoreEntitySet="Answers1">
+          <EntitySetMapping Name="AnswerTBLs">
+            <EntityTypeMapping TypeName="TODBModel.AnswerTBL">
+              <MappingFragment StoreEntitySet="AnswerTBLs">
                 <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
                 <ScalarProperty Name="Answer" ColumnName="Answer" />
                 <ScalarProperty Name="Score" ColumnName="Score" />
                 <ScalarProperty Name="AnswerDTS" ColumnName="AnswerDTS" />
-                <ScalarProperty Name="Answered" ColumnName="Answered" />
                 <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Accepted" ColumnName="Accepted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AnswerVotingHistories">
-            <EntityTypeMapping TypeName="TestTODBModel.AnswerVotingHistory">
-              <MappingFragment StoreEntitySet="AnswerVotingHistories">
-                <ScalarProperty Name="AVH_ID" ColumnName="AVH_ID" />
-                <ScalarProperty Name="Answer_AnswerID" ColumnName="Answer_AnswerID" />
+          <EntitySetMapping Name="AnswerVotingHistoryTBLs">
+            <EntityTypeMapping TypeName="TODBModel.AnswerVotingHistoryTBL">
+              <MappingFragment StoreEntitySet="AnswerVotingHistoryTBLs">
+                <ScalarProperty Name="AVHID" ColumnName="AVHID" />
+                <ScalarProperty Name="AVHUserID" ColumnName="AVHUserID" />
+                <ScalarProperty Name="AVHAnswerID" ColumnName="AVHAnswerID" />
+                <ScalarProperty Name="AVHDTS" ColumnName="AVHDTS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Categories1">
-            <EntityTypeMapping TypeName="TestTODBModel.Categories1">
-              <MappingFragment StoreEntitySet="Categories1">
+          <EntitySetMapping Name="CategoryTBLs">
+            <EntityTypeMapping TypeName="TODBModel.CategoryTBL">
+              <MappingFragment StoreEntitySet="CategoryTBLs">
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="QuestionComments">
-            <EntityTypeMapping TypeName="TestTODBModel.QuestionComment">
-              <MappingFragment StoreEntitySet="QuestionComments">
+          <EntitySetMapping Name="QuestionCommentTBLs">
+            <EntityTypeMapping TypeName="TODBModel.QuestionCommentTBL">
+              <MappingFragment StoreEntitySet="QuestionCommentTBLs">
                 <ScalarProperty Name="QCommentID" ColumnName="QCommentID" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="QComment" ColumnName="QComment" />
                 <ScalarProperty Name="QCommentDTS" ColumnName="QCommentDTS" />
                 <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Questions1">
-            <EntityTypeMapping TypeName="TestTODBModel.Questions1">
-              <MappingFragment StoreEntitySet="Questions1">
+          <EntitySetMapping Name="QuestionTBLs">
+            <EntityTypeMapping TypeName="TODBModel.QuestionTBL">
+              <MappingFragment StoreEntitySet="QuestionTBLs">
                 <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
                 <ScalarProperty Name="Question" ColumnName="Question" />
                 <ScalarProperty Name="Score" ColumnName="Score" />
                 <ScalarProperty Name="QuestionDTS" ColumnName="QuestionDTS" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Category_CategoryID" ColumnName="Category_CategoryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="QuestionVotingHistories">
-            <EntityTypeMapping TypeName="TestTODBModel.QuestionVotingHistory">
-              <MappingFragment StoreEntitySet="QuestionVotingHistories">
-                <ScalarProperty Name="QVH_ID" ColumnName="QVH_ID" />
-                <ScalarProperty Name="Question_QuestionID" ColumnName="Question_QuestionID" />
+          <EntitySetMapping Name="QuestionVotingHistoryTBLs">
+            <EntityTypeMapping TypeName="TODBModel.QuestionVotingHistoryTBL">
+              <MappingFragment StoreEntitySet="QuestionVotingHistoryTBLs">
+                <ScalarProperty Name="QVHID" ColumnName="QVHID" />
+                <ScalarProperty Name="QVHUserID" ColumnName="QVHUserID" />
+                <ScalarProperty Name="QVHQuestionID" ColumnName="QVHQuestionID" />
+                <ScalarProperty Name="QVHDTS" ColumnName="QVHDTS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="TestTODBModel.User">
-              <MappingFragment StoreEntitySet="Users">
+          <EntitySetMapping Name="UserTBLs">
+            <EntityTypeMapping TypeName="TODBModel.UserTBL">
+              <MappingFragment StoreEntitySet="UserTBLs">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AnswerVotingHistory_AVH_ID" ColumnName="AnswerVotingHistory_AVH_ID" />
-                <ScalarProperty Name="QuestionVotingHistory_QVH_ID" ColumnName="QuestionVotingHistory_QVH_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -13,10 +13,10 @@ namespace TaxOverflow2013.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TestTODBEntities : DbContext
+    public partial class TODBEntities : DbContext
     {
-        public TestTODBEntities()
-            : base("name=TestTODBEntities")
+        public TODBEntities()
+            : base("name=TODBEntities")
         {
         }
     
@@ -25,13 +25,13 @@ namespace TaxOverflow2013.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AnswerComment> AnswerComments { get; set; }
-        public virtual DbSet<Answers1> Answers1 { get; set; }
-        public virtual DbSet<AnswerVotingHistory> AnswerVotingHistories { get; set; }
-        public virtual DbSet<Categories1> Categories1 { get; set; }
-        public virtual DbSet<QuestionComment> QuestionComments { get; set; }
-        public virtual DbSet<Questions1> Questions1 { get; set; }
-        public virtual DbSet<QuestionVotingHistory> QuestionVotingHistories { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<AnswerCommentTBL> AnswerCommentTBLs { get; set; }
+        public virtual DbSet<AnswerTBL> AnswerTBLs { get; set; }
+        public virtual DbSet<AnswerVotingHistoryTBL> AnswerVotingHistoryTBLs { get; set; }
+        public virtual DbSet<CategoryTBL> CategoryTBLs { get; set; }
+        public virtual DbSet<QuestionCommentTBL> QuestionCommentTBLs { get; set; }
+        public virtual DbSet<QuestionTBL> QuestionTBLs { get; set; }
+        public virtual DbSet<QuestionVotingHistoryTBL> QuestionVotingHistoryTBLs { get; set; }
+        public virtual DbSet<UserTBL> UserTBLs { get; set; }
     }
 }

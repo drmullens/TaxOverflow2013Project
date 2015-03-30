@@ -12,16 +12,15 @@ namespace TaxOverflow2013.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Categories1
+    public partial class QuestionCommentTBL
     {
-        public Categories1()
-        {
-            this.Questions1 = new HashSet<Questions1>();
-        }
+        public int QCommentID { get; set; }
+        public string QComment { get; set; }
+        public System.DateTime QCommentDTS { get; set; }
+        public int QuestionID { get; set; }
+        public int UserID { get; set; }
     
-        public int CategoryID { get; set; }
-        public string Category { get; set; }
-    
-        public virtual ICollection<Questions1> Questions1 { get; set; }
+        public virtual QuestionTBL QuestionTBL { get; set; }
+        public virtual UserTBL UserTBL { get; set; }
     }
 }

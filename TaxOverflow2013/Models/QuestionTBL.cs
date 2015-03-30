@@ -12,26 +12,24 @@ namespace TaxOverflow2013.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Questions1
+    public partial class QuestionTBL
     {
-        public Questions1()
+        public QuestionTBL()
         {
-            this.Answers1 = new HashSet<Answers1>();
-            this.QuestionComments = new HashSet<QuestionComment>();
-            this.QuestionVotingHistories = new HashSet<QuestionVotingHistory>();
+            this.AnswerTBLs = new HashSet<AnswerTBL>();
+            this.QuestionCommentTBLs = new HashSet<QuestionCommentTBL>();
         }
     
         public int QuestionID { get; set; }
         public string Question { get; set; }
         public int Score { get; set; }
         public System.DateTime QuestionDTS { get; set; }
+        public int CategoryID { get; set; }
         public int UserID { get; set; }
-        public int Category_CategoryID { get; set; }
     
-        public virtual ICollection<Answers1> Answers1 { get; set; }
-        public virtual Categories1 Categories1 { get; set; }
-        public virtual ICollection<QuestionComment> QuestionComments { get; set; }
-        public virtual ICollection<QuestionVotingHistory> QuestionVotingHistories { get; set; }
-        public virtual User User { get; set; }
+        public virtual ICollection<AnswerTBL> AnswerTBLs { get; set; }
+        public virtual CategoryTBL CategoryTBL { get; set; }
+        public virtual ICollection<QuestionCommentTBL> QuestionCommentTBLs { get; set; }
+        public virtual UserTBL UserTBL { get; set; }
     }
 }
