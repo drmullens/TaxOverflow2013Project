@@ -17,14 +17,17 @@
         <h2>Post a Question</h2>
         <form method="post" action="/Home/Question">
             <select id="ddlCategory" name="ddlCategory">
-                <option value="default" >Select a Category</option>
+                <option value="default">Select a Category</option>
                 @{foreach (var ddlItem in Model)
                 {
                     <option value="@ddlItem.CategoryID">@ddlItem.Category</option>
                 }
                 }
+                <option value="Other">Other</option>
             </select>
-            
+
+            @*TODO: need a hidden postable textbox that becomes visible only when "Other" is selected from ddlCategory*@
+
             <textarea id="txtQuestion" name="txtQuestion"></textarea>
             <div class="text-right">
                 <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit"

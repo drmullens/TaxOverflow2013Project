@@ -7,16 +7,16 @@ namespace TaxOverflow2013.Controllers
 {
     public class HomeController : Controller
     {
+        TODBEntities context = new TODBEntities();
+        CurrentData currData = new CurrentData();
+
         public ActionResult Index()
         {
-
-            //TODO: put logic here to create new user on table if current user does not exist
-
             string currentUser;
 
             currentUser = User.Identity.Name;
 
-            using (var context = new TODBEntities())
+            using (context)
             {
                 var users = context.UserTBLs.Where(c => c.UserName == currentUser).ToList();
                 if (users.Count() == 0)
@@ -27,8 +27,18 @@ namespace TaxOverflow2013.Controllers
                     
                     context.UserTBLs.Add(newUser);
                     context.SaveChanges();
+
+                    users = context.UserTBLs.Where(c => c.UserName == currentUser).ToList();
+                }
+               
+                foreach (var person in users)
+                {
+                    currData.CurrentUser = person.UserName;
+                    currData.CurrentUserID = person.UserID;
                 }
             }
+
+            //TODO: Set up home page to get the top five by highest score and most recent
             return View(new HomeModel.MockIndexModel());
         }
 
@@ -37,7 +47,7 @@ namespace TaxOverflow2013.Controllers
             ViewBag.Message = "Post a Question";
             // TODO: load the DDL with the categories from the DB
 
-            using (var context = new TODBEntities())
+            using (context)
             {
                 var categories = context.CategoryTBLs.Where(c => c.CategoryID > 0).ToList();
                 return View(categories);
@@ -47,7 +57,7 @@ namespace TaxOverflow2013.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Question(string txtQuestion, string ddlCategory)
+        public ActionResult Question(string txtQuestion, string ddlCategory) //[optional] string newCategory = ""
         {
             string data = txtQuestion;
 
@@ -58,8 +68,9 @@ namespace TaxOverflow2013.Controllers
                 QuestionTBL myQuestion = new QuestionTBL();
 
                 myQuestion.Question = txtQuestion;
-                myQuestion.UserTBL.UserName = User.Identity.Name.ToString();
                 myQuestion.Score = 0;
+                myQuestion.QuestionDTS = DateTime.Now;
+                myQuestion.UserID = currData.CurrentUserID;
 
                 int ddlValue;
                 if (Int32.TryParse(ddlCategory, out ddlValue))
@@ -67,10 +78,15 @@ namespace TaxOverflow2013.Controllers
                 else
                     //TODO: logic here to handle problem with a non-int value being passed as ddlCategory
                     ddlValue = 0;
-                using (var context = new TODBEntities())
+                using (context)
                 {
+
                     context.QuestionTBLs.Add(myQuestion);
-                    context.SaveChanges();
+                    //context.SaveChanges();
+
+                    var QID = context.QuestionTBLs.Max(b=> b.QuestionID);
+                    myQuestion.QuestionID = QID;
+                    ViewData.Add("QuestionID", myQuestion.QuestionID);
                 }
 
             }
@@ -78,8 +94,10 @@ namespace TaxOverflow2013.Controllers
             {
                 Console.WriteLine("{0} in post question", ex);
             }
+            
 
-            return View("ViewQuestion", new HomeModel.MockViewQuestion(Int32.Parse("0")));
+            //TODO: dont send the whole db, create a model that would be the question, list of comments, answers and their comments
+            return View("ViewQuestion", new TODBEntities());
         }
 
         public ActionResult QuestionList()
