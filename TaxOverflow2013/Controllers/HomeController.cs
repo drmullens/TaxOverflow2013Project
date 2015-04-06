@@ -252,19 +252,61 @@ namespace TaxOverflow2013.Controllers
         {
             ViewBag.Message = "View a question";
 
-            if (Request["vote"] != null && !String.IsNullOrWhiteSpace(Request["vote"]))
+            int QID = Int32.Parse(Request["question_id"]);
+
+            QuestionStream CurrentQuestion = new QuestionStream();
+            QuestionTBL myQuestion = new QuestionTBL();
+
+            using (var context = new TODBEntities())
             {
-                return View(new TaxOverflow2013.Models.HomeModel.MockViewQuestion((Int32.Parse(Request["question_id"])), Int32.Parse(Request["vote"]), Convert.ToChar(Request["math"])));
+                var CurrQuestion = context.QuestionTBLs.Where(q => q.QuestionID == QID).ToList();
+                if (CurrQuestion.Count > 0 )
+                {
+                    myQuestion.QuestionID = QID;
+                    foreach(var aQuestion in CurrQuestion)
+                    {
+                        myQuestion = aQuestion;
+                    }
+
+                    CurrentQuestion.MainQuestion = myQuestion;
+                    CurrentQuestion.QuestionUserName = GetUserNameByID(myQuestion.UserID);
+                    CurrentQuestion.QuestionCategory = GetCategoryByID(myQuestion.CategoryID);
+
+                    var QComm = context.QuestionCommentTBLs.Where(a => a.QuestionID == myQuestion.QuestionID).ToList();
+                    foreach (var comment in QComm)
+                    {
+                        QuestionCommentStream QComment = new QuestionCommentStream();
+                        QComment.QComment = comment;
+                        QComment.QCUserName = comment.UserTBL.UserName;
+                        CurrentQuestion.RelatedQuestionComments.Add(QComment);
+                    }
+
+                    var QA = context.AnswerTBLs.Where(b => b.QuestionID == myQuestion.QuestionID).ToList();
+                    foreach (var ans in QA)
+                    {
+                        AnswerStream anAnswer = new AnswerStream();
+                        anAnswer.MainAnswer = ans;
+                        var ansComm = context.AnswerCommentTBLs.Where(d => d.AnswerID == ans.AnswerID).ToList();
+                        foreach (var comment in ansComm)
+                        {
+                            AnswerCommentStream AComment = new AnswerCommentStream();
+                            AComment.AComment = comment;
+                            AComment.ACUserName = comment.UserTBL.UserName;
+                            anAnswer.RelatedAnswerComments.Add(AComment);
+                        }
+
+                        CurrentQuestion.RelatedAnswers.Add(anAnswer);
+                    }
+                    
+                }
+                else
+                {
+                    Response.Redirect("/Error");
+                    return (null);
+                }
             }
-            else if (Request["question_id"] != null && !String.IsNullOrWhiteSpace(Request["question_id"]))
-            {
-                return View(new HomeModel.MockViewQuestion(Int32.Parse(Request["question_id"])));
-            }
-            else
-            {
-                Response.Redirect("~/");
-                return null;
-            }
+
+            return View(CurrentQuestion);
         }
 
         public ActionResult Search()

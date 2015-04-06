@@ -8,6 +8,7 @@
     <div class="col-md-12">
         <h2 id="hdrQuestionList" class="col-lg-6">All Questions</h2>
 
+        @*TODO: get this DDL working*@
         <select id="ddlSort" >
             <option value=0 >Select a Sort</option>
             <option value=1 >Category: A - Z</option>
@@ -27,6 +28,8 @@
                     </div>
                 </div>
                 <div class="row">
+
+                    @*TODO: Add a part in here to show if question has an accepted answer*@
                     <div class="Votes col-sm-3">
                         @Model.ShowQuestion[i].aQuestion.Score Votes
                     </div>
