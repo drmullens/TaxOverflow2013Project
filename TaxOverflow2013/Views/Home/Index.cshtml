@@ -9,30 +9,32 @@
             @*
                 Pull top 5 most Recent:
                 0 - id, 1 - Question, 2 - Number of Votes, 3 - Category, 4 - Author, 5 - TimeStamp
+
+                Top 5 most recent MostRecentQuestions -> aQuestion, CategoryString, UserName
             *@
 
-            @for (int i = Model.Question.Length - 1; i >= 0; i--)
+            @for (int i = 0; i <= Model.MostRecentQuestions.Count - 1; i++ )
             {
                 <div class="Start">
                     <div class="row">
                         <div class="Question col-sm-12">
-                            <a href="~/Home/ViewQuestion?question_id=@Model.Question[i][0]">@Model.Question[i][1]</a>
+                            <a href="~/Home/ViewQuestion?question_id=@Model.MostRecentQuestions[i].aQuestion.QuestionID">@Model.MostRecentQuestions[i].aQuestion.Question</a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="Votes col-sm-3">
-                            @Model.Question[i][2] Votes
+                            @Model.MostRecentQuestions[i].aQuestion.Score Votes
                         </div>
                         <div class="Category col-sm-4">
-                            @Model.Question[i][3]
+                            @Model.MostRecentQuestions[i].CategoryString
                         </div>
                         <div class="Author col-sm-5">
                             <span class="display-inline-block">
                                 <img src="~/Images/GenericPerson.png" width="25" />
                             </span>
                             <span class="display-inline-block">
-                                @Model.Question[i][4] <br />
-                                @Model.Question[i][5]
+                                @Model.MostRecentQuestions[i].UserName <br />
+                                @Model.MostRecentQuestions[i].aQuestion.QuestionDTS
                             </span>
                         </div>
                     </div>
@@ -44,33 +46,36 @@
     <div class="col-lg-6">
         <div id="divUnanswered" class="jumbotron">
             <h2>Top 5 Unanswered Questions</h2>
-            @*
-                Pull top 5 most Votes:
-                0 - id, 1 - Question, 2 - Number of Votes, 3 - Category, 4 - Author, 5 - TimeStamp
-            *@
+                        @*
+                            Pull top 5 most Votes:
+                            0 - id, 1 - Question, 2 - Number of Votes, 3 - Category, 4 - Author, 5 - TimeStamp
 
-            @for (int i = 0; i < Model.Question.Length; i++)
+                            top 5 most votes
+                            BestUnansweredQuestions -> aQuestion, CategroyString, UserName
+                        *@
+
+            @for (int i = 0; i <= Model.BestUnansweredQuestions.Count -1 ; i++)
             {
                 <div class="Start">
                     <div class="row">
                         <div class="Question col-sm-12">
-                            <a href="~/Home/ViewQuestion?question_id=@Model.Question[i][0]">@Model.Question[i][1]</a>
+                            <a href="~/Home/ViewQuestion?question_id=@Model.BestUnansweredQuestions[i].aQuestion.QuestionID">@Model.BestUnansweredQuestions[i].aQuestion.Question</a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="Votes col-sm-3">
-                            @Model.Question[i][2] Votes
+                            @Model.BestUnansweredQuestions[i].aQuestion.Score Votes
                         </div>
                         <div class="Category col-sm-4">
-                            @Model.Question[i][3]
+                            @Model.BestUnansweredQuestions[i].CategoryString
                         </div>
                         <div class="Author col-sm-5">
                             <span class="display-inline-block">
                                 <img src="~/Images/GenericPerson.png" width="25" />
                             </span>
                             <span class="display-inline-block">
-                                @Model.Question[i][4] <br />
-                                @Model.Question[i][5]
+                                @Model.BestUnansweredQuestions[i].UserName <br />
+                                @Model.BestUnansweredQuestions[i].aQuestion.QuestionDTS
                             </span>
                         </div>
                     </div>

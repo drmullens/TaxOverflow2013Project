@@ -149,11 +149,12 @@
     <Compile Include="Models\CategoryTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CurrentData.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\QuestionCommentTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\QuestionList.cs" />
+    <Compile Include="Models\QuestionStream.cs" />
     <Compile Include="Models\QuestionTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
