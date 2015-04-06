@@ -122,6 +122,7 @@ namespace TaxOverflow2013.Controllers
                     myQuestion.QuestionID = QID;
 
                     NewQuestion.MainQuestion = myQuestion;
+                    NewQuestion.QuestionUserName = User.Identity.Name;
 
                     var QComm = context.QuestionCommentTBLs.Where(a => a.QuestionID == myQuestion.QuestionID).ToList();
                     foreach (var comment in QComm)
@@ -241,6 +242,23 @@ namespace TaxOverflow2013.Controllers
                     }
                 }
                 return -1;  //no such value send -1 to show error
+        }
+
+        private string GetUserNameByID(int id)
+        {
+            using (var context = new TODBEntities())
+            {
+                var idStrings = context.UserTBLs.Where(c => c.UserID == id).ToList();
+                if (idStrings.Count > 0)
+                {
+                    foreach(var userName in idStrings)
+                    {
+                        return userName.UserName;
+                    }
+                }
+            }
+
+            return "";  //No such value, redirect to error screen
         }
 
         private string GetCategoryByID(int catID)
