@@ -157,16 +157,95 @@ namespace TaxOverflow2013.Controllers
                 Console.WriteLine("{0} in post question", ex);
             }
 
-
-            //TODO: dont send the whole db, create a model that would be the question, list of comments, answers and their comments
             return View("ViewQuestion", NewQuestion);
         }
 
-        public ActionResult QuestionList()
+        public ActionResult QuestionList(int ddlSortBy = 0)  //[optional] ddlSortBy
         {
             ViewBag.Message = "View Questions";
 
-            return View(new HomeModel.MockIndexModel());
+            //<option value=0 >Select a Sort</option>
+            //<option value=1 >Category: A - Z</option>
+            //<option value=2 >Category: Z - A</option>
+            //<option value=3 >Votes: High - Low</option>
+            //<option value=4 >Votes: Low - High</option>
+            //<option value=5 >Unanswered Questions</option>
+
+            ShowQuestionLists QuestionList = new ShowQuestionLists();
+            QuestionList.ShowQuestion = new List<QuestionListWithAnswered>();
+
+            using (var context = new TODBEntities())
+            {
+                List<QuestionTBL> QList = new List<QuestionTBL>();
+                switch (ddlSortBy)
+                {
+
+                    //create question list by drop down list selection default 0 by most recent date
+                    case 1 :
+                        {
+                            QList = (from R in context.QuestionTBLs
+                                         orderby (from C in context.CategoryTBLs orderby C.Category ascending select C)
+                                         select R).ToList();
+                            break;
+                        }
+                    case 2 :
+                        {
+                            QList = (from R in context.QuestionTBLs
+                                         orderby (from C in context.CategoryTBLs orderby C.Category descending select C)
+                                         select R).ToList();
+                            break;
+                        }
+                    case 3 :
+                        {
+                            QList = (from R in context.QuestionTBLs
+                                         orderby R.Score descending
+                                         select R).ToList();
+                            break;
+                        }
+                    case 4 :
+                        {
+                            QList = (from R in context.QuestionTBLs
+                                         orderby R.Score ascending
+                                         select R).ToList();
+                            break;
+                        }
+                    case 5 :
+                        {
+                            QList = (from R in context.QuestionTBLs
+                                         orderby (from A in context.AnswerTBLs orderby A.Accepted select A)
+                                         select R).ToList();
+                            break;
+                        }
+                    case 0 :
+                    default :
+                        {
+                            QList = (from R in context.QuestionTBLs
+                                        orderby R.QuestionDTS descending
+                                        select R).ToList();
+                            break;
+                        }
+                }
+
+                foreach(var item in QList)
+                {
+                    QuestionListWithAnswered aQuestion = new QuestionListWithAnswered();
+                    aQuestion.aQuestion = item;
+                    var isAccepted = context.AnswerTBLs.Where(a => a.QuestionID == item.QuestionID).ToList();
+                    if (isAccepted.Count > 0 )
+                    {
+                        aQuestion.AccptedAnswer = true;
+                    }
+                    else
+                    {
+                        aQuestion.AccptedAnswer = false;
+                    }
+                    aQuestion.UserName = GetUserNameByID(item.UserID);
+                    aQuestion.CategoryString = GetCategoryByID(item.CategoryID);
+                    QuestionList.ShowQuestion.Add(aQuestion);
+                }
+            }
+
+            return View(QuestionList);
         }
 
         public ActionResult ViewQuestion()

@@ -22,4 +22,22 @@ namespace TaxOverflow2013.Models
 
         public List<QuestionList> BestUnansweredQuestions { get; set; }
     }
+
+
+    //These two classes are used for the Show Questions page that displays all questions
+    public class QuestionListWithAnswered
+    {
+        public QuestionTBL aQuestion { get; set; }
+
+        public string CategoryString { get; set; }
+
+        public string UserName { get; set; }
+
+        public bool AccptedAnswer { get; set; }
+    }
+
+    public class ShowQuestionLists
+    {
+        public List<QuestionListWithAnswered> ShowQuestion { get; set; }
+    }
 }
