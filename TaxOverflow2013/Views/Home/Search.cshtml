@@ -7,14 +7,16 @@
     <div class="col-md-12">
         <h2 id="hdrSearchResults" class="col-lg-6">Search Results - ### Results</h2>
 
-        <select id="ddlSort">
-            <option value="default">Select a Sort</option>
-            <option value="CategoryASC">Category: A - Z</option>
-            <option value="CategoryDESC">Category: Z - A</option>
-            <option value="VotesDESC">Votes: High - Low</option>
-            <option value="VotesASC">Votes: Low - High</option>
-            <option value="Unanswered">Unanswered Questions</option>
-        </select>
+
+        @*Do we really need a DDL here?  This could be a problem in keeping the Search string available*@
+        @*<select id="ddlSort">
+            <option value=0>Select a Sort</option>
+            <option value=1>Category: A - Z</option>
+            <option value=2>Category: Z - A</option>
+            <option value=3>Votes: High - Low</option>
+            <option value=4>Votes: Low - High</option>
+            <option value=5>Unanswered Questions</option>
+        </select>*@
 
         <div class="clearfix"></div>
         @for (int i = 0; i < Model.Question.Length; i++)

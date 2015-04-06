@@ -1,0 +1,706 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TestTODB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TestTODBStoreContainer">
+    <EntitySet Name="Questions1" EntityType="TestTODB.Store.Questions1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Answers1" EntityType="TestTODB.Store.Answers1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories1" EntityType="TestTODB.Store.Categories1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QuestionVotingHistories" EntityType="TestTODB.Store.QuestionVotingHistories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AnswerVotingHistories" EntityType="TestTODB.Store.AnswerVotingHistories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="TestTODB.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QuestionComments" EntityType="TestTODB.Store.QuestionComments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AnswerComments" EntityType="TestTODB.Store.AnswerComments" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="QuestionsAnswers" Association="TestTODB.Store.QuestionsAnswers">
+      <End Role="Questions" EntitySet="Questions1" />
+      <End Role="Answers" EntitySet="Answers1" />
+    </AssociationSet>
+    <AssociationSet Name="QuestionsQuestionComment" Association="TestTODB.Store.QuestionsQuestionComment">
+      <End Role="Questions" EntitySet="Questions1" />
+      <End Role="QuestionComment" EntitySet="QuestionComments" />
+    </AssociationSet>
+    <AssociationSet Name="AnswersAnswerComment" Association="TestTODB.Store.AnswersAnswerComment">
+      <End Role="Answers" EntitySet="Answers1" />
+      <End Role="AnswerComment" EntitySet="AnswerComments" />
+    </AssociationSet>
+    <AssociationSet Name="UserQuestions" Association="TestTODB.Store.UserQuestions">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Questions" EntitySet="Questions1" />
+    </AssociationSet>
+    <AssociationSet Name="UserAnswers" Association="TestTODB.Store.UserAnswers">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Answers" EntitySet="Answers1" />
+    </AssociationSet>
+    <AssociationSet Name="QuestionsQuestionVotingHistory" Association="TestTODB.Store.QuestionsQuestionVotingHistory">
+      <End Role="Questions" EntitySet="Questions1" />
+      <End Role="QuestionVotingHistory" EntitySet="QuestionVotingHistories" />
+    </AssociationSet>
+    <AssociationSet Name="AnswersAnswerVotingHistory" Association="TestTODB.Store.AnswersAnswerVotingHistory">
+      <End Role="Answers" EntitySet="Answers1" />
+      <End Role="AnswerVotingHistory" EntitySet="AnswerVotingHistories" />
+    </AssociationSet>
+    <AssociationSet Name="UserQuestionComment" Association="TestTODB.Store.UserQuestionComment">
+      <End Role="User" EntitySet="Users" />
+      <End Role="QuestionComment" EntitySet="QuestionComments" />
+    </AssociationSet>
+    <AssociationSet Name="UserAnswerComment" Association="TestTODB.Store.UserAnswerComment">
+      <End Role="User" EntitySet="Users" />
+      <End Role="AnswerComment" EntitySet="AnswerComments" />
+    </AssociationSet>
+    <AssociationSet Name="QuestionsCategories" Association="TestTODB.Store.QuestionsCategories">
+      <End Role="Questions" EntitySet="Questions1" />
+      <End Role="Categories" EntitySet="Categories1" />
+    </AssociationSet>
+    <AssociationSet Name="UserAnswerVotingHistory" Association="TestTODB.Store.UserAnswerVotingHistory">
+      <End Role="User" EntitySet="Users" />
+      <End Role="AnswerVotingHistory" EntitySet="AnswerVotingHistories" />
+    </AssociationSet>
+    <AssociationSet Name="UserQuestionVotingHistory" Association="TestTODB.Store.UserQuestionVotingHistory">
+      <End Role="User" EntitySet="Users" />
+      <End Role="QuestionVotingHistory" EntitySet="QuestionVotingHistories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Questions1">
+    <Key>
+      <PropertyRef Name="QuestionID" />
+    </Key>
+    <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Score" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="QuestionDTS" Type="datetime" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Category_CategoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Answers1">
+    <Key>
+      <PropertyRef Name="AnswerID" />
+    </Key>
+    <Property Name="AnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Score" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="AnswerDTS" Type="datetime" Nullable="false" />
+    <Property Name="Answered" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="QuestionID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories1">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" Nullable="false" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="QuestionVotingHistories">
+    <Key>
+      <PropertyRef Name="QVH_ID" />
+    </Key>
+    <Property Name="QVH_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Question_QuestionID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AnswerVotingHistories">
+    <Key>
+      <PropertyRef Name="AVH_ID" />
+    </Key>
+    <Property Name="AVH_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Answer_AnswerID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="AnswerVotingHistory_AVH_ID" Type="int" Nullable="false" />
+    <Property Name="QuestionVotingHistory_QVH_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuestionComments">
+    <Key>
+      <PropertyRef Name="QCommentID" />
+    </Key>
+    <Property Name="QCommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="QCommentDTS" Type="datetime" Nullable="false" />
+    <Property Name="QuestionID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AnswerComments">
+    <Key>
+      <PropertyRef Name="ACommentID" />
+    </Key>
+    <Property Name="ACommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ACommentDTS" Type="datetime" Nullable="false" />
+    <Property Name="AnswerID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="QuestionsAnswers">
+    <End Role="Questions" Type="TestTODB.Store.Questions1" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Answers" Type="TestTODB.Store.Answers1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="QuestionID" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="QuestionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuestionsQuestionComment">
+    <End Role="Questions" Type="TestTODB.Store.Questions1" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="QuestionComment" Type="TestTODB.Store.QuestionComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="QuestionID" />
+      </Principal>
+      <Dependent Role="QuestionComment">
+        <PropertyRef Name="QuestionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AnswersAnswerComment">
+    <End Role="Answers" Type="TestTODB.Store.Answers1" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AnswerComment" Type="TestTODB.Store.AnswerComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Answers">
+        <PropertyRef Name="AnswerID" />
+      </Principal>
+      <Dependent Role="AnswerComment">
+        <PropertyRef Name="AnswerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserQuestions">
+    <End Role="User" Type="TestTODB.Store.Users" Multiplicity="1" />
+    <End Role="Questions" Type="TestTODB.Store.Questions1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserAnswers">
+    <End Role="User" Type="TestTODB.Store.Users" Multiplicity="1" />
+    <End Role="Answers" Type="TestTODB.Store.Answers1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuestionsQuestionVotingHistory">
+    <End Role="Questions" Type="TestTODB.Store.Questions1" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="QuestionVotingHistory" Type="TestTODB.Store.QuestionVotingHistories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="QuestionID" />
+      </Principal>
+      <Dependent Role="QuestionVotingHistory">
+        <PropertyRef Name="Question_QuestionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AnswersAnswerVotingHistory">
+    <End Role="Answers" Type="TestTODB.Store.Answers1" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AnswerVotingHistory" Type="TestTODB.Store.AnswerVotingHistories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Answers">
+        <PropertyRef Name="AnswerID" />
+      </Principal>
+      <Dependent Role="AnswerVotingHistory">
+        <PropertyRef Name="Answer_AnswerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserQuestionComment">
+    <End Role="User" Type="TestTODB.Store.Users" Multiplicity="1" />
+    <End Role="QuestionComment" Type="TestTODB.Store.QuestionComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="QuestionComment">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserAnswerComment">
+    <End Role="User" Type="TestTODB.Store.Users" Multiplicity="1" />
+    <End Role="AnswerComment" Type="TestTODB.Store.AnswerComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="AnswerComment">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuestionsCategories">
+    <End Role="Questions" Type="TestTODB.Store.Questions1" Multiplicity="*" />
+    <End Role="Categories" Type="TestTODB.Store.Categories1" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="Category_CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserAnswerVotingHistory">
+    <End Role="User" Type="TestTODB.Store.Users" Multiplicity="*" />
+    <End Role="AnswerVotingHistory" Type="TestTODB.Store.AnswerVotingHistories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AnswerVotingHistory">
+        <PropertyRef Name="AVH_ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="AnswerVotingHistory_AVH_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserQuestionVotingHistory">
+    <End Role="User" Type="TestTODB.Store.Users" Multiplicity="*" />
+    <End Role="QuestionVotingHistory" Type="TestTODB.Store.QuestionVotingHistories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionVotingHistory">
+        <PropertyRef Name="QVH_ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="QuestionVotingHistory_QVH_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TestTODB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="TestTODBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Questions1" EntityType="TestTODB.Questions" />
+          <EntitySet Name="Answers1" EntityType="TestTODB.Answers" />
+          <EntitySet Name="Categories1" EntityType="TestTODB.Categories" />
+          <EntitySet Name="QuestionVotingHistories" EntityType="TestTODB.QuestionVotingHistory" />
+          <EntitySet Name="AnswerVotingHistories" EntityType="TestTODB.AnswerVotingHistory" />
+          <EntitySet Name="UserInfoes" EntityType="TestTODB.UserInfo" />
+          <EntitySet Name="QuestionComments" EntityType="TestTODB.QuestionComment" />
+          <EntitySet Name="AnswerComments" EntityType="TestTODB.AnswerComment" />
+          <AssociationSet Name="QuestionsAnswers" Association="TestTODB.QuestionsAnswers">
+            <End Role="Questions" EntitySet="Questions1" />
+            <End Role="Answers" EntitySet="Answers1" />
+          </AssociationSet>
+          <AssociationSet Name="QuestionsQuestionComment" Association="TestTODB.QuestionsQuestionComment">
+            <End Role="Questions" EntitySet="Questions1" />
+            <End Role="QuestionComment" EntitySet="QuestionComments" />
+          </AssociationSet>
+          <AssociationSet Name="AnswersAnswerComment" Association="TestTODB.AnswersAnswerComment">
+            <End Role="Answers" EntitySet="Answers1" />
+            <End Role="AnswerComment" EntitySet="AnswerComments" />
+          </AssociationSet>
+          <AssociationSet Name="UserQuestions" Association="TestTODB.UserQuestions">
+            <End Role="User" EntitySet="UserInfoes" />
+            <End Role="Questions" EntitySet="Questions1" />
+          </AssociationSet>
+          <AssociationSet Name="UserAnswers" Association="TestTODB.UserAnswers">
+            <End Role="User" EntitySet="UserInfoes" />
+            <End Role="Answers" EntitySet="Answers1" />
+          </AssociationSet>
+          <AssociationSet Name="QuestionsQuestionVotingHistory" Association="TestTODB.QuestionsQuestionVotingHistory">
+            <End Role="Questions" EntitySet="Questions1" />
+            <End Role="QuestionVotingHistory" EntitySet="QuestionVotingHistories" />
+          </AssociationSet>
+          <AssociationSet Name="AnswersAnswerVotingHistory" Association="TestTODB.AnswersAnswerVotingHistory">
+            <End Role="Answers" EntitySet="Answers1" />
+            <End Role="AnswerVotingHistory" EntitySet="AnswerVotingHistories" />
+          </AssociationSet>
+          <AssociationSet Name="UserQuestionComment" Association="TestTODB.UserQuestionComment">
+            <End Role="User" EntitySet="UserInfoes" />
+            <End Role="QuestionComment" EntitySet="QuestionComments" />
+          </AssociationSet>
+          <AssociationSet Name="UserAnswerComment" Association="TestTODB.UserAnswerComment">
+            <End Role="User" EntitySet="UserInfoes" />
+            <End Role="AnswerComment" EntitySet="AnswerComments" />
+          </AssociationSet>
+          <AssociationSet Name="QuestionsCategories" Association="TestTODB.QuestionsCategories">
+            <End Role="Questions" EntitySet="Questions1" />
+            <End Role="Categories" EntitySet="Categories1" />
+          </AssociationSet>
+          <AssociationSet Name="UserAnswerVotingHistory" Association="TestTODB.UserAnswerVotingHistory">
+            <End Role="User" EntitySet="UserInfoes" />
+            <End Role="AnswerVotingHistory" EntitySet="AnswerVotingHistories" />
+          </AssociationSet>
+          <AssociationSet Name="UserQuestionVotingHistory" Association="TestTODB.UserQuestionVotingHistory">
+            <End Role="User" EntitySet="UserInfoes" />
+            <End Role="QuestionVotingHistory" EntitySet="QuestionVotingHistories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Score" Type="Int32" Nullable="false" DefaultValue="0" />
+          <Property Name="QuestionDTS" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Answers" Relationship="TestTODB.QuestionsAnswers" FromRole="Questions" ToRole="Answers" />
+          <NavigationProperty Name="QuestionComments" Relationship="TestTODB.QuestionsQuestionComment" FromRole="Questions" ToRole="QuestionComment" />
+          <NavigationProperty Name="User" Relationship="TestTODB.UserQuestions" FromRole="Questions" ToRole="User" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="QuestionVotingHistory" Relationship="TestTODB.QuestionsQuestionVotingHistory" FromRole="Questions" ToRole="QuestionVotingHistory" />
+          <NavigationProperty Name="Category" Relationship="TestTODB.QuestionsCategories" FromRole="Questions" ToRole="Categories" />
+        </EntityType>
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Answer" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Score" Type="Int32" Nullable="false" DefaultValue="0" />
+          <Property Name="AnswerDTS" Type="DateTime" Nullable="false" />
+          <Property Name="Answered" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <NavigationProperty Name="Question" Relationship="TestTODB.QuestionsAnswers" FromRole="Answers" ToRole="Questions" />
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AnswerComments" Relationship="TestTODB.AnswersAnswerComment" FromRole="Answers" ToRole="AnswerComment" />
+          <NavigationProperty Name="User" Relationship="TestTODB.UserAnswers" FromRole="Answers" ToRole="User" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AnswerVotingHistory" Relationship="TestTODB.AnswersAnswerVotingHistory" FromRole="Answers" ToRole="AnswerVotingHistory" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="15" />
+          <NavigationProperty Name="Question" Relationship="TestTODB.QuestionsCategories" FromRole="Categories" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="QuestionVotingHistory">
+          <Key>
+            <PropertyRef Name="QVH_ID" />
+          </Key>
+          <Property Name="QVH_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Question" Relationship="TestTODB.QuestionsQuestionVotingHistory" FromRole="QuestionVotingHistory" ToRole="Questions" />
+          <NavigationProperty Name="User" Relationship="TestTODB.UserQuestionVotingHistory" FromRole="QuestionVotingHistory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="AnswerVotingHistory">
+          <Key>
+            <PropertyRef Name="AVH_ID" />
+          </Key>
+          <Property Name="AVH_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Answer" Relationship="TestTODB.AnswersAnswerVotingHistory" FromRole="AnswerVotingHistory" ToRole="Answers" />
+          <NavigationProperty Name="User" Relationship="TestTODB.UserAnswerVotingHistory" FromRole="AnswerVotingHistory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="Questions" Relationship="TestTODB.UserQuestions" FromRole="User" ToRole="Questions" />
+          <NavigationProperty Name="Answers" Relationship="TestTODB.UserAnswers" FromRole="User" ToRole="Answers" />
+          <NavigationProperty Name="QuestionComments" Relationship="TestTODB.UserQuestionComment" FromRole="User" ToRole="QuestionComment" />
+          <NavigationProperty Name="AnswerComments" Relationship="TestTODB.UserAnswerComment" FromRole="User" ToRole="AnswerComment" />
+          <NavigationProperty Name="AnswerVotingHistory" Relationship="TestTODB.UserAnswerVotingHistory" FromRole="User" ToRole="AnswerVotingHistory" />
+          <NavigationProperty Name="QuestionVotingHistory" Relationship="TestTODB.UserQuestionVotingHistory" FromRole="User" ToRole="QuestionVotingHistory" />
+        </EntityType>
+        <EntityType Name="QuestionComment">
+          <Key>
+            <PropertyRef Name="QCommentID" />
+          </Key>
+          <Property Name="QCommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="QCommentDTS" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="TestTODB.QuestionsQuestionComment" FromRole="QuestionComment" ToRole="Questions" />
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TestTODB.UserQuestionComment" FromRole="QuestionComment" ToRole="User" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AnswerComment">
+          <Key>
+            <PropertyRef Name="ACommentID" />
+          </Key>
+          <Property Name="ACommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="ACommentDTS" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Answer" Relationship="TestTODB.AnswersAnswerComment" FromRole="AnswerComment" ToRole="Answers" />
+          <Property Name="AnswerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TestTODB.UserAnswerComment" FromRole="AnswerComment" ToRole="User" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="QuestionsAnswers">
+          <End Type="TestTODB.Questions" Role="Questions" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TestTODB.Answers" Role="Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="QuestionsQuestionComment">
+          <End Type="TestTODB.Questions" Role="Questions" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TestTODB.QuestionComment" Role="QuestionComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="QuestionComment">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AnswersAnswerComment">
+          <End Type="TestTODB.Answers" Role="Answers" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TestTODB.AnswerComment" Role="AnswerComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answers">
+              <PropertyRef Name="AnswerID" />
+            </Principal>
+            <Dependent Role="AnswerComment">
+              <PropertyRef Name="AnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserQuestions">
+          <End Type="TestTODB.UserInfo" Role="User" Multiplicity="1" />
+          <End Type="TestTODB.Questions" Role="Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserAnswers">
+          <End Type="TestTODB.UserInfo" Role="User" Multiplicity="1" />
+          <End Type="TestTODB.Answers" Role="Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="QuestionsQuestionVotingHistory">
+          <End Type="TestTODB.Questions" Role="Questions" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TestTODB.QuestionVotingHistory" Role="QuestionVotingHistory" Multiplicity="1" />
+        </Association>
+        <Association Name="AnswersAnswerVotingHistory">
+          <End Type="TestTODB.Answers" Role="Answers" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TestTODB.AnswerVotingHistory" Role="AnswerVotingHistory" Multiplicity="1" />
+        </Association>
+        <Association Name="UserQuestionComment">
+          <End Type="TestTODB.UserInfo" Role="User" Multiplicity="1" />
+          <End Type="TestTODB.QuestionComment" Role="QuestionComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="QuestionComment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserAnswerComment">
+          <End Type="TestTODB.UserInfo" Role="User" Multiplicity="1" />
+          <End Type="TestTODB.AnswerComment" Role="AnswerComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AnswerComment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="QuestionsCategories">
+          <End Type="TestTODB.Questions" Role="Questions" Multiplicity="1" />
+          <End Type="TestTODB.Categories" Role="Categories" Multiplicity="1" />
+        </Association>
+        <Association Name="UserAnswerVotingHistory">
+          <End Type="TestTODB.UserInfo" Role="User" Multiplicity="1" />
+          <End Type="TestTODB.AnswerVotingHistory" Role="AnswerVotingHistory" Multiplicity="1" />
+        </Association>
+        <Association Name="UserQuestionVotingHistory">
+          <End Type="TestTODB.UserInfo" Role="User" Multiplicity="1" />
+          <End Type="TestTODB.QuestionVotingHistory" Role="QuestionVotingHistory" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestTODBStoreContainer" CdmEntityContainer="TestTODBContext">
+    <EntitySetMapping Name="Questions1">
+      <EntityTypeMapping TypeName="IsTypeOf(TestTODB.Questions)">
+        <MappingFragment StoreEntitySet="Questions1">
+          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="QuestionDTS" ColumnName="QuestionDTS" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Answers1">
+      <EntityTypeMapping TypeName="IsTypeOf(TestTODB.Answers)">
+        <MappingFragment StoreEntitySet="Answers1">
+          <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="AnswerDTS" ColumnName="AnswerDTS" />
+          <ScalarProperty Name="Answered" ColumnName="Answered" />
+          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories1">
+      <EntityTypeMapping TypeName="IsTypeOf(TestTODB.Categories)">
+        <MappingFragment StoreEntitySet="Categories1">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionVotingHistories">
+      <EntityTypeMapping TypeName="IsTypeOf(TestTODB.QuestionVotingHistory)">
+        <MappingFragment StoreEntitySet="QuestionVotingHistories">
+          <ScalarProperty Name="QVH_ID" ColumnName="QVH_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnswerVotingHistories">
+      <EntityTypeMapping TypeName="IsTypeOf(TestTODB.AnswerVotingHistory)">
+        <MappingFragment StoreEntitySet="AnswerVotingHistories">
+          <ScalarProperty Name="AVH_ID" ColumnName="AVH_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfoes">
+      <EntityTypeMapping TypeName="IsTypeOf(TestTODB.UserInfo)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionComments">
+      <EntityTypeMapping TypeName="IsTypeOf(TestTODB.QuestionComment)">
+        <MappingFragment StoreEntitySet="QuestionComments">
+          <ScalarProperty Name="QCommentID" ColumnName="QCommentID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="QCommentDTS" ColumnName="QCommentDTS" />
+          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnswerComments">
+      <EntityTypeMapping TypeName="IsTypeOf(TestTODB.AnswerComment)">
+        <MappingFragment StoreEntitySet="AnswerComments">
+          <ScalarProperty Name="ACommentID" ColumnName="ACommentID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="ACommentDTS" ColumnName="ACommentDTS" />
+          <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="QuestionsQuestionVotingHistory" TypeName="TestTODB.QuestionsQuestionVotingHistory" StoreEntitySet="QuestionVotingHistories">
+      <EndProperty Name="Questions">
+        <ScalarProperty Name="QuestionID" ColumnName="Question_QuestionID" />
+      </EndProperty>
+      <EndProperty Name="QuestionVotingHistory">
+        <ScalarProperty Name="QVH_ID" ColumnName="QVH_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AnswersAnswerVotingHistory" TypeName="TestTODB.AnswersAnswerVotingHistory" StoreEntitySet="AnswerVotingHistories">
+      <EndProperty Name="Answers">
+        <ScalarProperty Name="AnswerID" ColumnName="Answer_AnswerID" />
+      </EndProperty>
+      <EndProperty Name="AnswerVotingHistory">
+        <ScalarProperty Name="AVH_ID" ColumnName="AVH_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="QuestionsCategories" TypeName="TestTODB.QuestionsCategories" StoreEntitySet="Questions1">
+      <EndProperty Name="Categories">
+        <ScalarProperty Name="CategoryID" ColumnName="Category_CategoryID" />
+      </EndProperty>
+      <EndProperty Name="Questions">
+        <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserAnswerVotingHistory" TypeName="TestTODB.UserAnswerVotingHistory" StoreEntitySet="Users">
+      <EndProperty Name="AnswerVotingHistory">
+        <ScalarProperty Name="AVH_ID" ColumnName="AnswerVotingHistory_AVH_ID" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserID" ColumnName="UserID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserQuestionVotingHistory" TypeName="TestTODB.UserQuestionVotingHistory" StoreEntitySet="Users">
+      <EndProperty Name="QuestionVotingHistory">
+        <ScalarProperty Name="QVH_ID" ColumnName="QuestionVotingHistory_QVH_ID" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserID" ColumnName="UserID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

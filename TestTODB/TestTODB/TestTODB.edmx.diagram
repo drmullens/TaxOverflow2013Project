@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9b764c24dfb24e44b909ce07f8a9fef1" Name="Diagram1" >
+        <EntityTypeShape EntityType="TestTODB.Questions" Width="1.5" PointX="2.625" PointY="0.625" />
+        <EntityTypeShape EntityType="TestTODB.Answers" Width="1.5" PointX="5.875" PointY="0.75" />
+        <EntityTypeShape EntityType="TestTODB.Categories" Width="1.5" PointX="0.5" PointY="2.625" FillColor="Lime" />
+        <EntityTypeShape EntityType="TestTODB.QuestionVotingHistory" Width="1.5" PointX="2.5" PointY="4.375" FillColor="Silver" />
+        <EntityTypeShape EntityType="TestTODB.AnswerVotingHistory" Width="1.5" PointX="5.25" PointY="4.375" FillColor="Silver" />
+        <EntityTypeShape EntityType="TestTODB.UserInfo" Width="1.5" PointX="8.25" PointY="4.375" FillColor="Yellow" />
+        <EntityTypeShape EntityType="TestTODB.QuestionComment" Width="1.5" PointX="9.125" PointY="0.625" FillColor="Fuchsia" />
+        <EntityTypeShape EntityType="TestTODB.AnswerComment" Width="1.5" PointX="11.75" PointY="0.625" FillColor="Fuchsia" />
+        <AssociationConnector Association="TestTODB.QuestionsAnswers" />
+        <AssociationConnector Association="TestTODB.QuestionsQuestionComment" />
+        <AssociationConnector Association="TestTODB.AnswersAnswerComment" />
+        <AssociationConnector Association="TestTODB.UserQuestions" />
+        <AssociationConnector Association="TestTODB.UserAnswers" />
+        <AssociationConnector Association="TestTODB.QuestionsQuestionVotingHistory" />
+        <AssociationConnector Association="TestTODB.AnswersAnswerVotingHistory" />
+        <AssociationConnector Association="TestTODB.UserQuestionComment" />
+        <AssociationConnector Association="TestTODB.UserAnswerComment" />
+        <AssociationConnector Association="TestTODB.QuestionsCategories" />
+        <AssociationConnector Association="TestTODB.UserAnswerVotingHistory" />
+        <AssociationConnector Association="TestTODB.UserQuestionVotingHistory" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
