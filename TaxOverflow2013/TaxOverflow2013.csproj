@@ -154,6 +154,7 @@
       <DependentUpon>TODB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\QuestionList.cs" />
+    <Compile Include="Models\QuestionOrAnswer.cs" />
     <Compile Include="Models\QuestionStream.cs" />
     <Compile Include="Models\QuestionTBL.cs">
       <DependentUpon>TODB.tt</DependentUpon>

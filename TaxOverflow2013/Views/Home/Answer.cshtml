@@ -32,42 +32,49 @@
             <div id="divVotes" class="col-md-1">
                 <div id="divVoteCount">
                     @* Voting Data Goes Here *@
-                    @Model.Question[2]
+                    @Model.aQuestion.Score
                 </div>
             </div>
             <div id="divQuestion" class="col-md-9">
                 <div class="divCategory">
-                    @Model.Question[3]
+                    @Model.CategoryString
                 </div>
-                @Model.Question[1]
+                @Model.aQuestion.Question
             </div>
             <div id="divAuthorDetails" class="col-md-2">
                 <div id="divGenericPerson">
                     <img src="~/Images/GenericPerson.png" height="70" width="50" alt="Generic Person Photo" />
                 </div>
-                <div id="divAuthor">@Model.Question[4]</div>
-                <div id="divTime">@Model.Question[5]</div>
+                <div id="divAuthor">@Model.UserName</div>
+                <div id="divTime">@Model.aQuestion.QuestionDTS</div>
             </div>
             <div class="clearfix"></div>
             <div id="divButtonChoices">
                 <div class="text-left float-left">
-                    <a class="btn btn-default btn-sm" href="../Home/ViewQuestion?question_id=@Model.Question[0]">Back</a>
+                    <a class="btn btn-default btn-sm" href="../Home/ViewQuestion?question_id=@Model.aQuestion.QuestionID">Back</a>
                 </div>
-                <a class="btn btn-default btn-sm" href="../Home/Answer?question_id=@Model.Question[0]">Answer</a>
-                <a class="btn btn-default btn-sm" href="../Home/Comment?question_id=@Model.Question[0]">Comment</a>
+                <a class="btn btn-default btn-sm" href="../Home/Answer?question_id=@Model.aQuestion.QuestionID">Answer</a>
+                <a class="btn btn-default btn-sm" href="../Home/Comment?question_id=@Model.aQuestion.QuestionID">Comment</a>
             </div>
         </div>
 
-        <p>
-            <textarea id="txtAnswer" name="txtAnswer"></textarea>
+        <form method="post" action="/Home/ViewQuestion">
+            <p>
+                <textarea id="txtAnswer" name="txtAnswer"></textarea>
 
-            <div class="text-right">
-                    <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" 
-                            title="Submit" class="btn btn-default" style="margin-top: 20px;">Submit</button>
+                <div class="text-right">
+                    <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit"
+                            title="Submit" class="btn btn-default" style="margin-top: 20px;">
+                        Submit
+                    </button>
 
-                    <button type="button" name="btnCancel" id="btnCancel" value="Cancel" 
-                            title="Cancel" class="btn btn-default" style="margin-top: 20px;">Cancel</button>
-            </div>
-        </p>
-    </div>
+                    <button type="button" name="btnCancel" id="btnCancel" value="Cancel"
+                            title="Cancel" class="btn btn-default" style="margin-top: 20px;">
+                        Cancel
+                    </button>
+                </div>
+                <input type="text" class="hidden" value="@Model.aQuestion.QuestionID" id="QuestionID" name="QuestionID" />
+            </p>
+        </form>
+</div>
 </div>

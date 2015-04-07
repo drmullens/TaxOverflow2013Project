@@ -73,8 +73,8 @@
                         <div class="divGenericPerson">
                             <img src="~/Images/GenericPerson.png" height="70" width="50" alt="Generic Person Photo" />
                         </div>
-                        <div class="divAuthor">@Model.QComment[i].QCUserName</div>
-                        <div class="divTime">@Model.QComment[i].QComment.QCommentDTS</div>
+                        <div class="divAuthor">@Model.RelatedQuestionComments[i].QCUserName</div>
+                        <div class="divTime">@Model.RelatedQuestionComments[i].QComment.QCommentDTS</div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -102,7 +102,7 @@
                             <img src="~/Images/VoteDown.png" width="50" alt="Voting Down Glyphs" />
                         </a>
 
-                        @if (@Model.RelatedAnswers[i].MainAnswer.Accepted == "true")
+                        @if (@Model.RelatedAnswers[i].MainAnswer.Accepted == true)
                         {
                             <img src="~/Images/checkmark.png" alt="Check Mark means Answer is Accepted" width="50" />
                         }
@@ -121,7 +121,7 @@
                     <div class="divButtonChoices">
                         @* If Question Writer *@
 
-                        @if (@Model.QuestionUserName.Contains(User.Identity.Name.Split('\\')[1]))
+                        @if (@Model.QuestionUserName == @Model.RelatedAnswers[i].AnswerUserName && @Model.RelatedAnswers[i].MainAnswer.Accepted == false)
                         {
                             <a class="btn btn-default btn-sm" href="question_id=@Model.RelatedAnswers[i].MainAnswer.QuestionID&answer_id=@Model.RelatedAnswers[i].MainAnswer.AnswerID">Mark As Answer</a>
                         }
@@ -148,7 +148,7 @@
                                     <img src="~/Images/GenericPerson.png" height="70" width="50" alt="Generic Person Photo" />
                                 </div>
                                 <div class="divAuthor">@Model.RelatedAnswers[i].RelatedAnswerComments[j].ACUserName</div>
-                                <div class="divTime">@Model.RelatedAnswers[i].RelatedAnswerComments[j].AComment.ACommentDTS</div>
+                                <div class="divTime">@Model.RelatedAnswers[i].RelatedAnswerComments[j].AComment.AcommentDTS</div>
                             </div>
                             <div class="clearfix"></div>
                         </div>

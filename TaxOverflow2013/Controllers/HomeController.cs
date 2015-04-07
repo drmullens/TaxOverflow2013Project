@@ -10,7 +10,7 @@ namespace TaxOverflow2013.Controllers
     {
 
 
-        public ActionResult Index() 
+        public ActionResult Index()
         {
             string currentUser;
 
@@ -20,7 +20,7 @@ namespace TaxOverflow2013.Controllers
             HomeQuestionLists HomePageQuestions = new HomeQuestionLists();
             HomePageQuestions.MostRecentQuestions = new List<QuestionList>();
             HomePageQuestions.BestUnansweredQuestions = new List<QuestionList>();
-            
+
             using (var context = new TODBEntities())
             {
                 var users = context.UserTBLs.Where(c => c.UserName == currentUser).ToList();
@@ -51,8 +51,8 @@ namespace TaxOverflow2013.Controllers
 
 
                 //fill model lists with information
-                
-                foreach(var recent in MostRecent)
+
+                foreach (var recent in MostRecent)
                 {
                     QuestionList newQuestion = new QuestionList();
                     newQuestion.aQuestion = recent;
@@ -62,7 +62,7 @@ namespace TaxOverflow2013.Controllers
 
                 }
 
-                foreach(var highScores in BestScore)
+                foreach (var highScores in BestScore)
                 {
                     QuestionList newQuestion = new QuestionList();
                     newQuestion.aQuestion = highScores;
@@ -117,8 +117,8 @@ namespace TaxOverflow2013.Controllers
                     context.QuestionTBLs.Add(myQuestion);
                     context.SaveChanges();
 
-                    //Return new QuestionID
-                    var QID = context.QuestionTBLs.Max(b => b.QuestionID);  
+                    //Return newest QuestionID
+                    var QID = context.QuestionTBLs.Max(b => b.QuestionID);
                     myQuestion.QuestionID = QID;
 
                     NewQuestion.MainQuestion = myQuestion;
@@ -181,57 +181,57 @@ namespace TaxOverflow2013.Controllers
                 {
 
                     //create question list by drop down list selection default 0 by most recent date
-                    case 1 :
+                    case 1:
                         {
                             QList = (from R in context.QuestionTBLs
-                                         orderby (from C in context.CategoryTBLs orderby C.Category ascending select C)
-                                         select R).ToList();
+                                     orderby (from C in context.CategoryTBLs orderby C.Category ascending select C)
+                                     select R).ToList();
                             break;
                         }
-                    case 2 :
+                    case 2:
                         {
                             QList = (from R in context.QuestionTBLs
-                                         orderby (from C in context.CategoryTBLs orderby C.Category descending select C)
-                                         select R).ToList();
+                                     orderby (from C in context.CategoryTBLs orderby C.Category descending select C)
+                                     select R).ToList();
                             break;
                         }
-                    case 3 :
+                    case 3:
                         {
                             QList = (from R in context.QuestionTBLs
-                                         orderby R.Score descending
-                                         select R).ToList();
+                                     orderby R.Score descending
+                                     select R).ToList();
                             break;
                         }
-                    case 4 :
+                    case 4:
                         {
                             QList = (from R in context.QuestionTBLs
-                                         orderby R.Score ascending
-                                         select R).ToList();
+                                     orderby R.Score ascending
+                                     select R).ToList();
                             break;
                         }
-                    case 5 :
+                    case 5:
                         {
                             QList = (from R in context.QuestionTBLs
-                                         orderby (from A in context.AnswerTBLs orderby A.Accepted select A)
-                                         select R).ToList();
+                                     orderby (from A in context.AnswerTBLs orderby A.Accepted select A)
+                                     select R).ToList();
                             break;
                         }
-                    case 0 :
-                    default :
+                    case 0:
+                    default:
                         {
                             QList = (from R in context.QuestionTBLs
-                                        orderby R.QuestionDTS descending
-                                        select R).ToList();
+                                     orderby R.QuestionDTS descending
+                                     select R).ToList();
                             break;
                         }
                 }
 
-                foreach(var item in QList)
+                foreach (var item in QList)
                 {
                     QuestionListWithAnswered aQuestion = new QuestionListWithAnswered();
                     aQuestion.aQuestion = item;
                     var isAccepted = context.AnswerTBLs.Where(a => a.QuestionID == item.QuestionID).ToList();
-                    if (isAccepted.Count > 0 )
+                    if (isAccepted.Count > 0)
                     {
                         aQuestion.AccptedAnswer = true;
                     }
@@ -255,15 +255,18 @@ namespace TaxOverflow2013.Controllers
             int QID = Int32.Parse(Request["question_id"]);
 
             QuestionStream CurrentQuestion = new QuestionStream();
+            CurrentQuestion.RelatedQuestionComments = new List<QuestionCommentStream>();
+            CurrentQuestion.RelatedAnswers = new List<AnswerStream>();
+            
             QuestionTBL myQuestion = new QuestionTBL();
 
             using (var context = new TODBEntities())
             {
                 var CurrQuestion = context.QuestionTBLs.Where(q => q.QuestionID == QID).ToList();
-                if (CurrQuestion.Count > 0 )
+                if (CurrQuestion.Count > 0)
                 {
                     myQuestion.QuestionID = QID;
-                    foreach(var aQuestion in CurrQuestion)
+                    foreach (var aQuestion in CurrQuestion)
                     {
                         myQuestion = aQuestion;
                     }
@@ -285,19 +288,23 @@ namespace TaxOverflow2013.Controllers
                     foreach (var ans in QA)
                     {
                         AnswerStream anAnswer = new AnswerStream();
+                        anAnswer.RelatedAnswerComments = new List<AnswerCommentStream>();
+
                         anAnswer.MainAnswer = ans;
+                        anAnswer.AnswerUserName = GetUserNameByID(ans.UserID);
                         var ansComm = context.AnswerCommentTBLs.Where(d => d.AnswerID == ans.AnswerID).ToList();
+
                         foreach (var comment in ansComm)
                         {
                             AnswerCommentStream AComment = new AnswerCommentStream();
                             AComment.AComment = comment;
-                            AComment.ACUserName = comment.UserTBL.UserName;
+                            AComment.ACUserName = GetUserNameByID(comment.UserID);
                             anAnswer.RelatedAnswerComments.Add(AComment);
                         }
 
                         CurrentQuestion.RelatedAnswers.Add(anAnswer);
                     }
-                    
+
                 }
                 else
                 {
@@ -307,6 +314,102 @@ namespace TaxOverflow2013.Controllers
             }
 
             return View(CurrentQuestion);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult ViewQuestion(string txtAnswer, string type = "Answer", string QuestionID = "0", string AnswerID = "0" )
+        {
+            int QID = 0;
+            int AID = 0;
+
+            if (type == "Answer")
+                //This means a new Answer is being posted
+            {
+                if (Int32.TryParse(QuestionID, out QID))
+                {
+                    AnswerTBL newAnswer = new AnswerTBL();
+                    newAnswer.UserID = GetCurrentUser();
+                    newAnswer.Answer = txtAnswer;
+                    newAnswer.QuestionID = QID;
+                    newAnswer.Score = 0;
+                    newAnswer.AnswerDTS = DateTime.Now;
+                    newAnswer.Accepted = false;
+
+                    QuestionStream showQuestion = new QuestionStream();
+                    using (var context = new TODBEntities())
+                    {
+                        context.AnswerTBLs.Add(newAnswer);
+                        context.SaveChanges();
+                    }
+
+                    showQuestion = getQuestionStream(QID);
+                    if (showQuestion != null)
+                    {
+                        return View(showQuestion);
+                    }
+                }
+            }
+            else if (type == "QComment")
+            {
+                if (Int32.TryParse(QuestionID, out QID))
+                {
+                    QuestionCommentTBL newComment = new QuestionCommentTBL();
+                    newComment.UserID = GetCurrentUser();
+                    newComment.QComment = txtAnswer;
+                    newComment.QuestionID = QID;
+                    newComment.QCommentDTS = DateTime.Now;
+
+                    QuestionStream showQuestion = new QuestionStream();
+                    using (var context = new TODBEntities())
+                    {
+                        context.QuestionCommentTBLs.Add(newComment);
+                        context.SaveChanges();
+                    }
+
+                    showQuestion = getQuestionStream(QID);
+                    if (showQuestion != null)
+                    {
+                        return View(showQuestion);
+                    }
+                }
+            }
+            else if(type == "AComment")
+            {
+                if (Int32.TryParse(AnswerID, out AID))
+                {
+                    AnswerCommentTBL newComment = new AnswerCommentTBL();
+                    newComment.UserID = GetCurrentUser();
+                    newComment.AComment = txtAnswer;
+                    newComment.AnswerID = AID;
+                    newComment.AcommentDTS = DateTime.Now;
+
+                    QuestionStream showQuestion = new QuestionStream();
+
+                    using (var context = new TODBEntities())
+                    {
+                        context.AnswerCommentTBLs.Add(newComment);
+                        context.SaveChanges();
+
+                        var currentQuestion = context.AnswerTBLs.Where(c => c.AnswerID == AID).ToList();
+                        if (currentQuestion.Count > 0)
+                        {
+                            foreach(var item in currentQuestion)
+                            {
+                                QID = item.QuestionID;
+                            }
+
+                            showQuestion = getQuestionStream(QID);
+                            if (showQuestion != null)
+                            {
+                                return View(showQuestion);
+                            }
+                        }
+                    }
+                }
+            }
+            Response.Redirect("/Error");
+            return null;
         }
 
         public ActionResult Search()
@@ -320,30 +423,82 @@ namespace TaxOverflow2013.Controllers
         {
             ViewBag.Message = "Post an Answer";
 
-            if (Request["question_id"] != null)
+            int QID;
+
+            QuestionList fullQuestion = new QuestionList();
+
+            if (Int32.TryParse(Request["Question_id"], out QID))
             {
-                return View(new HomeModel.MockQuestion(Int32.Parse(Request["question_id"])));
+                using (var context = new TODBEntities())
+                {
+                    var currQuestion = context.QuestionTBLs.Where(c => c.QuestionID == QID).ToList();
+                    if (currQuestion.Count > 0)
+                    {
+                        foreach (var QuestionInfo in currQuestion)
+                        {
+                            fullQuestion.aQuestion = QuestionInfo;
+                            fullQuestion.CategoryString = GetCategoryByID(QuestionInfo.CategoryID);
+                            fullQuestion.UserName = GetUserNameByID(QuestionInfo.UserID);
+                        }
+                    }
+
+                }
+                return View(fullQuestion);
             }
-            else
-            {
-                Response.Redirect("~/");
-                return null;
-            }
+
+            Response.Redirect("~/");
+            return null;
         }
 
         public ActionResult Comment()
         {
             ViewBag.Message = "Post a Comment";
 
-            if (Request["question_id"] != null)
+            int ID;
+            int AID;  //if there is a questionID and an answerID > 0, then this is an answer comment
+
+            QuestionOrAnswer fullQuestion = new QuestionOrAnswer();
+            if (Int32.TryParse(Request["answer_id"], out AID))
             {
-                return View(new TaxOverflow2013.Models.HomeModel.MockQuestion(Int32.Parse(Request["question_id"])));
+                if (AID > 0)
+                {
+                    using (var context = new TODBEntities())
+                    {
+                        var currAnswer = context.AnswerTBLs.Where(c => c.AnswerID == AID).ToList();
+                        foreach(var AnswerInfo in currAnswer)
+                        {
+                            fullQuestion.anAnswer = new AnswerList();
+                            fullQuestion.anAnswer.anAnswer = AnswerInfo;
+                            fullQuestion.anAnswer.AUserName = GetUserNameByID(AnswerInfo.UserID);
+                            fullQuestion.type = CommentType.Answer;
+                        }
+                    }
+                    return View(fullQuestion);
+                }
             }
-            else
+            if (Int32.TryParse(Request["question_id"], out ID))
             {
-                Response.Redirect("~/");
-                return null;
+                using (var context = new TODBEntities())
+                {
+                    var currQuestion = context.QuestionTBLs.Where(c => c.QuestionID == ID).ToList();
+                    if (currQuestion.Count > 0)
+                    {
+                        foreach (var QuestionInfo in currQuestion)
+                        {
+                            fullQuestion.aQuestion = new QuestionList();
+                            fullQuestion.aQuestion.aQuestion = QuestionInfo;
+                            fullQuestion.aQuestion.CategoryString = GetCategoryByID(QuestionInfo.CategoryID);
+                            fullQuestion.aQuestion.UserName = GetUserNameByID(QuestionInfo.UserID);
+                            fullQuestion.type = CommentType.Question;
+                        }
+                    }
+
+                }
+                return View(fullQuestion);
             }
+
+            Response.Redirect("~/");
+            return null;
         }
 
 
@@ -351,18 +506,18 @@ namespace TaxOverflow2013.Controllers
 
         private int GetCurrentUser()
         {
-                using (var context = new TODBEntities())
+            using (var context = new TODBEntities())
+            {
+                var currUser = context.UserTBLs.Where(c => c.UserName == User.Identity.Name).ToList();
+                if (currUser.Count > 0)
                 {
-                    var currUser = context.UserTBLs.Where(c => c.UserName == User.Identity.Name).ToList();
-                    if (currUser.Count > 0)
+                    foreach (var person in currUser)
                     {
-                        foreach (var person in currUser)
-                        {
-                            return person.UserID;
-                        }
+                        return person.UserID;
                     }
                 }
-                return -1;  //no such value send -1 to show error
+            }
+            return -1;  //no such value send -1 to show error
         }
 
         private string GetUserNameByID(int id)
@@ -372,7 +527,7 @@ namespace TaxOverflow2013.Controllers
                 var idStrings = context.UserTBLs.Where(c => c.UserID == id).ToList();
                 if (idStrings.Count > 0)
                 {
-                    foreach(var userName in idStrings)
+                    foreach (var userName in idStrings)
                     {
                         return userName.UserName;
                     }
@@ -387,9 +542,9 @@ namespace TaxOverflow2013.Controllers
             using (var context = new TODBEntities())
             {
                 var catString = context.CategoryTBLs.Where(c => c.CategoryID == catID).ToList();
-                if (catString.Count > 0 )
+                if (catString.Count > 0)
                 {
-                    foreach(var catItem in catString)
+                    foreach (var catItem in catString)
                     {
                         return catItem.Category;
                     }
@@ -397,6 +552,56 @@ namespace TaxOverflow2013.Controllers
             }
 
             return "";  //No such value, redirect to error screen
+        }
+
+        private QuestionStream getQuestionStream(int QID)
+        {
+            QuestionStream aQuestionStream = new QuestionStream();
+            aQuestionStream.RelatedAnswers = new List<AnswerStream>();
+            aQuestionStream.RelatedQuestionComments = new List<QuestionCommentStream>();
+
+            using (var context = new TODBEntities())
+            {
+                var QStream = context.QuestionTBLs.Where(c => c.QuestionID == QID).ToList();
+                if (QStream.Count > 0)
+                {
+                    foreach (var question in QStream)
+                    {
+                        aQuestionStream.MainQuestion = question;
+                        aQuestionStream.QuestionUserName = GetUserNameByID(question.UserID);
+                        aQuestionStream.QuestionCategory = GetCategoryByID(question.CategoryID);
+                    }
+
+                    var QComm = context.QuestionCommentTBLs.Where(a => a.QuestionID == aQuestionStream.MainQuestion.QuestionID).ToList();
+                    foreach (var comment in QComm)
+                    {
+                        QuestionCommentStream QComment = new QuestionCommentStream();
+                        QComment.QComment = comment;
+                        QComment.QCUserName = comment.UserTBL.UserName;
+                        aQuestionStream.RelatedQuestionComments.Add(QComment);
+                    }
+
+                    var QA = context.AnswerTBLs.Where(b => b.QuestionID == aQuestionStream.MainQuestion.QuestionID).ToList();
+                    foreach (var ans in QA)
+                    {
+                        AnswerStream anAnswer = new AnswerStream();
+                        anAnswer.RelatedAnswerComments = new List<AnswerCommentStream>();
+
+                        anAnswer.MainAnswer = ans;
+                        var ansComm = context.AnswerCommentTBLs.Where(d => d.AnswerID == ans.AnswerID).ToList();
+                        foreach (var comment in ansComm)
+                        {
+                            AnswerCommentStream AComment = new AnswerCommentStream();
+                            AComment.AComment = comment;
+                            AComment.ACUserName = comment.UserTBL.UserName;
+                            anAnswer.RelatedAnswerComments.Add(AComment);
+                        }
+
+                        aQuestionStream.RelatedAnswers.Add(anAnswer);
+                    }
+                }
+            }
+            return aQuestionStream;
         }
 
         #endregion
