@@ -1,38 +1,25 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    //in title this could be a question cut to a length of 65 characters total
+    String Title = System.Text.RegularExpressions.Regex.Replace((String)Model.MainQuestion.Question,
+        "<[^>]*(>|$)", "");
 
-    ViewBag.Title = "";
+    ViewBag.Title = Title.Substring(0, Title.Length >= 20 ? 20 : Title.Length);
 }
-
-
 
 <div class="row">
     <div class="col-md-12">
         <h2>Viewing a Question.</h2>
 
-        @*
-            Question:
-            0 - QuestionID, 1 - Question, 2 - Number of Votes, 3 - Category, 4 - Author, 5 - TimeStamp
-
-            NewQuestion.MainQuestion.Question
-            NewQuestion.MainQuestion.QuestionID
-            NewQuestion.MainQuestion.QuestionDTS
-            NewQuestion.MainQuestion.Score
-            NewQuestion.MainQuestion.CategoryString
-            NewQuestion.MainQuestion.UserName
-        *@
-
         <div id="divQJumbo" class="jumbotron row">
             <div id="divVotes" class="col-md-1">
-                <a href="../Home/ViewQuestion?question_id=@Model.MainQuestion.QuestionID&vote=@Model.MainQuestion.Score&math=a">
+                <a href="@Url.Content("~/Home/ViewQuestion?question_id=" + @Model.MainQuestion.QuestionID + "&vote=VoteUp")">
                     <img src="~/Images/VoteUp.png" width="50" alt="Voting Up Glyphs" />
                 </a>
                 <div id="divVoteCount">
                     @Model.MainQuestion.Score
                 </div>
-                <a href="../Home/ViewQuestion?question_id=@Model.MainQuestion.QuestionID&vote=@Model.MainQuestion.Score&math=s">
+                <a href="@Url.Content("~/Home/ViewQuestion?question_id=" + @Model.MainQuestion.QuestionID + "&vote=VoteDown")">
                     <img src="~/Images/VoteDown.png" width="50" alt="Voting Down Glyphs" />
                 </a>
             </div>
@@ -40,7 +27,7 @@
                 <div class="divCategory">
                     @Model.QuestionCategory
                 </div>
-                @Model.MainQuestion.Question
+                @Html.Raw(Model.MainQuestion.Question)
             </div>
             <div id="divAuthorDetails" class="col-md-2">
                 <div id="divGenericPerson">
@@ -51,15 +38,14 @@
             </div>
             <div class="clearfix"></div>
             <div id="divButtonChoices">
-                <a class="btn btn-default btn-sm" href="../Home/Answer?question_id=@Model.MainQuestion.QuestionID">Answer</a>
-                <a class="btn btn-default btn-sm" href="../Home/Comment?question_id=@Model.MainQuestion.QuestionID">Comment</a>
+                <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/Answer/" + @Model.MainQuestion.QuestionID)">
+                    Answer
+                </a>
+                <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/Comment?question_id=" + @Model.MainQuestion.QuestionID)">
+                    Comment
+                </a>
             </div>
         </div>
-
-        @*
-            Question Comments:
-            0 - QuestionID, 1 - CommentID, 2 - Comment, 3 - Author, 4 - TimeStamp
-        *@
 
         @if (Model.RelatedQuestionComments != null)
         {
@@ -67,7 +53,7 @@
             {
                 <div class="divCJumbo jumbotron row">
                     <div class="divComment col-md-10">
-                        @Model.RelatedQuestionComments[i].QComment.QComment
+                        @Html.Raw(Model.RelatedQuestionComments[i].QComment.QComment)
                     </div>
                     <div class="divAuthorDetails col-md-2">
                         <div class="divGenericPerson">
@@ -80,11 +66,7 @@
                 </div>
             }
         }
-        @*
-            Answers:
-            0 - QuestionID, 1 - AnswerID, 2 - Answer, 3 - Number of Votes, 4 - is Correct, 5 - Author, 6 - TimeStamp
-        *@
-    
+
         @if (Model.RelatedAnswers != null)
         {
             for (int i = 0; i < Model.RelatedAnswers.Count; i++)
@@ -108,7 +90,7 @@
                         }
                     </div>
                     <div class="divAnswer col-md-9">
-                        @Model.RelatedAnswers[i].MainAnswer.Answer
+                        @Html.Raw(Model.RelatedAnswers[i].MainAnswer.Answer)
                     </div>
                     <div class="divAuthorDetails col-md-2">
                         <div class="divGenericPerson">
@@ -123,16 +105,15 @@
 
                         @if (@Model.QuestionUserName == @Model.RelatedAnswers[i].AnswerUserName && @Model.RelatedAnswers[i].MainAnswer.Accepted == false)
                         {
-                            <a class="btn btn-default btn-sm" href="question_id=@Model.RelatedAnswers[i].MainAnswer.QuestionID&answer_id=@Model.RelatedAnswers[i].MainAnswer.AnswerID">Mark As Answer</a>
+                            <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/ViewQuestion?question_id=" + @Model.RelatedAnswers[i].MainAnswer.QuestionID + "&answer_id=" + @Model.RelatedAnswers[i].MainAnswer.AnswerID)">
+                                Mark As Answer
+                            </a>
                         }
-                        <a class="btn btn-default btn-sm" href="../Home/Comment?question_id=@Model.RelatedAnswers[i].MainAnswer.QuestionID&answer_id=@Model.RelatedAnswers[i].MainAnswer.AnswerID">Comment</a>
+                        <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/Comment?question_id=" + @Model.RelatedAnswers[i].MainAnswer.QuestionID + "&answer_id=" + @Model.RelatedAnswers[i].MainAnswer.AnswerID)">
+                            Comment
+                        </a>
                     </div>
                 </div>
-
-                @*
-                    Answer Comments:
-                    0 - answerID, 1 - commentID, 2 - Comment, 3 - Author, 4 - TimeStamp
-                *@
 
                 if (Model.RelatedAnswers[i].RelatedAnswerComments != null)
                 {
@@ -141,7 +122,7 @@
                         @*  For Each of the Answer Comments *@
                         <div class="divCAJumbo jumbotron row">
                             <div class="divComment col-md-10">
-                                @Model.RelatedAnswers[i].RelatedAnswerComments[j].AComment.AComment
+                                @Html.Raw(Model.RelatedAnswers[i].RelatedAnswerComments[j].AComment.AComment)
                             </div>
                             <div class="divAuthorDetails col-md-2">
                                 <div class="divGenericPerson">

@@ -3,26 +3,27 @@
 }
 
 @section scripts {
-<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-<script>tinymce.init({
-    selector: "textarea#txtAnswer",
-    theme: "modern",
-    plugins: [
-         "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
-         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-         "save table contextmenu directionality emoticons template paste textcolor"
-    ],
-    style_formats: [
-         {title: 'Bold text', inline: 'b'},
-         {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
-         {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
-         {title: 'Example 1', inline: 'span', classes: 'example1'},
-         {title: 'Example 2', inline: 'span', classes: 'example2'},
-         {title: 'Table styles'},
-         { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }
-    ],
-    schema: "html5"
-}); </script>}
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: "textarea#txtAnswer",
+            theme: "modern",
+            plugins: [
+                 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                 "save table contextmenu directionality emoticons template paste textcolor"
+            ],
+            style_formats: [
+                 { title: 'Bold text', inline: 'b' },
+                 { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } },
+                 { title: 'Red header', block: 'h1', styles: { color: '#ff0000' } },
+                 { title: 'Example 1', inline: 'span', classes: 'example1' },
+                 { title: 'Example 2', inline: 'span', classes: 'example2' },
+                 { title: 'Table styles' },
+                 { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }
+            ],
+            schema: "html5"
+        }); </script>}
 
 <div class="row">
     <div class="col-md-12">
@@ -39,7 +40,7 @@
                 <div class="divCategory">
                     @Model.CategoryString
                 </div>
-                @Model.aQuestion.Question
+                @Html.Raw(@Model.aQuestion.Question)
             </div>
             <div id="divAuthorDetails" class="col-md-2">
                 <div id="divGenericPerson">
@@ -51,10 +52,16 @@
             <div class="clearfix"></div>
             <div id="divButtonChoices">
                 <div class="text-left float-left">
-                    <a class="btn btn-default btn-sm" href="../Home/ViewQuestion?question_id=@Model.aQuestion.QuestionID">Back</a>
+                    <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/ViewQuestion/" + @Model.aQuestion.QuestionID)">
+                        Back
+                    </a>
                 </div>
-                <a class="btn btn-default btn-sm" href="../Home/Answer?question_id=@Model.aQuestion.QuestionID">Answer</a>
-                <a class="btn btn-default btn-sm" href="../Home/Comment?question_id=@Model.aQuestion.QuestionID">Comment</a>
+                <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/Answer/" + @Model.aQuestion.QuestionID)">
+                    Answer
+                </a>
+                <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/Comment?question_id=" + @Model.aQuestion.QuestionID)">
+                    Comment
+                </a>
             </div>
         </div>
 
@@ -68,13 +75,12 @@
                         Submit
                     </button>
 
-                    <button type="button" name="btnCancel" id="btnCancel" value="Cancel"
-                            title="Cancel" class="btn btn-default" style="margin-top: 20px;">
+                    <a class="btn btn-default" href="@Url.Content("~/Home/ViewQuestion/" + @Model.aQuestion.QuestionID)" style="margin-top: 20px;">
                         Cancel
-                    </button>
+                    </a>
                 </div>
                 <input type="text" class="hidden" value="@Model.aQuestion.QuestionID" id="QuestionID" name="QuestionID" />
             </p>
         </form>
-</div>
+    </div>
 </div>

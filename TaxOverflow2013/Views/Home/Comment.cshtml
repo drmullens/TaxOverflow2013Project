@@ -23,7 +23,7 @@
                     <div class="divCategory">
                         @Model.aQuestion.CategoryString
                     </div>
-                    @Model.aQuestion.aQuestion.Question
+                    @Html.Raw(@Model.aQuestion.aQuestion.Question)
                 </div>
                 <div id="divAuthorDetails" class="col-md-2">
                     <div id="divGenericPerson">
@@ -35,10 +35,16 @@
                 <div class="clearfix"></div>
                 <div id="divButtonChoices">
                     <div class="text-left float-left">
-                        <a class="btn btn-default btn-sm" href="../Home/ViewQuestion?question_id=@Model.aQuestion.aQuestion.QuestionID">Back</a>
+                        <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/ViewQuestion/" + @Model.aQuestion.aQuestion.QuestionID)">
+                            Back
+                        </a>
                     </div>
-                    <a class="btn btn-default btn-sm" href="../Home/Answer?question_id=@Model.aQuestion.aQuestion.QuestionID">Answer</a>
-                    <a class="btn btn-default btn-sm" href="../Home/Comment?question_id=@Model.aQuestion.aQuestion.QuestionID">Comment</a>
+                    <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/Answer/" + @Model.aQuestion.aQuestion.QuestionID)">
+                        Answer
+                    </a>
+                    <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/Comment/" + @Model.aQuestion.aQuestion.QuestionID)">
+                        Comment
+                    </a>
                 </div>
             </div>
 
@@ -51,10 +57,9 @@
                             Submit
                         </button>
 
-                        <button type="button" name="btnCancel" id="btnCancel" value="Cancel"
-                                title="Cancel" class="btn btn-default" style="margin-top: 20px;">
+                        <a class="btn btn-default" href="@Url.Content("~/Home/ViewQuestion/" + @Model.aQuestion.aQuestion.QuestionID)" style="margin-top: 20px;">
                             Cancel
-                        </button>
+                        </a>
                     </div>
                     <input type="text" class="hidden" value="@Model.aQuestion.aQuestion.QuestionID" id="QuestionID" name="QuestionID" />
                     <input type="text" class="hidden" value="QComment" id="type" name="type" />
@@ -71,7 +76,7 @@
                     </div>
                 </div>
                 <div id="divQuestion" class="col-md-9">
-                    @Model.anAnswer.anAnswer.Answer
+                    @Html.Raw(Model.anAnswer.anAnswer.Answer)
                 </div>
                 <div id="divAuthorDetails" class="col-md-2">
                     <div id="divGenericPerson">
@@ -83,32 +88,35 @@
                 <div class="clearfix"></div>
                 <div id="divButtonChoices">
                     <div class="text-left float-left">
-                        <a class="btn btn-default btn-sm" href="../Home/ViewQuestion?question_id=@Model.anAnswer.anAnswer.AnswerID">Back</a>
+                        <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/ViewQuestion/" + @Model.anAnswer.anAnswer.QuestionID)">
+                            Back
+                        </a>
                     </div>
-                    <a class="btn btn-default btn-sm" href="../Home/Comment?answer_id=@Model.anAnswer.anAnswer.AnswerID">Comment</a>
+                    <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/Comment?answer_id=" + @Model.anAnswer.anAnswer.AnswerID)">
+                        Comment
+                    </a>
                 </div>
             </div>
 
-            <form method="post" action="/Home/ViewQuestion">
-                <p>
-                    <textarea id="txtAnswer" name="txtAnswer"></textarea>
-                    <div class="text-right">
-                        <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit"
-                                title="Submit" class="btn btn-default" style="margin-top: 20px;">
-                            Submit
-                        </button>
+    <form method="post" action="/Home/ViewQuestion">
+        <p>
+            <textarea id="txtAnswer" name="txtAnswer"></textarea>
+            <div class="text-right">
+                <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit"
+                        title="Submit" class="btn btn-default" style="margin-top: 20px;">
+                    Submit
+                </button>
 
-                        <button type="button" name="btnCancel" id="btnCancel" value="Cancel"
-                                title="Cancel" class="btn btn-default" style="margin-top: 20px;">
-                            Cancel
-                        </button>
-                    </div>
-                    <input type="text" class="hidden" value="@Model.anAnswer.anAnswer.AnswerID" id="AnswerID" name="AnswerID" />
-                    <input type="text" class="hidden" value="AComment" id="type" name="type" />
-                </p>
-            </form>
+                <a class="btn btn-default" href="@Url.Content("~/Home/ViewQuestion/" + @Model.anAnswer.anAnswer.QuestionID)" style="margin-top: 20px;">
+                    Cancel
+                </a>
+            </div>
+            <input type="text" class="hidden" value="@Model.anAnswer.anAnswer.AnswerID" id="AnswerID" name="AnswerID" />
+            <input type="text" class="hidden" value="AComment" id="type" name="type" />
+        </p>
+    </form>
         }
 
-        
+
     </div>
 </div>

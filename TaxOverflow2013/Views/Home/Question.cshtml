@@ -25,8 +25,7 @@
                 }
                 <option value="Other">Other</option>
             </select>
-
-            @*TODO: need a hidden postable textbox that becomes visible only when "Other" is selected from ddlCategory*@
+            <input type="text" id="txtOther" name="txtOther" hidden="hidden" />
 
             <textarea id="txtQuestion" name="txtQuestion"></textarea>
             <div class="text-right">
@@ -43,3 +42,16 @@
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+    ddlCategory.onchange = function () {
+        if (ddlCategory.selectedIndex == (ddlCategory.childElementCount - 1)) {
+            txtOther.attributes.removeNamedItem('hidden');
+        }
+        else {
+            var hidden = document.createAttribute('hidden');
+            hidden.value = 'hidden';
+            txtOther.attributes.setNamedItem(hidden);
+        }
+    }
+</script>

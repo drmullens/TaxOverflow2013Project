@@ -28,7 +28,7 @@ input, select, textarea {
 
 #divAuthorDetails, .divAuthorDetails {
     text-align: right;
-    padding: 15px
+    padding: 15px;
 }
 
 .divAJumbo, .divCAJumbo {
@@ -44,7 +44,7 @@ input, select, textarea {
 }
 
 #ddlCategory {
-    display: block;
+    display: inline-block;
     width: 200px;
     height: 30px;
     margin-bottom: 20px;
@@ -69,6 +69,12 @@ input, select, textarea {
 }
 
 .Question, .divCategory {
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 40px;
+    width: 100%;
     margin-top: 5px;
     font-size: 20pt;
 }
@@ -114,4 +120,8 @@ input, select, textarea {
 
 .float-right {
     float: right;
+}
+
+#txtOther {
+    padding: 5px;
 }

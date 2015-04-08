@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using TaxOverflow2013.Models;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace TaxOverflow2013.Controllers
 {
@@ -58,6 +58,8 @@ namespace TaxOverflow2013.Controllers
                     newQuestion.aQuestion = recent;
                     newQuestion.CategoryString = recent.CategoryTBL.Category;
                     newQuestion.UserName = recent.UserTBL.UserName;
+                    newQuestion.aQuestion.Question = System.Text.RegularExpressions.Regex.Replace(newQuestion.aQuestion.Question,
+                        "<[^>]*(>|$)", "");
                     HomePageQuestions.MostRecentQuestions.Add(newQuestion);
 
                 }
@@ -68,6 +70,8 @@ namespace TaxOverflow2013.Controllers
                     newQuestion.aQuestion = highScores;
                     newQuestion.CategoryString = highScores.CategoryTBL.Category;
                     newQuestion.UserName = highScores.UserTBL.UserName;
+                    newQuestion.aQuestion.Question = System.Text.RegularExpressions.Regex.Replace(newQuestion.aQuestion.Question,
+                        "<[^>]*(>|$)", "");
                     HomePageQuestions.BestUnansweredQuestions.Add(newQuestion);
                 }
             }
@@ -248,16 +252,25 @@ namespace TaxOverflow2013.Controllers
             return View(QuestionList);
         }
 
-        public ActionResult ViewQuestion()
+        public ActionResult ViewQuestion(string question_id = "")
         {
             ViewBag.Message = "View a question";
 
-            int QID = Int32.Parse(Request["question_id"]);
+            int QID;
+
+            if (question_id == "")
+            {
+                QID = Int32.Parse(Request["question_id"]);
+            }
+            else
+            {
+                QID = Int32.Parse(question_id);
+            }
 
             QuestionStream CurrentQuestion = new QuestionStream();
             CurrentQuestion.RelatedQuestionComments = new List<QuestionCommentStream>();
             CurrentQuestion.RelatedAnswers = new List<AnswerStream>();
-            
+
             QuestionTBL myQuestion = new QuestionTBL();
 
             using (var context = new TODBEntities())
@@ -318,13 +331,13 @@ namespace TaxOverflow2013.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult ViewQuestion(string txtAnswer, string type = "Answer", string QuestionID = "0", string AnswerID = "0" )
+        public ActionResult ViewQuestion(string txtAnswer, string type = "Answer", string QuestionID = "0", string AnswerID = "0")
         {
             int QID = 0;
             int AID = 0;
 
             if (type == "Answer")
-                //This means a new Answer is being posted
+            //This means a new Answer is being posted
             {
                 if (Int32.TryParse(QuestionID, out QID))
                 {
@@ -374,7 +387,7 @@ namespace TaxOverflow2013.Controllers
                     }
                 }
             }
-            else if(type == "AComment")
+            else if (type == "AComment")
             {
                 if (Int32.TryParse(AnswerID, out AID))
                 {
@@ -394,7 +407,7 @@ namespace TaxOverflow2013.Controllers
                         var currentQuestion = context.AnswerTBLs.Where(c => c.AnswerID == AID).ToList();
                         if (currentQuestion.Count > 0)
                         {
-                            foreach(var item in currentQuestion)
+                            foreach (var item in currentQuestion)
                             {
                                 QID = item.QuestionID;
                             }
@@ -419,15 +432,32 @@ namespace TaxOverflow2013.Controllers
             return View(new HomeModel.MockIndexModel());
         }
 
-        public ActionResult Answer()
+        public ActionResult Answer(string question_id = "")
         {
             ViewBag.Message = "Post an Answer";
 
             int QID;
 
+            try
+            {
+                if (question_id == "")
+                {
+                    QID = Int32.Parse(Request["Question_id"]);
+                }
+                else
+                {
+                    QID = Int32.Parse(question_id);
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+
             QuestionList fullQuestion = new QuestionList();
 
-            if (Int32.TryParse(Request["Question_id"], out QID))
+            if (QID != null)
             {
                 using (var context = new TODBEntities())
                 {
@@ -465,7 +495,7 @@ namespace TaxOverflow2013.Controllers
                     using (var context = new TODBEntities())
                     {
                         var currAnswer = context.AnswerTBLs.Where(c => c.AnswerID == AID).ToList();
-                        foreach(var AnswerInfo in currAnswer)
+                        foreach (var AnswerInfo in currAnswer)
                         {
                             fullQuestion.anAnswer = new AnswerList();
                             fullQuestion.anAnswer.anAnswer = AnswerInfo;
