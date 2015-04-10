@@ -95,7 +95,7 @@ namespace TaxOverflow2013.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Question(string txtQuestion, string ddlCategory) //[optional] string newCategory = ""
+        public ActionResult Question(string txtQuestion, string ddlCategory, string txtOther = "") 
         {
             string data = txtQuestion;
             QuestionStream NewQuestion = new QuestionStream();
@@ -217,7 +217,7 @@ namespace TaxOverflow2013.Controllers
                     case 5:
                         {
                             QList = (from R in context.QuestionTBLs
-                                     orderby (from A in context.AnswerTBLs orderby A.Accepted select A)
+                                     orderby (from A in context.AnswerTBLs where !A.Accepted select A)
                                      select R).ToList();
                             break;
                         }
@@ -296,6 +296,7 @@ namespace TaxOverflow2013.Controllers
                     foreach (var aQuestion in CurrQuestion)
                     {
                         myQuestion = aQuestion;
+                        CurrentQuestion.QReputation = aQuestion.UserTBL.Reputation;
                     }
 
                     CurrentQuestion.MainQuestion = myQuestion;
@@ -308,6 +309,7 @@ namespace TaxOverflow2013.Controllers
                     {
                         QuestionCommentStream QComment = new QuestionCommentStream();
                         QComment.QComment = comment;
+                        QComment.QCReputation = comment.UserTBL.Reputation;
                         QComment.QCUserName = comment.UserTBL.UserName;
                         CurrentQuestion.RelatedQuestionComments.Add(QComment);
                     }
@@ -317,7 +319,7 @@ namespace TaxOverflow2013.Controllers
                     {
                         AnswerStream anAnswer = new AnswerStream();
                         anAnswer.RelatedAnswerComments = new List<AnswerCommentStream>();
-
+                        anAnswer.AReputation = ans.UserTBL.Reputation;
                         anAnswer.MainAnswer = ans;
                         anAnswer.AnswerUserName = GetUserNameByID(ans.UserID);
                         var ansComm = context.AnswerCommentTBLs.Where(d => d.AnswerID == ans.AnswerID).ToList();
@@ -326,6 +328,7 @@ namespace TaxOverflow2013.Controllers
                         {
                             AnswerCommentStream AComment = new AnswerCommentStream();
                             AComment.AComment = comment;
+                            AComment.ACReputation = comment.UserTBL.Reputation;
                             AComment.ACUserName = GetUserNameByID(comment.UserID);
                             anAnswer.RelatedAnswerComments.Add(AComment);
                         }
@@ -614,6 +617,7 @@ namespace TaxOverflow2013.Controllers
                     foreach (var question in QStream)
                     {
                         aQuestionStream.MainQuestion = question;
+                        aQuestionStream.QReputation = question.UserTBL.Reputation;
                         aQuestionStream.CurrentUserID = GetCurrentUser();
                         aQuestionStream.QuestionUserName = GetUserNameByID(question.UserID);
                         aQuestionStream.QuestionCategory = GetCategoryByID(question.CategoryID);
@@ -624,6 +628,7 @@ namespace TaxOverflow2013.Controllers
                     {
                         QuestionCommentStream QComment = new QuestionCommentStream();
                         QComment.QComment = comment;
+                        QComment.QCReputation = comment.UserTBL.Reputation;
                         QComment.QCUserName = comment.UserTBL.UserName;
                         aQuestionStream.RelatedQuestionComments.Add(QComment);
                     }
@@ -633,7 +638,7 @@ namespace TaxOverflow2013.Controllers
                     {
                         AnswerStream anAnswer = new AnswerStream();
                         anAnswer.RelatedAnswerComments = new List<AnswerCommentStream>();
-
+                        anAnswer.AReputation = ans.UserTBL.Reputation;
                         anAnswer.MainAnswer = ans;
                         if (ans.Accepted == true)
                         {
@@ -644,6 +649,7 @@ namespace TaxOverflow2013.Controllers
                         {
                             AnswerCommentStream AComment = new AnswerCommentStream();
                             AComment.AComment = comment;
+                            AComment.ACReputation = comment.UserTBL.Reputation;
                             AComment.ACUserName = comment.UserTBL.UserName;
                             anAnswer.RelatedAnswerComments.Add(AComment);
                         }
@@ -738,11 +744,66 @@ namespace TaxOverflow2013.Controllers
                     case 3:
                         {
                             //Answer voted up
+                            var checkvote = context.AnswerVotingHistoryTBLs.Where(a => a.AVHAnswerID == QID && a.AVHUserID == currUser).ToList();
+                            if (checkvote.Count == 0)
+                            {
+                                var myAnswer = context.AnswerTBLs.Where(b => b.AnswerID == AID).ToList();
+                                foreach(var anAnswer in myAnswer)
+                                {
+                                    anAnswer.Score += 1;
+
+                                    var AnswererID = context.UserTBLs.Where(c => c.UserID == anAnswer.UserID).ToList();
+                                    foreach(var aUser in AnswererID)
+                                    {
+                                        aUser.Reputation += 10;
+
+                                        AnswerVotingHistoryTBL AHistory = new AnswerVotingHistoryTBL();
+
+                                        AHistory.AVHAnswerID = anAnswer.AnswerID;
+                                        AHistory.AVHUserID = currUser;
+                                        AHistory.AVHDTS = DateTime.Now;
+
+                                        context.AnswerVotingHistoryTBLs.Add(AHistory);
+                                        context.SaveChanges();
+                                    }
+                                }
+                            }
                             break;
                         }
                     case 4:
                         {
                             //Answer voted down
+
+                            var checkvote = context.AnswerVotingHistoryTBLs.Where(a => a.AVHAnswerID == QID && a.AVHUserID == currUser).ToList();
+                            if (checkvote.Count == 0)
+                            {
+                                var myAnswer = context.AnswerTBLs.Where(b => b.AnswerID == AID).ToList();
+                                foreach(var anAnswer in myAnswer)
+                                {
+                                    anAnswer.Score -= 1;
+
+                                    var AnswererID = context.UserTBLs.Where(c => c.UserID == anAnswer.UserID).ToList();
+                                    foreach (var aUser in AnswererID)
+                                    {
+                                        aUser.Reputation -= 2;
+
+                                        var raterID = context.UserTBLs.Where(d => d.UserID == currUser).ToList();
+                                        foreach (var rater in raterID)
+                                        {
+                                            rater.Reputation -= 1;
+
+                                            AnswerVotingHistoryTBL AHistory = new AnswerVotingHistoryTBL();
+
+                                            AHistory.AVHAnswerID = anAnswer.AnswerID;
+                                            AHistory.AVHUserID = currUser;
+                                            AHistory.AVHDTS = DateTime.Now;
+
+                                            context.AnswerVotingHistoryTBLs.Add(AHistory);
+                                            context.SaveChanges();
+                                        }
+                                    }
+                                }
+                            }
                             break;
                         }
                     default:

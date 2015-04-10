@@ -79,7 +79,7 @@
           </Key>
           <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Reputation" Type="int" />
+          <Property Name="Reputation" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_AnswerTBLAnswerCommentTBL">
           <End Role="AnswerTBLs" Type="Self.AnswerTBLs" Multiplicity="1" />
@@ -313,7 +313,7 @@
           <NavigationProperty Name="AnswerTBLs" Relationship="Self.FK_UserTBLAnswerTBL" FromRole="UserTBLs" ToRole="AnswerTBLs" />
           <NavigationProperty Name="QuestionCommentTBLs" Relationship="Self.FK_UserTBLQuestionCommentTBL" FromRole="UserTBLs" ToRole="QuestionCommentTBLs" />
           <NavigationProperty Name="QuestionTBLs" Relationship="Self.FK_UserTBLQuestionTBL" FromRole="UserTBLs" ToRole="QuestionTBLs" />
-          <Property Name="Reputation" Type="Int32" />
+          <Property Name="Reputation" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_AnswerTBLAnswerCommentTBL">
           <End Role="AnswerTBLs" Type="Self.AnswerTBL" Multiplicity="1" />
