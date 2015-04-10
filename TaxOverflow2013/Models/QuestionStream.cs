@@ -21,6 +21,8 @@ namespace TaxOverflow2013.Models
 
         public int CurrentUserID { get; set; }
 
+        public int QReputation { get; set; }
+
         public List<AnswerStream> RelatedAnswers { get; set; }
 
         public List<QuestionCommentStream> RelatedQuestionComments { get; set; }
@@ -32,6 +34,8 @@ namespace TaxOverflow2013.Models
 
         public string AnswerUserName { get; set; }
 
+        public int AReputation { get; set; }
+
         public List<AnswerCommentStream> RelatedAnswerComments { get; set; }
     }
 
@@ -41,6 +45,8 @@ namespace TaxOverflow2013.Models
 
         public string QCUserName { get; set; }
 
+        public int QCReputation { get; set; }
+
     }
 
     public class AnswerCommentStream
@@ -48,5 +54,7 @@ namespace TaxOverflow2013.Models
         public AnswerCommentTBL AComment { get; set; }
 
         public string ACUserName { get; set; }
+
+        public int ACReputation { get; set; }
     }
 }
