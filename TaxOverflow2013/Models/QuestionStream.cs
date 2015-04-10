@@ -17,6 +17,10 @@ namespace TaxOverflow2013.Models
 
         public string QuestionCategory { get; set; }
 
+        public bool AcceptedAnswer { get; set; }
+
+        public int CurrentUserID { get; set; }
+
         public List<AnswerStream> RelatedAnswers { get; set; }
 
         public List<QuestionCommentStream> RelatedQuestionComments { get; set; }

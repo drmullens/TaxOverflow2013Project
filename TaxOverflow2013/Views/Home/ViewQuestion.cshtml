@@ -13,15 +13,21 @@
 
         <div id="divQJumbo" class="jumbotron row">
             <div id="divVotes" class="col-md-1">
-                <a href="@Url.Content("~/Home/ViewQuestion?question_id=" + @Model.MainQuestion.QuestionID + "&vote=VoteUp")">
-                    <img src="~/Images/VoteUp.png" width="50" alt="Voting Up Glyphs" />
-                </a>
+                @if (@Model.MainQuestion.UserID != @Model.CurrentUserID)
+                {
+                    <a href="@Url.Content("~/Home/ViewQuestion?question_id=" + @Model.MainQuestion.QuestionID + "&vote=1")">
+                        <img src="~/Images/VoteUp.png" width="50" alt="Voting Up Glyphs" />
+                    </a>
+                }
                 <div id="divVoteCount">
                     @Model.MainQuestion.Score
                 </div>
-                <a href="@Url.Content("~/Home/ViewQuestion?question_id=" + @Model.MainQuestion.QuestionID + "&vote=VoteDown")">
-                    <img src="~/Images/VoteDown.png" width="50" alt="Voting Down Glyphs" />
-                </a>
+                @if (@Model.MainQuestion.UserID != @Model.CurrentUserID)
+                {
+                    <a href="@Url.Content("~/Home/ViewQuestion?question_id=" + @Model.MainQuestion.QuestionID + "&vote=2")">
+                        <img src="~/Images/VoteDown.png" width="50" alt="Voting Down Glyphs" />
+                    </a>
+                }
             </div>
             <div id="divQuestion" class="col-md-9">
                 <div class="divCategory">
@@ -73,17 +79,22 @@
             {
                 <div class="divAJumbo jumbotron row">
                     <div class="divVotes col-md-1">
-                        <a href="../Home/ViewQuestion?question_id=@Model.RelatedAnswers[i].MainAnswer.QuestionID&answer_id=@Model.RelatedAnswers[i].MainAnswer.AnswerID&vote=@Model.RelatedAnswers[i].MainAnswer.Score&math=a">
-                            <img src="~/Images/VoteUp.png" width="50" alt="Voting Up Glyphs" />
-                        </a>
+                        @if (@Model.RelatedAnswers[i].MainAnswer.UserID != @Model.CurrentUserID)
+                        {
+                            <a href="../Home/ViewQuestion?question_id=@Model.MainQuestion.QuestionID&answer_id=@Model.RelatedAnswers[i].MainAnswer.AnswerID&vote=3">
+                                <img src="~/Images/VoteUp.png" width="50" alt="Voting Up Glyphs" />
+                            </a>
+                        }
                         <div class="divVoteCount">
                             @* Voting Data Goes Here *@
                             @Model.RelatedAnswers[i].MainAnswer.Score
                         </div>
-                        <a href="../Home/ViewQuestion?question_id=@Model.RelatedAnswers[i].MainAnswer.QuestionID&answer_id=@Model.RelatedAnswers[i].MainAnswer.AnswerID&vote=@Model.RelatedAnswers[i].MainAnswer.Score&math=s">
-                            <img src="~/Images/VoteDown.png" width="50" alt="Voting Down Glyphs" />
-                        </a>
-
+                        @if (@Model.RelatedAnswers[i].MainAnswer.UserID != @Model.CurrentUserID)
+                        {
+                            <a href="../Home/ViewQuestion?question_id=@Model.MainQuestion.QuestionID&answer_id=@Model.RelatedAnswers[i].MainAnswer.AnswerID&vote=4">
+                                <img src="~/Images/VoteDown.png" width="50" alt="Voting Down Glyphs" />
+                            </a>
+                        }
                         @if (@Model.RelatedAnswers[i].MainAnswer.Accepted == true)
                         {
                             <img src="~/Images/checkmark.png" alt="Check Mark means Answer is Accepted" width="50" />
@@ -103,7 +114,7 @@
                     <div class="divButtonChoices">
                         @* If Question Writer *@
 
-                        @if (@Model.QuestionUserName == @Model.RelatedAnswers[i].AnswerUserName && @Model.RelatedAnswers[i].MainAnswer.Accepted == false)
+                        @if (@Model.QuestionUserName == @Model.RelatedAnswers[i].AnswerUserName && @Model.RelatedAnswers[i].MainAnswer.Accepted == false && @Model.AcceptedAnswer == false && @Model.CurrentUserID == @Model.RelatedAnswers[i].MainAnswer.UserID)
                         {
                             <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/ViewQuestion?question_id=" + @Model.RelatedAnswers[i].MainAnswer.QuestionID + "&answer_id=" + @Model.RelatedAnswers[i].MainAnswer.AnswerID)">
                                 Mark As Answer

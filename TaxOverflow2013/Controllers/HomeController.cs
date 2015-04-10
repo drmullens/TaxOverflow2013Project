@@ -31,6 +31,7 @@ namespace TaxOverflow2013.Controllers
                     UserTBL newUser = new UserTBL();
 
                     newUser.UserName = User.Identity.Name;
+                    newUser.Reputation = 0;
 
                     context.UserTBLs.Add(newUser);
                     context.SaveChanges();
@@ -252,11 +253,13 @@ namespace TaxOverflow2013.Controllers
             return View(QuestionList);
         }
 
-        public ActionResult ViewQuestion(string question_id = "")
+        public ActionResult ViewQuestion(string question_id = "", string answer_id = "", string vote = "")
         {
             ViewBag.Message = "View a question";
 
-            int QID;
+            int QID = 0;
+            int AID = 0;
+            int voteNum;
 
             if (question_id == "")
             {
@@ -265,6 +268,17 @@ namespace TaxOverflow2013.Controllers
             else
             {
                 QID = Int32.Parse(question_id);
+            }
+
+            if (answer_id != "")
+            {
+                AID = Int32.Parse(answer_id);
+            }
+
+            if (vote != "")
+            {
+                voteNum = Int32.Parse(vote);
+                UpdateReputation(QID, AID, voteNum);
             }
 
             QuestionStream CurrentQuestion = new QuestionStream();
@@ -285,6 +299,7 @@ namespace TaxOverflow2013.Controllers
                     }
 
                     CurrentQuestion.MainQuestion = myQuestion;
+                    CurrentQuestion.CurrentUserID = GetCurrentUser();
                     CurrentQuestion.QuestionUserName = GetUserNameByID(myQuestion.UserID);
                     CurrentQuestion.QuestionCategory = GetCategoryByID(myQuestion.CategoryID);
 
@@ -436,7 +451,7 @@ namespace TaxOverflow2013.Controllers
         {
             ViewBag.Message = "Post an Answer";
 
-            int QID;
+            int QID = 0;
 
             try
             {
@@ -457,7 +472,7 @@ namespace TaxOverflow2013.Controllers
 
             QuestionList fullQuestion = new QuestionList();
 
-            if (QID != null)
+            if (QID != 0)
             {
                 using (var context = new TODBEntities())
                 {
@@ -589,6 +604,7 @@ namespace TaxOverflow2013.Controllers
             QuestionStream aQuestionStream = new QuestionStream();
             aQuestionStream.RelatedAnswers = new List<AnswerStream>();
             aQuestionStream.RelatedQuestionComments = new List<QuestionCommentStream>();
+            aQuestionStream.AcceptedAnswer = false;
 
             using (var context = new TODBEntities())
             {
@@ -598,6 +614,7 @@ namespace TaxOverflow2013.Controllers
                     foreach (var question in QStream)
                     {
                         aQuestionStream.MainQuestion = question;
+                        aQuestionStream.CurrentUserID = GetCurrentUser();
                         aQuestionStream.QuestionUserName = GetUserNameByID(question.UserID);
                         aQuestionStream.QuestionCategory = GetCategoryByID(question.CategoryID);
                     }
@@ -618,6 +635,10 @@ namespace TaxOverflow2013.Controllers
                         anAnswer.RelatedAnswerComments = new List<AnswerCommentStream>();
 
                         anAnswer.MainAnswer = ans;
+                        if (ans.Accepted == true)
+                        {
+                            aQuestionStream.AcceptedAnswer = true;
+                        }
                         var ansComm = context.AnswerCommentTBLs.Where(d => d.AnswerID == ans.AnswerID).ToList();
                         foreach (var comment in ansComm)
                         {
@@ -635,5 +656,103 @@ namespace TaxOverflow2013.Controllers
         }
 
         #endregion
+
+        private void UpdateReputation(int QID, int AID, int type)
+        {
+            int currUser = GetCurrentUser();
+            //Having an answer accepted: 15
+            //accepting an answer: 2
+            //having an answer voted up: 10
+            //have a question voted up: 5
+            //having a question voted down: -2
+            //voting an answer or question down: -1
+            using (var context = new TODBEntities())
+            {
+
+                switch (type)
+                {
+                    case 1:
+                        {
+                            //Question voted up
+                            var checkvote = context.QuestionVotingHistoryTBLs.Where(a => a.QVHQuestionID == QID && a.QVHUserID == currUser).ToList();
+                            if (checkvote.Count == 0)
+                            {
+                                var myQuestion = context.QuestionTBLs.Where(c => c.QuestionID == QID).ToList();
+                                foreach (var aQuestion in myQuestion)
+                                {
+                                    aQuestion.Score += 1;
+
+                                    var AskerID = context.UserTBLs.Where(b => b.UserID == aQuestion.UserID).ToList();
+                                    foreach (var aUser in AskerID)
+                                    {
+                                        aUser.Reputation += 5;
+
+                                        QuestionVotingHistoryTBL QHistory = new QuestionVotingHistoryTBL();
+
+                                        QHistory.QVHQuestionID = aQuestion.QuestionID;
+                                        QHistory.QVHUserID = currUser;
+                                        QHistory.QVHDTS = DateTime.Now;
+
+                                        context.QuestionVotingHistoryTBLs.Add(QHistory);
+                                        context.SaveChanges();
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    case 2:
+                        {
+                            //Question voted down
+                            var checkvote = context.QuestionVotingHistoryTBLs.Where(a => a.QVHQuestionID == QID && a.QVHUserID == currUser).ToList();
+                            if (checkvote.Count == 0)
+                            {
+                                var myQuestion = context.QuestionTBLs.Where(c => c.QuestionID == QID).ToList();
+                                foreach(var aQuestion in myQuestion)
+                                {
+                                    aQuestion.Score -= 1;
+
+                                    var AskerID = context.UserTBLs.Where(b => b.UserID == aQuestion.UserID).ToList();
+                                    foreach(var aUser in AskerID)
+                                    {
+                                        aUser.Reputation -= 2;
+
+                                        var raterID = context.UserTBLs.Where(d => d.UserID == currUser).ToList();
+                                        foreach(var rater in raterID)
+                                        {
+                                            rater.Reputation -= 1;
+
+                                            QuestionVotingHistoryTBL QHistory = new QuestionVotingHistoryTBL();
+
+                                            QHistory.QVHQuestionID = aQuestion.QuestionID;
+                                            QHistory.QVHUserID = currUser;
+                                            QHistory.QVHDTS = DateTime.Now;
+
+                                            context.QuestionVotingHistoryTBLs.Add(QHistory);
+                                            context.SaveChanges();
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            //Answer voted up
+                            break;
+                        }
+                    case 4:
+                        {
+                            //Answer voted down
+                            break;
+                        }
+                    default:
+                        {
+                            //Some type of error, send to error page
+                            break;
+                        }
+                }
+            }
+
+        }
     }
 }

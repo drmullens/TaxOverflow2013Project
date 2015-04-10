@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TODBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TODBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AnswerCommentTBLs">
           <Key>
             <PropertyRef Name="ACommentID" />
@@ -79,6 +79,7 @@
           </Key>
           <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Reputation" Type="int" />
         </EntityType>
         <Association Name="FK_AnswerTBLAnswerCommentTBL">
           <End Role="AnswerTBLs" Type="Self.AnswerTBLs" Multiplicity="1" />
@@ -218,8 +219,7 @@
             <End Role="QuestionTBLs" EntitySet="QuestionTBLs" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TODBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -313,6 +313,7 @@
           <NavigationProperty Name="AnswerTBLs" Relationship="Self.FK_UserTBLAnswerTBL" FromRole="UserTBLs" ToRole="AnswerTBLs" />
           <NavigationProperty Name="QuestionCommentTBLs" Relationship="Self.FK_UserTBLQuestionCommentTBL" FromRole="UserTBLs" ToRole="QuestionCommentTBLs" />
           <NavigationProperty Name="QuestionTBLs" Relationship="Self.FK_UserTBLQuestionTBL" FromRole="UserTBLs" ToRole="QuestionTBLs" />
+          <Property Name="Reputation" Type="Int32" />
         </EntityType>
         <Association Name="FK_AnswerTBLAnswerCommentTBL">
           <End Role="AnswerTBLs" Type="Self.AnswerTBL" Multiplicity="1" />
@@ -536,6 +537,7 @@
           <EntitySetMapping Name="UserTBLs">
             <EntityTypeMapping TypeName="TODBModel.UserTBL">
               <MappingFragment StoreEntitySet="UserTBLs">
+                <ScalarProperty Name="Reputation" ColumnName="Reputation" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>

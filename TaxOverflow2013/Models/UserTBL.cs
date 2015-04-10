@@ -24,6 +24,7 @@ namespace TaxOverflow2013.Models
     
         public int UserID { get; set; }
         public string UserName { get; set; }
+        public Nullable<int> Reputation { get; set; }
     
         public virtual ICollection<AnswerCommentTBL> AnswerCommentTBLs { get; set; }
         public virtual ICollection<AnswerTBL> AnswerTBLs { get; set; }
