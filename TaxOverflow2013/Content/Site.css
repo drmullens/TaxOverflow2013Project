@@ -125,3 +125,7 @@ input, select, textarea {
 #txtOther {
     padding: 5px;
 }
+
+.red {
+    color: #FF0000;
+}

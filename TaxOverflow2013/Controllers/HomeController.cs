@@ -95,7 +95,7 @@ namespace TaxOverflow2013.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Question(string txtQuestion, string ddlCategory, string txtOther = "") 
+        public ActionResult Question(string txtQuestion, string ddlCategory, string txtOther = "")
         {
             string data = txtQuestion;
             QuestionStream NewQuestion = new QuestionStream();
@@ -189,14 +189,14 @@ namespace TaxOverflow2013.Controllers
                     case 1:
                         {
                             QList = (from R in context.QuestionTBLs
-                                     orderby (from C in context.CategoryTBLs orderby C.Category ascending select C)
+                                     orderby R.CategoryTBL.Category ascending
                                      select R).ToList();
                             break;
                         }
                     case 2:
                         {
                             QList = (from R in context.QuestionTBLs
-                                     orderby (from C in context.CategoryTBLs orderby C.Category descending select C)
+                                     orderby R.CategoryTBL.Category descending
                                      select R).ToList();
                             break;
                         }
@@ -217,7 +217,16 @@ namespace TaxOverflow2013.Controllers
                     case 5:
                         {
                             QList = (from R in context.QuestionTBLs
-                                     orderby (from A in context.AnswerTBLs where !A.Accepted select A)
+                                     let Accepted = (from A in context.AnswerTBLs where !A.Accepted select A.QuestionID)
+                                     where Accepted.Contains(R.QuestionID) || R.AnswerTBLs.Count == 0
+                                     select R).ToList();
+                            break;
+                        }
+                    case 6:
+                        {
+                            QList = (from R in context.QuestionTBLs
+                                     let Accepted = (from A in context.AnswerTBLs where A.Accepted select A.QuestionID)
+                                     where Accepted.Contains(R.QuestionID)
                                      select R).ToList();
                             break;
                         }
@@ -247,6 +256,7 @@ namespace TaxOverflow2013.Controllers
                     aQuestion.UserName = GetUserNameByID(item.UserID);
                     aQuestion.CategoryString = GetCategoryByID(item.CategoryID);
                     QuestionList.ShowQuestion.Add(aQuestion);
+                    aQuestion.aQuestion.UserTBL.Reputation = item.UserTBL.Reputation;
                 }
             }
 
@@ -263,16 +273,28 @@ namespace TaxOverflow2013.Controllers
 
             if (question_id == "")
             {
-                QID = Int32.Parse(Request["question_id"]);
+                if (!Int32.TryParse(Request["question_id"], out QID))
+                {
+                    Index();
+                    return View("Index");
+                }
             }
             else
             {
-                QID = Int32.Parse(question_id);
+                if (!Int32.TryParse(question_id, out QID))
+                {
+                    Index();
+                    return View("Index");
+                }
             }
 
             if (answer_id != "")
             {
-                AID = Int32.Parse(answer_id);
+                if (!Int32.TryParse(answer_id, out AID))
+                {
+                    Index();
+                    return View("Index");
+                }
             }
 
             if (vote != "")
@@ -339,8 +361,8 @@ namespace TaxOverflow2013.Controllers
                 }
                 else
                 {
-                    Response.Redirect("/Error");
-                    return (null);
+                    Index();
+                    return View("Index");
                 }
             }
 
@@ -439,8 +461,8 @@ namespace TaxOverflow2013.Controllers
                     }
                 }
             }
-            Response.Redirect("/Error");
-            return null;
+            Index();
+            return View("Index");
         }
 
         public ActionResult Search()
@@ -456,20 +478,10 @@ namespace TaxOverflow2013.Controllers
 
             int QID = 0;
 
-            try
+            if ((!Int32.TryParse(Request["question_id"], out QID)) && (!Int32.TryParse(question_id, out QID)))
             {
-                if (question_id == "")
-                {
-                    QID = Int32.Parse(Request["Question_id"]);
-                }
-                else
-                {
-                    QID = Int32.Parse(question_id);
-                }
-            }
-            catch (Exception)
-            {
-                return null;
+                Index();
+                return View("Index");
             }
 
 
@@ -487,6 +499,7 @@ namespace TaxOverflow2013.Controllers
                             fullQuestion.aQuestion = QuestionInfo;
                             fullQuestion.CategoryString = GetCategoryByID(QuestionInfo.CategoryID);
                             fullQuestion.UserName = GetUserNameByID(QuestionInfo.UserID);
+                            fullQuestion.aQuestion.UserTBL.Reputation = QuestionInfo.UserTBL.Reputation;
                         }
                     }
 
@@ -494,11 +507,11 @@ namespace TaxOverflow2013.Controllers
                 return View(fullQuestion);
             }
 
-            Response.Redirect("~/");
-            return null;
+            Index();
+            return View("Index");
         }
 
-        public ActionResult Comment()
+        public ActionResult Comment(string question_id)
         {
             ViewBag.Message = "Post a Comment";
 
@@ -519,12 +532,14 @@ namespace TaxOverflow2013.Controllers
                             fullQuestion.anAnswer.anAnswer = AnswerInfo;
                             fullQuestion.anAnswer.AUserName = GetUserNameByID(AnswerInfo.UserID);
                             fullQuestion.type = CommentType.Answer;
+                            fullQuestion.anAnswer.anAnswer.UserTBL.Reputation = AnswerInfo.UserTBL.Reputation;
+
                         }
                     }
                     return View(fullQuestion);
                 }
             }
-            if (Int32.TryParse(Request["question_id"], out ID))
+            if (Int32.TryParse(Request["question_id"], out ID) || Int32.TryParse(question_id, out ID))
             {
                 using (var context = new TODBEntities())
                 {
@@ -538,6 +553,7 @@ namespace TaxOverflow2013.Controllers
                             fullQuestion.aQuestion.CategoryString = GetCategoryByID(QuestionInfo.CategoryID);
                             fullQuestion.aQuestion.UserName = GetUserNameByID(QuestionInfo.UserID);
                             fullQuestion.type = CommentType.Question;
+                            fullQuestion.aQuestion.aQuestion.UserTBL.Reputation = QuestionInfo.UserTBL.Reputation;
                         }
                     }
 
@@ -545,8 +561,8 @@ namespace TaxOverflow2013.Controllers
                 return View(fullQuestion);
             }
 
-            Response.Redirect("~/");
-            return null;
+            Index();
+            return View("Index");
         }
 
 
@@ -713,17 +729,17 @@ namespace TaxOverflow2013.Controllers
                             if (checkvote.Count == 0)
                             {
                                 var myQuestion = context.QuestionTBLs.Where(c => c.QuestionID == QID).ToList();
-                                foreach(var aQuestion in myQuestion)
+                                foreach (var aQuestion in myQuestion)
                                 {
                                     aQuestion.Score -= 1;
 
                                     var AskerID = context.UserTBLs.Where(b => b.UserID == aQuestion.UserID).ToList();
-                                    foreach(var aUser in AskerID)
+                                    foreach (var aUser in AskerID)
                                     {
                                         aUser.Reputation -= 2;
 
                                         var raterID = context.UserTBLs.Where(d => d.UserID == currUser).ToList();
-                                        foreach(var rater in raterID)
+                                        foreach (var rater in raterID)
                                         {
                                             rater.Reputation -= 1;
 
@@ -748,12 +764,12 @@ namespace TaxOverflow2013.Controllers
                             if (checkvote.Count == 0)
                             {
                                 var myAnswer = context.AnswerTBLs.Where(b => b.AnswerID == AID).ToList();
-                                foreach(var anAnswer in myAnswer)
+                                foreach (var anAnswer in myAnswer)
                                 {
                                     anAnswer.Score += 1;
 
                                     var AnswererID = context.UserTBLs.Where(c => c.UserID == anAnswer.UserID).ToList();
-                                    foreach(var aUser in AnswererID)
+                                    foreach (var aUser in AnswererID)
                                     {
                                         aUser.Reputation += 10;
 
@@ -778,7 +794,7 @@ namespace TaxOverflow2013.Controllers
                             if (checkvote.Count == 0)
                             {
                                 var myAnswer = context.AnswerTBLs.Where(b => b.AnswerID == AID).ToList();
-                                foreach(var anAnswer in myAnswer)
+                                foreach (var anAnswer in myAnswer)
                                 {
                                     anAnswer.Score -= 1;
 

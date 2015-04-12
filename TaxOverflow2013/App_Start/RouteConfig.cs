@@ -14,6 +14,12 @@ namespace TaxOverflow2013
                 url: "{controller}/{action}/{question_id}",
                 defaults: new { controller = "Home", action = "Index", question_id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Sort",
+                url: "{controller}/{action}/{ddlSortBy}",
+                defaults: new { controller = "Home", action = "QuestionList", ddlSortBy = UrlParameter.Optional }
+            );
         }
     }
 }

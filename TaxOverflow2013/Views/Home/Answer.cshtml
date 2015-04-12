@@ -36,17 +36,17 @@
                     @Model.aQuestion.Score
                 </div>
             </div>
-            <div id="divQuestion" class="col-md-9">
+            <div id="divQuestion" class="col-md-8">
                 <div class="divCategory">
                     @Model.CategoryString
                 </div>
                 @Html.Raw(@Model.aQuestion.Question)
             </div>
-            <div id="divAuthorDetails" class="col-md-2">
+            <div id="divAuthorDetails" class="col-md-3">
                 <div id="divGenericPerson">
                     <img src="~/Images/GenericPerson.png" height="70" width="50" alt="Generic Person Photo" />
                 </div>
-                <div id="divAuthor">@Model.UserName</div>
+                <div id="divAuthor">@Model.UserName (<span class="red">@Model.aQuestion.UserTBL.Reputation</span>)</div>
                 <div id="divTime">@Model.aQuestion.QuestionDTS</div>
             </div>
             <div class="clearfix"></div>
@@ -59,7 +59,7 @@
                 <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/Answer/" + @Model.aQuestion.QuestionID)">
                     Answer
                 </a>
-                <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/Comment?question_id=" + @Model.aQuestion.QuestionID)">
+                <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/Comment/" + @Model.aQuestion.QuestionID)">
                     Comment
                 </a>
             </div>

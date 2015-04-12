@@ -7,9 +7,6 @@
         <div id="divRecent" class="jumbotron">
             <h2>Top 5 Most Recent</h2>
             @*
-                Pull top 5 most Recent:
-                0 - id, 1 - Question, 2 - Number of Votes, 3 - Category, 4 - Author, 5 - TimeStamp
-
                 Top 5 most recent MostRecentQuestions -> aQuestion, CategoryString, UserName
             *@
 
@@ -25,15 +22,15 @@
                         <div class="Votes col-sm-3">
                             @Model.MostRecentQuestions[i].aQuestion.Score Votes
                         </div>
-                        <div class="Category col-sm-4">
+                        <div class="Category col-sm-3">
                             @Model.MostRecentQuestions[i].CategoryString
                         </div>
-                        <div class="Author col-sm-5">
+                        <div class="Author col-sm-6">
                             <span class="display-inline-block">
                                 <img src="~/Images/GenericPerson.png" width="25" />
                             </span>
                             <span class="display-inline-block">
-                                @Model.MostRecentQuestions[i].UserName <br />
+                                @Model.MostRecentQuestions[i].UserName  (<span class="red">@Model.MostRecentQuestions[i].aQuestion.UserTBL.Reputation</span>)<br />
                                 @Model.MostRecentQuestions[i].aQuestion.QuestionDTS
                             </span>
                         </div>
@@ -47,9 +44,6 @@
         <div id="divUnanswered" class="jumbotron">
             <h2>Top 5 Unanswered Questions</h2>
                         @*
-                            Pull top 5 most Votes:
-                            0 - id, 1 - Question, 2 - Number of Votes, 3 - Category, 4 - Author, 5 - TimeStamp
-
                             top 5 most votes
                             BestUnansweredQuestions -> aQuestion, CategroyString, UserName
                         *@
@@ -66,15 +60,15 @@
                         <div class="Votes col-sm-3">
                             @Model.BestUnansweredQuestions[i].aQuestion.Score Votes
                         </div>
-                        <div class="Category col-sm-4">
+                        <div class="Category col-sm-3">
                             @Model.BestUnansweredQuestions[i].CategoryString
                         </div>
-                        <div class="Author col-sm-5">
+                        <div class="Author col-sm-6">
                             <span class="display-inline-block">
                                 <img src="~/Images/GenericPerson.png" width="25" />
                             </span>
                             <span class="display-inline-block">
-                                @Model.BestUnansweredQuestions[i].UserName <br />
+                                @Model.BestUnansweredQuestions[i].UserName (<span class="red">@Model.BestUnansweredQuestions[i].aQuestion.UserTBL.Reputation</span>)<br />
                                 @Model.BestUnansweredQuestions[i].aQuestion.QuestionDTS
                             </span>
                         </div>

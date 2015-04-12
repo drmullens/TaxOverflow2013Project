@@ -9,13 +9,14 @@
         <h2 id="hdrQuestionList" class="col-lg-6">All Questions</h2>
 
         @*TODO: get this DDL working*@
-        <select id="ddlSort">
-            <option value=0>Select a Sort</option>
-            <option value=1>Category: A - Z</option>
-            <option value=2>Category: Z - A</option>
-            <option value=3>Votes: High - Low</option>
-            <option value=4>Votes: Low - High</option>
-            <option value=5>Unanswered Questions</option>
+        <select id="ddlSort" onchange="javascript: Sort();">
+            <option value="0">Select a Sort</option>
+            <option value="1" @(Request["ddlSortBy"] == "1" ? "selected" : "")>Category: A - Z</option>
+            <option value="2" @(Request["ddlSortBy"] == "2" ? "selected" : "")>Category: Z - A</option>
+            <option value="3" @(Request["ddlSortBy"] == "3" ? "selected" : "")>Votes: High - Low</option>
+            <option value="4" @(Request["ddlSortBy"] == "4" ? "selected" : "")>Votes: Low - High</option>
+            <option value="5" @(Request["ddlSortBy"] == "5" ? "selected" : "")>Unanswered Questions</option>
+            <option value="6" @(Request["ddlSortBy"] == "6" ? "selected" : "")>Answered Questions</option>
         </select>
 
         <div class="clearfix"></div>
@@ -25,7 +26,7 @@
                 <div class="row">
                     <div class="Question col-sm-12">
                         <a href="~/Home/ViewQuestion?question_id=@Model.ShowQuestion[i].aQuestion.QuestionID&referrer=Recent">
-                    @System.Text.RegularExpressions.Regex.Replace((String)Model.ShowQuestion[i].aQuestion.Question, "<[^>]*(>|$)", "")
+                            @System.Text.RegularExpressions.Regex.Replace((String)Model.ShowQuestion[i].aQuestion.Question, "<[^>]*(>|$)", "")
                         </a>
                     </div>
                 </div>
@@ -43,7 +44,7 @@
                             <img src="~/Images/GenericPerson.png" width="25" />
                         </span>
                         <span class="display-inline-block">
-                            @Model.ShowQuestion[i].UserName <br />
+                            @Model.ShowQuestion[i].UserName (<span class="red">@Model.ShowQuestion[i].aQuestion.UserTBL.Reputation</span>)<br />
                             @Model.ShowQuestion[i].aQuestion.QuestionDTS
                         </span>
                     </div>
@@ -52,3 +53,9 @@
         }
     </div>
 </div>
+
+<script type="text/javascript">
+    function Sort() {
+        window.location.replace("@Url.Content("~/Home/QuestionList")?ddlSortBy=" + ddlSort.selectedIndex);
+    }
+</script>

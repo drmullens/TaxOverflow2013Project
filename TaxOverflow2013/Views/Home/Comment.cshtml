@@ -19,17 +19,17 @@
                         @Model.aQuestion.aQuestion.Score
                     </div>
                 </div>
-                <div id="divQuestion" class="col-md-9">
+                <div id="divQuestion" class="col-md-8">
                     <div class="divCategory">
                         @Model.aQuestion.CategoryString
                     </div>
                     @Html.Raw(@Model.aQuestion.aQuestion.Question)
                 </div>
-                <div id="divAuthorDetails" class="col-md-2">
+                <div id="divAuthorDetails" class="col-md-3">
                     <div id="divGenericPerson">
                         <img src="~/Images/GenericPerson.png" height="70" width="50" alt="Generic Person Photo" />
                     </div>
-                    <div id="divAuthor">@Model.aQuestion.UserName</div>
+                    <div id="divAuthor">@Model.aQuestion.UserName (<span class="red">@Model.aQuestion.aQuestion.UserTBL.Reputation</span>)</div>
                     <div id="divTime">@Model.aQuestion.aQuestion.QuestionDTS</div>
                 </div>
                 <div class="clearfix"></div>
@@ -75,14 +75,14 @@
                         @Model.anAnswer.anAnswer.Score
                     </div>
                 </div>
-                <div id="divQuestion" class="col-md-9">
+                <div id="divQuestion" class="col-md-8">
                     @Html.Raw(Model.anAnswer.anAnswer.Answer)
                 </div>
-                <div id="divAuthorDetails" class="col-md-2">
+                <div id="divAuthorDetails" class="col-md-3">
                     <div id="divGenericPerson">
                         <img src="~/Images/GenericPerson.png" height="70" width="50" alt="Generic Person Photo" />
                     </div>
-                    <div id="divAuthor">@Model.anAnswer.AUserName</div>
+                    <div id="divAuthor">@Model.anAnswer.AUserName (<span class="red">@Model.anAnswer.anAnswer.UserTBL.Reputation</span>)</div>
                     <div id="divTime">@Model.anAnswer.anAnswer.AnswerDTS</div>
                 </div>
                 <div class="clearfix"></div>
