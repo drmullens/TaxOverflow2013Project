@@ -87,7 +87,7 @@ namespace TaxOverflow2013.Controllers
             TODBEntities context = new TODBEntities();
             using (context)
             {
-                var categories = context.CategoryTBLs.Where(c => c.CategoryID > 0).ToList();
+                var categories = context.CategoryTBLs.Where(c => c.CategoryID > 0).OrderBy(c => c.Category).ToList();
                 return View(categories);
             }
 
@@ -492,7 +492,7 @@ namespace TaxOverflow2013.Controllers
 
             int userID = GetUserIdByName(UserNameSearch);
 
-            if (string.IsNullOrWhiteSpace(UserNameSearch)  && userID == 0)
+            if (string.IsNullOrWhiteSpace(UserNameSearch) && userID == 0)
             {
                 Index();
                 return View("Index");
@@ -512,7 +512,7 @@ namespace TaxOverflow2013.Controllers
 
                 aQuestionList.ResultCount = QList.Count;
 
-                foreach(var item in QList)
+                foreach (var item in QList)
                 {
                     QuestionListWithAnswered aQuestion = new QuestionListWithAnswered();
                     aQuestion.aQuestion = item;
@@ -746,7 +746,7 @@ namespace TaxOverflow2013.Controllers
             int userID = 0;
             using (var context = new TODBEntities())
             {
-                var aUser = context.UserTBLs.Where(a => a.UserName == userName).ToList();
+                var aUser = context.UserTBLs.Where(a => a.UserName.Contains(userName)).ToList();
                 if (aUser.Count == 0)
                 {
                     return userID;
@@ -754,9 +754,9 @@ namespace TaxOverflow2013.Controllers
 
                 else
                 {
-                    foreach(var searchUser in aUser)
+                    foreach (var searchUser in aUser)
                     {
-                        userID =  searchUser.UserID;
+                        userID = searchUser.UserID;
                     }
                 }
             }
@@ -923,7 +923,7 @@ namespace TaxOverflow2013.Controllers
             using (var context = new TODBEntities())
             {
                 var Accepted = context.AnswerTBLs.Where(a => a.AnswerID == AnswerID).ToList();
-                foreach(AnswerTBL anAnswer in Accepted)
+                foreach (AnswerTBL anAnswer in Accepted)
                 {
                     anAnswer.Accepted = true;
                     anAnswer.UserTBL.Reputation += 15;

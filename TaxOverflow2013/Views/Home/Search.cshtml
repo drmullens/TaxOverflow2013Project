@@ -1,11 +1,13 @@
 ﻿@{
     //This could preview the search terms?
-    ViewBag.Title = "Search";
+    ViewBag.Title = "Search" + Html.Raw(String.IsNullOrWhiteSpace(Request["UserNameSearch"]) ? String.Empty : " for &quot;" + Request["UserNameSearch"] + "&quot;");
 }
 
 <div class="row">
     <div class="col-md-12">
-        <h2 id="hdrSearchResults" class="col-lg-6">Search Results - @Model.ResultCount Results</h2>
+        <h2 id="hdrSearchResults" class="col-lg-12">
+            Search Results @(Html.Raw(String.IsNullOrWhiteSpace(Request["UserNameSearch"]) ? String.Empty : " for &quot;" + Request["UserNameSearch"] + "&quot;")) - @Model.ResultCount Results
+        </h2>
 
         <div class="clearfix"></div>
         @for (int i = 0; i < Model.ShowQuestion.Count; i++)
@@ -13,8 +15,8 @@
             <div class="Start">
                 <div class="row">
                     <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=@Model.ShowQuestion[i].aQuestion.QuestionID&referrer=Recent">
-                            @System.Text.RegularExpressions.Regex.Replace((String)Model.ShowQuestion[i].aQuestion.Question, "<[^>]*(>|$)", "")
+                        <a href="~/Home/ViewQuestion/@Model.ShowQuestion[i].aQuestion.QuestionID">
+                            @Html.Raw(System.Text.RegularExpressions.Regex.Replace((String)Model.ShowQuestion[i].aQuestion.Question, "<[^>]*(>|$)", ""))
                         </a>
                     </div>
                 </div>

@@ -15,7 +15,7 @@
                 <div class="Start">
                     <div class="row">
                         <div class="Question col-sm-12">
-                            <a href="~/Home/ViewQuestion/@Model.MostRecentQuestions[i].aQuestion.QuestionID">@Model.MostRecentQuestions[i].aQuestion.Question</a>
+                            <a href="~/Home/ViewQuestion/@Model.MostRecentQuestions[i].aQuestion.QuestionID">@Html.Raw(Model.MostRecentQuestions[i].aQuestion.Question)</a>
                         </div>
                     </div>
                     <div class="row">
@@ -53,7 +53,7 @@
                 <div class="Start">
                     <div class="row">
                         <div class="Question col-sm-12">
-                            <a href="~/Home/ViewQuestion/@Model.BestUnansweredQuestions[i].aQuestion.QuestionID">@Model.BestUnansweredQuestions[i].aQuestion.Question</a>
+                            <a href="~/Home/ViewQuestion/@Model.BestUnansweredQuestions[i].aQuestion.QuestionID">@Html.Raw(Model.BestUnansweredQuestions[i].aQuestion.Question)</a>
                         </div>
                     </div>
                     <div class="row">

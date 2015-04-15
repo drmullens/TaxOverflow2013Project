@@ -25,8 +25,8 @@
             <div class="Start">
                 <div class="row">
                     <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=@Model.ShowQuestion[i].aQuestion.QuestionID&referrer=Recent">
-                            @System.Text.RegularExpressions.Regex.Replace((String)Model.ShowQuestion[i].aQuestion.Question, "<[^>]*(>|$)", "")
+                        <a href="~/Home/ViewQuestion/@Model.ShowQuestion[i].aQuestion.QuestionID">
+                            @Html.Raw(System.Text.RegularExpressions.Regex.Replace((String)Model.ShowQuestion[i].aQuestion.Question, "<[^>]*(>|$)", ""))
                         </a>
                     </div>
                 </div>
