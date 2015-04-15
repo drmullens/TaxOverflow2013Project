@@ -39,5 +39,14 @@ namespace TaxOverflow2013.Models
     public class ShowQuestionLists
     {
         public List<QuestionListWithAnswered> ShowQuestion { get; set; }
+
+    }
+
+    public class SearchQuestionLists
+    {
+        public List<QuestionListWithAnswered> ShowQuestion { get; set; }
+
+        public int ResultCount { get; set; }
+
     }
 }

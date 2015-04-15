@@ -29,8 +29,10 @@
                 @Html.ActionLink("All Questions", "QuestionList", new { area = "" }, new { @class = "btn btn-default" })
             </div>
             <div class="col-md-4 text-right">
-                <input type="text" name="taMainSearchBox" class="input-sm" style="vertical-align: bottom" />
-                <button type="submit" name="btnSubmitSearch" class="btn btn-default btn-sm" style="vertical-align: bottom">Search</button>
+                <form method="post" action="/Home/Search">
+                    <input type="text" name="UserNameSearch" id="UserNameSearch" required placeholder="User Name Search" class="input-sm" style="vertical-align: bottom" />
+                    <button type="submit" name="btnSubmitSearch" class="btn btn-default btn-sm" style="vertical-align: bottom">Search</button>
+                </form>
             </div>
         </div>
     </div>

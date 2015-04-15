@@ -97,8 +97,20 @@ namespace TaxOverflow2013.Controllers
         [ValidateInput(false)]
         public ActionResult Question(string txtQuestion, string ddlCategory, string txtOther = "")
         {
+            if (string.IsNullOrWhiteSpace(txtQuestion))
+            {
+                Index();
+                return View("Index");
+            }
+
             string data = txtQuestion;
             QuestionStream NewQuestion = new QuestionStream();
+
+            if (ddlCategory.ToUpper() == "OTHER" && txtOther != "" && CheckForDup(txtOther))
+            {
+                ddlCategory = AddNewCategory(txtOther);
+                NewQuestion.QuestionCategory = txtOther;
+            }
 
             try
             {
@@ -135,6 +147,7 @@ namespace TaxOverflow2013.Controllers
                         QuestionCommentStream QComment = new QuestionCommentStream();
                         QComment.QComment = comment;
                         QComment.QCUserName = comment.UserTBL.UserName;
+                        NewQuestion.QReputation = comment.UserTBL.Reputation;
                         NewQuestion.RelatedQuestionComments.Add(QComment);
                     }
 
@@ -299,8 +312,15 @@ namespace TaxOverflow2013.Controllers
 
             if (vote != "")
             {
+                //vote up or down on a question or an answer
                 voteNum = Int32.Parse(vote);
                 UpdateReputation(QID, AID, voteNum);
+            }
+            else if (AID != 0 && QID != 0)
+            {
+                //if both are != 0 then this is marking a question as accepted
+                int UserID = GetCurrentUser();
+                UpdateAcceptedAnswer(QID, AID, UserID);
             }
 
             QuestionStream CurrentQuestion = new QuestionStream();
@@ -465,11 +485,55 @@ namespace TaxOverflow2013.Controllers
             return View("Index");
         }
 
-        public ActionResult Search()
+        [HttpPost]
+        public ActionResult Search(string UserNameSearch)
         {
             ViewBag.Message = "View Search Results";
 
-            return View(new HomeModel.MockIndexModel());
+            int userID = GetUserIdByName(UserNameSearch);
+
+            if (string.IsNullOrWhiteSpace(UserNameSearch)  && userID == 0)
+            {
+                Index();
+                return View("Index");
+            }
+
+            SearchQuestionLists aQuestionList = new SearchQuestionLists();
+            aQuestionList.ShowQuestion = new List<QuestionListWithAnswered>();
+
+            List<QuestionTBL> QList = new List<QuestionTBL>();
+
+            using (var context = new TODBEntities())
+            {
+                QList = (from R in context.QuestionTBLs
+                         where (R.UserID == userID)
+                         orderby R.QuestionDTS descending
+                         select R).ToList();
+
+                aQuestionList.ResultCount = QList.Count;
+
+                foreach(var item in QList)
+                {
+                    QuestionListWithAnswered aQuestion = new QuestionListWithAnswered();
+                    aQuestion.aQuestion = item;
+                    var isAccepted = context.AnswerTBLs.Where(a => a.QuestionID == item.QuestionID).ToList();
+                    if (isAccepted.Count > 0)
+                    {
+                        aQuestion.AccptedAnswer = true;
+                    }
+                    else
+                    {
+                        aQuestion.AccptedAnswer = false;
+                    }
+                    aQuestion.UserName = GetUserNameByID(item.UserID);
+                    aQuestion.CategoryString = GetCategoryByID(item.CategoryID);
+                    aQuestionList.ShowQuestion.Add(aQuestion);
+                    aQuestion.aQuestion.UserTBL.Reputation = item.UserTBL.Reputation;
+                }
+            }
+
+
+            return View(aQuestionList);
         }
 
         public ActionResult Answer(string question_id = "")
@@ -677,6 +741,28 @@ namespace TaxOverflow2013.Controllers
             return aQuestionStream;
         }
 
+        private int GetUserIdByName(string userName)
+        {
+            int userID = 0;
+            using (var context = new TODBEntities())
+            {
+                var aUser = context.UserTBLs.Where(a => a.UserName == userName).ToList();
+                if (aUser.Count == 0)
+                {
+                    return userID;
+                }
+
+                else
+                {
+                    foreach(var searchUser in aUser)
+                    {
+                        userID =  searchUser.UserID;
+                    }
+                }
+            }
+            return userID;
+        }
+
         #endregion
 
         private void UpdateReputation(int QID, int AID, int type)
@@ -831,5 +917,49 @@ namespace TaxOverflow2013.Controllers
             }
 
         }
+
+        private void UpdateAcceptedAnswer(int QuestionID, int AnswerID, int UserID)
+        {
+            using (var context = new TODBEntities())
+            {
+                var Accepted = context.AnswerTBLs.Where(a => a.AnswerID == AnswerID).ToList();
+                foreach(AnswerTBL anAnswer in Accepted)
+                {
+                    anAnswer.Accepted = true;
+                    anAnswer.UserTBL.Reputation += 15;
+                }
+                context.SaveChanges();
+            }
+        }
+
+        private string AddNewCategory(string newCategory)
+        {
+            using (var context = new TODBEntities())
+            {
+                CategoryTBL newCat = new CategoryTBL();
+
+                newCat.Category = newCategory;
+
+                context.CategoryTBLs.Add(newCat);
+
+                context.SaveChanges();
+
+                string catID = context.CategoryTBLs.Max(a => a.CategoryID).ToString();
+
+                return catID;
+            }
+        }
+
+        private bool CheckForDup(string category)
+        {
+            using (var context = new TODBEntities())
+            {
+                var dup = context.CategoryTBLs.Where(a => a.Category == category).ToList();
+                if (dup.Count > 0)
+                    return false;
+            }
+            return true;
+        }
+
     }
 }

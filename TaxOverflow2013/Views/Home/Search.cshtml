@@ -5,42 +5,35 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h2 id="hdrSearchResults" class="col-lg-6">Search Results - ### Results</h2>
-
-
-        @*Do we really need a DDL here?  This could be a problem in keeping the Search string available*@
-        @*<select id="ddlSort">
-            <option value=0>Select a Sort</option>
-            <option value=1>Category: A - Z</option>
-            <option value=2>Category: Z - A</option>
-            <option value=3>Votes: High - Low</option>
-            <option value=4>Votes: Low - High</option>
-            <option value=5>Unanswered Questions</option>
-        </select>*@
+        <h2 id="hdrSearchResults" class="col-lg-6">Search Results - @Model.ResultCount Results</h2>
 
         <div class="clearfix"></div>
-        @for (int i = 0; i < Model.Question.Length; i++)
+        @for (int i = 0; i < Model.ShowQuestion.Count; i++)
         {
             <div class="Start">
                 <div class="row">
                     <div class="Question col-sm-12">
-                        <a href="~/Home/ViewQuestion?question_id=@Model.Question[i][0]&referrer=Recent">@Model.Question[i][1]</a>
+                        <a href="~/Home/ViewQuestion?question_id=@Model.ShowQuestion[i].aQuestion.QuestionID&referrer=Recent">
+                            @System.Text.RegularExpressions.Regex.Replace((String)Model.ShowQuestion[i].aQuestion.Question, "<[^>]*(>|$)", "")
+                        </a>
                     </div>
                 </div>
                 <div class="row">
+
+                    @*TODO: Add a part in here to show if question has an accepted answer*@
                     <div class="Votes col-sm-3">
-                        @Model.Question[i][2] Votes
+                        @Model.ShowQuestion[i].aQuestion.Score Votes
                     </div>
                     <div class="Category col-sm-4">
-                        @Model.Question[i][3]
+                        @Model.ShowQuestion[i].CategoryString
                     </div>
                     <div class="Author col-sm-5">
                         <span class="display-inline-block">
                             <img src="~/Images/GenericPerson.png" width="25" />
                         </span>
                         <span class="display-inline-block">
-                            @Model.Question[i][4] <br />
-                            @Model.Question[i][5]
+                            @Model.ShowQuestion[i].UserName (<span class="red">@Model.ShowQuestion[i].aQuestion.UserTBL.Reputation</span>)<br />
+                            @Model.ShowQuestion[i].aQuestion.QuestionDTS
                         </span>
                     </div>
                 </div>
