@@ -138,41 +138,13 @@ namespace TaxOverflow2013.Controllers
                     var QID = context.QuestionTBLs.Max(b => b.QuestionID);
                     myQuestion.QuestionID = QID;
 
-                    NewQuestion.MainQuestion = myQuestion;
-                    NewQuestion.QuestionUserName = User.Identity.Name;
-
-                    var QComm = context.QuestionCommentTBLs.Where(a => a.QuestionID == myQuestion.QuestionID).ToList();
-                    foreach (var comment in QComm)
-                    {
-                        QuestionCommentStream QComment = new QuestionCommentStream();
-                        QComment.QComment = comment;
-                        QComment.QCUserName = comment.UserTBL.UserName;
-                        NewQuestion.QReputation = comment.UserTBL.Reputation;
-                        NewQuestion.RelatedQuestionComments.Add(QComment);
-                    }
-
-                    var QA = context.AnswerTBLs.Where(b => b.QuestionID == myQuestion.QuestionID).ToList();
-                    foreach (var ans in QA)
-                    {
-                        AnswerStream anAnswer = new AnswerStream();
-                        anAnswer.MainAnswer = ans;
-                        var ansComm = context.AnswerCommentTBLs.Where(d => d.AnswerID == ans.AnswerID).ToList();
-                        foreach (var comment in ansComm)
-                        {
-                            AnswerCommentStream AComment = new AnswerCommentStream();
-                            AComment.AComment = comment;
-                            AComment.ACUserName = comment.UserTBL.UserName;
-                            anAnswer.RelatedAnswerComments.Add(AComment);
-                        }
-
-                        NewQuestion.RelatedAnswers.Add(anAnswer);
-                    }
+                    NewQuestion = getQuestionStream(QID);
+                    
                 }
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine("{0} in post question", ex);
                 Index();
                 return View("Index");
             }
@@ -366,6 +338,10 @@ namespace TaxOverflow2013.Controllers
                         anAnswer.AReputation = ans.UserTBL.Reputation;
                         anAnswer.MainAnswer = ans;
                         anAnswer.AnswerUserName = GetUserNameByID(ans.UserID);
+                        if (ans.Accepted == true)
+                        {
+                            CurrentQuestion.AcceptedAnswer = true;
+                        }
                         var ansComm = context.AnswerCommentTBLs.Where(d => d.AnswerID == ans.AnswerID).ToList();
 
                         foreach (var comment in ansComm)
@@ -722,6 +698,7 @@ namespace TaxOverflow2013.Controllers
                         AnswerStream anAnswer = new AnswerStream();
                         anAnswer.RelatedAnswerComments = new List<AnswerCommentStream>();
                         anAnswer.AReputation = ans.UserTBL.Reputation;
+                        anAnswer.AnswerUserName = GetUserNameByID(ans.UserID);
                         anAnswer.MainAnswer = ans;
                         if (ans.Accepted == true)
                         {
