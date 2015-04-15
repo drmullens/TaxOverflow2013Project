@@ -173,6 +173,8 @@ namespace TaxOverflow2013.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine("{0} in post question", ex);
+                Index();
+                return View("Index");
             }
 
             return View("ViewQuestion", NewQuestion);

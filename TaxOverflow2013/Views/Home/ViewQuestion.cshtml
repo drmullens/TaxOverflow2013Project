@@ -1,10 +1,14 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    String Title = System.Text.RegularExpressions.Regex.Replace((String)Model.MainQuestion.Question,
-        "<[^>]*(>|$)", "");
+    if (Model.MainQuestion.UserID != Model.CurrentUserID)
+    {
+        String Title = System.Text.RegularExpressions.Regex.Replace((String)Model.MainQuestion.Question,
+    "<[^>]*(>|$)", "");
+        
+        ViewBag.Title = Title.Substring(0, Title.Length >= 20 ? 20 : Title.Length);
+    }
 
-    ViewBag.Title = Title.Substring(0, Title.Length >= 20 ? 20 : Title.Length);
 }
 
 <div class="row">
