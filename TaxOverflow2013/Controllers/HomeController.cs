@@ -485,18 +485,19 @@ namespace TaxOverflow2013.Controllers
             return View("Index");
         }
 
-        [HttpPost]
-        public ActionResult Search(string UserNameSearch)
+        public ActionResult Search(string UserNameSearch = "")
         {
-            ViewBag.Message = "View Search Results";
 
-            int userID = GetUserIdByName(UserNameSearch);
-
-            if (string.IsNullOrWhiteSpace(UserNameSearch) && userID == 0)
+            if (string.IsNullOrWhiteSpace(UserNameSearch))
             {
                 Index();
                 return View("Index");
             }
+
+            ViewBag.Message = "View Search Results";
+
+            int userID = GetUserIdByName(UserNameSearch);
+
 
             SearchQuestionLists aQuestionList = new SearchQuestionLists();
             aQuestionList.ShowQuestion = new List<QuestionListWithAnswered>();
