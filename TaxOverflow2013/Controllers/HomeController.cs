@@ -16,7 +16,7 @@ namespace TaxOverflow2013.Controllers
 
             currentUser = User.Identity.Name;
 
-            //HomePageQuestions contains 2 lists, the top 5 most recent and top 5 highest scores without an accepted answer
+            //HomePageQuestions contains 2 lists, the top 5 highest scores without an accepted answer and top 5 most recent regardless of answer
             HomeQuestionLists HomePageQuestions = new HomeQuestionLists();
             HomePageQuestions.MostRecentQuestions = new List<QuestionList>();
             HomePageQuestions.BestUnansweredQuestions = new List<QuestionList>();
@@ -42,12 +42,11 @@ namespace TaxOverflow2013.Controllers
                 //get the top 5 most recent and top 5 highest scores without an accepted answer
                 var MostRecent = (from R in context.QuestionTBLs
                                   orderby R.QuestionDTS descending
-                                  where !(from A in context.AnswerTBLs select A.QuestionID).Contains(R.QuestionID)
                                   select R).Take(5).ToList();
 
                 var BestScore = (from S in context.QuestionTBLs
                                  orderby S.Score descending
-                                 where !(from A in context.AnswerTBLs where A.Accepted == true select A.QuestionID).Contains(S.QuestionID)
+                                 where !(from A in context.AnswerTBLs where A.Accepted select A.QuestionID).Contains(S.QuestionID)
                                  select S).Take(5).ToList();
 
 
@@ -139,7 +138,7 @@ namespace TaxOverflow2013.Controllers
                     myQuestion.QuestionID = QID;
 
                     NewQuestion = getQuestionStream(QID);
-                    
+
                 }
 
             }
