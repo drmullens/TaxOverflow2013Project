@@ -5,7 +5,7 @@
     {
         String Title = System.Text.RegularExpressions.Regex.Replace((String)Model.MainQuestion.Question,
     "<[^>]*(>|$)", "");
-        
+
         ViewBag.Title = Title.Substring(0, Title.Length >= 20 ? 20 : Title.Length);
     }
 
@@ -83,7 +83,7 @@
                     <div class="divVotes col-md-1">
                         @if (@Model.RelatedAnswers[i].MainAnswer.UserID != @Model.CurrentUserID)
                         {
-                            <a href="../Home/ViewQuestion?question_id=@Model.MainQuestion.QuestionID&answer_id=@Model.RelatedAnswers[i].MainAnswer.AnswerID&vote=3">
+                            <a href="@Url.Content("~/Home/ViewQuestion?question_id=" + @Model.MainQuestion.QuestionID + "&answer_id=" + @Model.RelatedAnswers[i].MainAnswer.AnswerID +"&vote=3")">
                                 <img src="~/Images/VoteUp.png" width="50" alt="Voting Up Glyphs" />
                             </a>
                         }
@@ -93,7 +93,7 @@
                         </div>
                         @if (@Model.RelatedAnswers[i].MainAnswer.UserID != @Model.CurrentUserID)
                         {
-                            <a href="../Home/ViewQuestion?question_id=@Model.MainQuestion.QuestionID&answer_id=@Model.RelatedAnswers[i].MainAnswer.AnswerID&vote=4">
+                            <a href="@Url.Content("~/Home/ViewQuestion?question_id=" + @Model.MainQuestion.QuestionID + "&answer_id=" + @Model.RelatedAnswers[i].MainAnswer.AnswerID + "&vote=4")">
                                 <img src="~/Images/VoteDown.png" width="50" alt="Voting Down Glyphs" />
                             </a>
                         }
