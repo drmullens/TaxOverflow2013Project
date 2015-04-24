@@ -1,9 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    if (Model.MainQuestion.UserID != Model.CurrentUserID)
+    if (User.Identity.IsAuthenticated)
     {
-        String Title = System.Text.RegularExpressions.Regex.Replace((String)Model.MainQuestion.Question,
+        String Title = System.Text.RegularExpressions.Regex.Replace((String)Model.QuestionCategory,
     "<[^>]*(>|$)", "");
 
         ViewBag.Title = Title.Substring(0, Title.Length >= 20 ? 20 : Title.Length);
@@ -116,7 +116,7 @@
                     <div class="divButtonChoices">
                         @* If Question Writer *@
 
-                        @if (@Model.QuestionUserName == @Model.RelatedAnswers[i].AnswerUserName && @Model.RelatedAnswers[i].MainAnswer.Accepted == false && @Model.AcceptedAnswer == false && @Model.CurrentUserID == @Model.RelatedAnswers[i].MainAnswer.UserID)
+                        @if (User.Identity.Name == Model.QuestionUserName && !Model.RelatedAnswers[i].MainAnswer.Accepted && !Model.AcceptedAnswer)
                         {
                             <a class="btn btn-default btn-sm" href="@Url.Content("~/Home/ViewQuestion?question_id=" + @Model.RelatedAnswers[i].MainAnswer.QuestionID + "&answer_id=" + @Model.RelatedAnswers[i].MainAnswer.AnswerID)">
                                 Mark As Answer
