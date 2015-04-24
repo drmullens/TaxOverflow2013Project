@@ -213,7 +213,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Icon.png" />
     <Content Include="Images\checkmark.png" />
     <Content Include="Images\GenericPerson.png" />
     <Content Include="Images\TaxOverflow.png" />
