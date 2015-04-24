@@ -28,8 +28,8 @@
         });
     </script>}
 
-    @*TODO: JavaScript validation of the DDL  value != "default"
-        Possible new value to be saved if  *@
+@*TODO: JavaScript validation of the DDL  value != "default"
+    Possible new value to be saved if  *@
 
 <div class="row">
     <div class="col-md-12">
@@ -48,15 +48,13 @@
 
             <textarea id="txtQuestion" name="txtQuestion"></textarea>
             <div class="text-right">
-                <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit"
-                        title="Submit" class="btn btn-default" style="margin-top: 20px;">
+                <button type="submit" name="btnSubmit" id="btnSubmit" value="Submit" title="Submit" class="btn btn-default" style="margin-top: 20px;">
                     Submit
                 </button>
 
-                <button type="button" name="btnCancel" id="btnCancel" value="Cancel"
-                        title="Cancel" class="btn btn-default" style="margin-top: 20px;">
+                <a href="@Url.Content("~/Home/Index")" class="btn btn-default" style="margin-top: 20px;">
                     Cancel
-                </button>
+                </a>
             </div>
         </form>
     </div>
