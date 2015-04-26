@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TaxOverflow2013.Models
+namespace TaxOverflow.Models
 {
     public class HomeModel
     {

@@ -9,7 +9,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 
-namespace TaxOverflow2013
+namespace TaxOverflow
 {
     public class MvcApplication : System.Web.HttpApplication
     {

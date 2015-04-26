@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TaxOverflow2013.Properties {
+namespace TaxOverflow.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

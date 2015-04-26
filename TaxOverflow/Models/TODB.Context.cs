@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TaxOverflow2013.Models
+namespace TaxOverflow.Models
 {
     using System;
     using System.Data.Entity;

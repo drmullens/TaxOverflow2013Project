@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TaxOverflow2013.Models
+namespace TaxOverflow.Models
 {
 
     //Summary: these classes are for returning a model of a single question.  All comments, answers and their comments will be in this model

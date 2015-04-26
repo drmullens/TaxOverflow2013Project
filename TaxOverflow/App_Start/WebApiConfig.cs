@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace TaxOverflow2013
+namespace TaxOverflow
 {
     public static class WebApiConfig
     {

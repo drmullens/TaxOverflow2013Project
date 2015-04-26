@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace TaxOverflow2013
+namespace TaxOverflow
 {
     public class RouteConfig
     {

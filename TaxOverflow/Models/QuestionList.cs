@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TaxOverflow2013.Models
+namespace TaxOverflow.Models
 {
     public class QuestionList
     {

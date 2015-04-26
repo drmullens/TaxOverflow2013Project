@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace TaxOverflow2013
+namespace TaxOverflow
 {
     public class BundleConfig
     {
