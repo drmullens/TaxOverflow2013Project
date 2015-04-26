@@ -144,6 +144,7 @@ namespace TaxOverflow.Controllers
             }
             catch (Exception ex)
             {
+                Console.Write(ex.ToString());
                 Index();
                 return View("Index");
             }

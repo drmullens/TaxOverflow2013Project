@@ -194,6 +194,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Delete All Data And Reseed PKs.sql" />
     <Content Include="App_Data\TODB.mdf" />
     <Content Include="App_Data\TODB_log.ldf">
       <DependentUpon>TODB.mdf</DependentUpon>
