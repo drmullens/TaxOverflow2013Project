@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxOverflow", "TaxOverflow2013\TaxOverflow.csproj", "{2362ABF6-5795-4957-889E-232BA5E7A2E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxOverflow", "TaxOverflow\TaxOverflow.csproj", "{2362ABF6-5795-4957-889E-232BA5E7A2E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
