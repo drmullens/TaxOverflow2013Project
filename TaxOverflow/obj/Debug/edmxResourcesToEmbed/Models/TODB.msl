@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TODBModelStoreContainer" CdmEntityContainer="TODBEntities">
+    <EntitySetMapping Name="AnswerCommentTBLs">
+      <EntityTypeMapping TypeName="TODBModel.AnswerCommentTBL">
+        <MappingFragment StoreEntitySet="AnswerCommentTBLs">
+          <ScalarProperty Name="ACommentID" ColumnName="ACommentID" />
+          <ScalarProperty Name="AComment" ColumnName="AComment" />
+          <ScalarProperty Name="AcommentDTS" ColumnName="AcommentDTS" />
+          <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnswerTBLs">
+      <EntityTypeMapping TypeName="TODBModel.AnswerTBL">
+        <MappingFragment StoreEntitySet="AnswerTBLs">
+          <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="AnswerDTS" ColumnName="AnswerDTS" />
+          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnswerVotingHistoryTBLs">
+      <EntityTypeMapping TypeName="TODBModel.AnswerVotingHistoryTBL">
+        <MappingFragment StoreEntitySet="AnswerVotingHistoryTBLs">
+          <ScalarProperty Name="AVHID" ColumnName="AVHID" />
+          <ScalarProperty Name="AVHUserID" ColumnName="AVHUserID" />
+          <ScalarProperty Name="AVHAnswerID" ColumnName="AVHAnswerID" />
+          <ScalarProperty Name="AVHDTS" ColumnName="AVHDTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryTBLs">
+      <EntityTypeMapping TypeName="TODBModel.CategoryTBL">
+        <MappingFragment StoreEntitySet="CategoryTBLs">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionCommentTBLs">
+      <EntityTypeMapping TypeName="TODBModel.QuestionCommentTBL">
+        <MappingFragment StoreEntitySet="QuestionCommentTBLs">
+          <ScalarProperty Name="QCommentID" ColumnName="QCommentID" />
+          <ScalarProperty Name="QComment" ColumnName="QComment" />
+          <ScalarProperty Name="QCommentDTS" ColumnName="QCommentDTS" />
+          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionTBLs">
+      <EntityTypeMapping TypeName="TODBModel.QuestionTBL">
+        <MappingFragment StoreEntitySet="QuestionTBLs">
+          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="QuestionDTS" ColumnName="QuestionDTS" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionVotingHistoryTBLs">
+      <EntityTypeMapping TypeName="TODBModel.QuestionVotingHistoryTBL">
+        <MappingFragment StoreEntitySet="QuestionVotingHistoryTBLs">
+          <ScalarProperty Name="QVHID" ColumnName="QVHID" />
+          <ScalarProperty Name="QVHUserID" ColumnName="QVHUserID" />
+          <ScalarProperty Name="QVHQuestionID" ColumnName="QVHQuestionID" />
+          <ScalarProperty Name="QVHDTS" ColumnName="QVHDTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTBLs">
+      <EntityTypeMapping TypeName="TODBModel.UserTBL">
+        <MappingFragment StoreEntitySet="UserTBLs">
+          <ScalarProperty Name="Reputation" ColumnName="Reputation" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
